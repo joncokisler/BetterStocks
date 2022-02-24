@@ -1,4 +1,5 @@
 import React from 'react';
+import { uid } from 'react-uid';
 
 import StockListElem from '../StockListElem';
 
@@ -11,14 +12,16 @@ class StockList extends React.Component {
     }
 
     render() {
+        const { stocks } = this.props;
+
         return (
             <div className='stockList'>
                 <ol>
-                    <li><StockListElem className='stockListElem' symbol='TSLA' ticks={ [1,2,3,4] } val1={ 207 } val2={ 30 } /></li>
-                    <li><StockListElem className='stockListElem' symbol='AMD' ticks={ [1,2,3,4] } val1={ 165 } val2={ 25 } /></li>
-                    <li><StockListElem className='stockListElem' symbol='INTC' ticks={ [1,2,3,4] } val1={ 148 } val2={ 20 } /></li>
-                    <li><StockListElem className='stockListElem' symbol='NVDA' ticks={ [1,2,3,4] } val1={ 108 } val2={ 20 } /></li>
-                    <li><StockListElem className='stockListElem' symbol='AAPL' ticks={ [1,2,3,4] } val1={ -100 } val2={ 5 } /></li>
+                    {
+                        stocks.map(
+                            stock => (<li key={ uid(stock) }><StockListElem stock={ stock }/></li>)
+                        )
+                    }
                 </ol>
             </div>
         )
