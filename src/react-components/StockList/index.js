@@ -25,14 +25,24 @@ class StockList extends React.Component {
         stocks = stocks.sort(this.compareStock);
 
         return (
-            <div className='stockList'>
-                <ol>
-                    {
-                        stocks.map(
-                            stock => (<li key={ uid(stock) }><StockListElem stock={ stock }/></li>)
-                        )
-                    }
-                </ol>
+            <div>
+                <table className='stockList'>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Trend</th>
+                            <th>This Year</th>
+                            <th>This Month</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            stocks.map(
+                                stock => (<StockListElem key={ uid(stock) } stock={ stock }/>)
+                            )
+                        }
+                    </tbody>
+                </table>
             </div>
         )
     }

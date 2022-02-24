@@ -18,14 +18,12 @@ class StockListElem extends React.Component {
         const { stock } = this.props;
 
         return (
-            <div className='stockListElem'>
-                <ul>
-                    <li>{ stock.symbol }</li>
-                    <li>{ '[' + String(stock.ticks) + ']' }</li>
-                    <li>{ stock.val1 }</li>
-                    <li>{ stock.val2 }</li>
-                </ul>
-            </div>
+            <tr className='stockListElem'>
+                <td>{ stock.symbol }</td>
+                <td>{ '[' + String(stock.ticks) + ']' }</td>
+                <td>{ stock.val1 }</td>
+                <td>{ stock.val2 }</td>
+            </tr>
         )
     }
 }
