@@ -8,7 +8,7 @@ class StockListElem extends React.Component {
         super(props);
         this.state = {
             symbol: props.symbol,
-            ticks: props.ticks,
+            trend: props.trend,
             val1: props.val1,
             val2: props.val2
         };
@@ -20,7 +20,7 @@ class StockListElem extends React.Component {
         return (
             <tr className='stockListElem'>
                 <td>{ stock.symbol }</td>
-                <td>{ '[' + String(stock.ticks) + ']' }</td>
+                <td>{ '[' + String(stock.trend) + ']' }</td>
                 <td>{ stock.val1 }</td>
                 <td>{ stock.val2 }</td>
             </tr>

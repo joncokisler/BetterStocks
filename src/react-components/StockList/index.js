@@ -20,7 +20,7 @@ class StockList extends React.Component {
     }
 
     render() {
-        let { stocks } = this.props;
+        let { stocks, trend_name, col1_name, col2_name } = this.props;
 
         stocks = stocks.sort(this.compareStock);
 
@@ -30,9 +30,9 @@ class StockList extends React.Component {
                     <thead>
                         <tr>
                             <th>Symbol</th>
-                            <th>Trend</th>
-                            <th>This Year</th>
-                            <th>This Month</th>
+                            <th>{ trend_name }</th>
+                            <th>{ col1_name }</th>
+                            <th>{ col2_name }</th>
                         </tr>
                     </thead>
                     <tbody>
