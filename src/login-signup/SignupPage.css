@@ -1,0 +1,46 @@
+ul {
+    list-style: none;
+}
+#inputDiv{
+    margin:auto;
+    width:fit-content;
+}
+
+input{
+    background-color: #d9d9d9;
+    border:none;
+    display: block;
+    margin-top:10px;
+
+    color:black;
+    box-sizing: border-box;
+    border-radius:10px;
+    transition: all .2s ease-in-out;
+    
+}
+input:hover{
+
+    transform: scale(1.08);
+    
+}
+input:focus{
+    background-color: #d9d9d9;
+    border:none;
+    display: block;
+    margin-top:10px;
+
+    color:black;
+    box-sizing: border-box;
+    border-radius:10px;
+    transform: scale(1.12);
+    
+}
+
+#submit-button{
+    border: black 2px solid;
+}
+::placeholder{
+    color:black;
+    opacity: 0.8;
+    padding:5px;
+}
