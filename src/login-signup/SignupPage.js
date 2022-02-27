@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from '../header/Header.js';
-import './SignupPage.css'
+import './SignupPage.css';
+import { withRouter } from "react-router-dom";
 
 class SignupPage extends React.Component {
 
@@ -51,7 +52,7 @@ class SignupPage extends React.Component {
         return (
             <div>
                 <Header/>
-                <div>
+                <div id="welcome-header">
                     <h3>Welcome</h3>
                 </div>
 
@@ -63,13 +64,6 @@ class SignupPage extends React.Component {
                     <input id="submit-button" type="submit" value="Submit" onChange={ this.handleInputChange } onClick={this.submitInfo}/>
                 </div>
 
-                <div>
-                    <ul>
-                    <li><a>Forgot Password? </a></li>
-                        <li><a>Log In</a></li>
-                        <li><a>Sign Up</a></li>
-                    </ul>
-                </div>
             </div>
         )
     }
