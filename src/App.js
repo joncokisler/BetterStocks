@@ -12,7 +12,7 @@ function App() {
       {symbol: 'TSLA', trend: [73, 78, 82, 22], val1: 207, val2: 30},
     ],
     stock_ratings: [
-      {symbol: 'AAPL', trend: [2.71, 1.79, 3.90, 4.96, 4.00], val1: 4.5, val2: 24, val1_mode: 'stars'},
+      {symbol: 'AAPL', trend: [2.71, 1.79, 3.90, 4.96], val1: 4.5, val2: 24, val1_mode: 'stars'},
       {symbol: 'AMD', trend: [0.82, 1.18, 0.57, 3.81], val1: 2.2, val2: 18, val1_mode: 'stars'},
       {symbol: 'INTC', trend: [3.24, 0.82, 0.37, 0.96], val1: 1.6, val2: 50, val1_mode: 'stars'},
       {symbol: 'NVDA', trend: [4.70, 2.76, 2.16, 4.80], val1: 3.8, val2: 97, val1_mode: 'stars'},

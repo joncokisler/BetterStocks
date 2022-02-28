@@ -32,7 +32,8 @@ class StockListElem extends React.Component {
                     radius: 0
                 },
                 line: {
-                    tension: 0.25
+                    tension: 0.25,
+                    borderColor: `rgba(255, 0, 0, 1)`
                 }
             },
             maintainAspectRatio: false,
