@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { AiFillStar } from 'react-icons/ai';
+import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
 
 import './styles.css';
 
@@ -14,6 +17,43 @@ class StockListElem extends React.Component {
             val2: props.val2,
             val1_mode: props.val1_mode
         };
+    }
+
+    render_trend(stock) {
+        const labels = []
+        for (const [index, element] of stock.trend.entries()) {
+            labels.push(index);
+        }
+
+        const options = {
+            events: [],
+            elements: {
+                point: {
+                    radius: 0
+                },
+                line: {
+                    tension: 0.25
+                }
+            },
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: {display: false},
+                yAxes: {display: false}
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        };
+
+        const data = {
+            labels: labels,
+            datasets: [
+                {data: labels.map((i) => stock.trend[i])}
+            ]
+        };
+        return <div className='trendChart'><Line options= { options } data={ data }/></div>;
     }
 
     render_val1(stock) {
@@ -49,7 +89,7 @@ class StockListElem extends React.Component {
         return (
             <tr className='stockListElem'>
                 <td>{ stock.symbol }</td>
-                <td>{ '[' + String(stock.trend) + ']' }</td>
+                <td>{ this.render_trend(stock) }</td>
                 <td>{ this.render_val1(stock) }</td>
                 <td>{ stock.val2 }</td>
             </tr>

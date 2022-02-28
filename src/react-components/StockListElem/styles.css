@@ -3,6 +3,11 @@
     padding: 1em;
 }
 
+.trendChart {
+    width: 10em;
+    height: 4em;
+}
+
 .star--percent100 {
     clip-path: inset(0 0 0 0);
 }
