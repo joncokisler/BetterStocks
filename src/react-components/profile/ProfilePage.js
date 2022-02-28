@@ -7,27 +7,23 @@ import { Navigate } from 'react-router-dom';
 
 class ProfilePage extends React.Component {
 
+    state ={
+        username:"",
+        displayName:"",
+        watchlists:"",
+        bio:"",
+        profilePicture:"", //profile picture is a url-based image at the moment
+        contactInfo: {
+            phoneNumber:null,
+            email:"",
+        }
+    }
+
     render() {
         return (
             <div>
                 <Header/>
 
-                <div id="login-header">
-                    <h3>Welcome</h3>
-                </div>
-
-                <div id="inputDiv">
-                    <input class="textbox" type="text" name="username" placeholder="Enter Username"/>
-                    <input class="textbox" type="password" name="password" placeholder="Enter Password"/>
-                    <input id="submit-button" type="submit" value="Submit" onClick={ this.loginPressed }/>
-                </div>
-
-                <div>
-                    <ul>
-                        <li><a href="#" onClick={ this.handleForgotPassword }>Forgot Password? </a></li>
-                        <li><a href="#" onClick={ this.handleSignup }>Sign Up</a></li>
-                    </ul>
-                </div>
             </div>
         )
     }
