@@ -25,6 +25,16 @@ class StockListElem extends React.Component {
             labels.push(index);
         }
 
+        let trend_color = 'rgba(80, 80, 80, 0.7)';
+        if (stock.trend.length >= 2) {
+            const begin_end_diff = stock.trend[stock.trend.length - 1] - stock.trend[0];
+            if (begin_end_diff > 0) {
+                trend_color = 'rgba(30, 150, 0, 0.7)';
+            } else if (begin_end_diff < 0) {
+                trend_color = 'rgba(250, 33, 58, 0.7)';
+            }
+        }
+
         const options = {
             events: [],
             elements: {
@@ -33,7 +43,7 @@ class StockListElem extends React.Component {
                 },
                 line: {
                     tension: 0.25,
-                    borderColor: `rgba(255, 0, 0, 1)`
+                    borderColor: trend_color
                 }
             },
             maintainAspectRatio: false,
