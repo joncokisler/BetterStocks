@@ -14,7 +14,7 @@ class FiveStar extends React.Component {
     }
 
     render() {
-        const { stars } = this.props;
+        const { stars, size_mult } = this.props;
 
         const star_fills = [];
         for (let i = 0; i < 5; i++) {
@@ -26,13 +26,19 @@ class FiveStar extends React.Component {
             }
         }
 
+        let star_pixel_size = 16;  // default font size
+        try {
+            star_pixel_size *= size_mult;
+        } catch (e) {
+        }
+
         return (
-            <div>
-                <AiFillStar className={`star--percent${star_fills[0]}`} />
-                <AiFillStar className={`star--percent${star_fills[1]}`} />
-                <AiFillStar className={`star--percent${star_fills[2]}`} />
-                <AiFillStar className={`star--percent${star_fills[3]}`} />
-                <AiFillStar className={`star--percent${star_fills[4]}`} />
+            <div className='fiveStar'>
+                <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[0]}`} />
+                <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[1]}`} />
+                <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[2]}`} />
+                <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[3]}`} />
+                <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[4]}`} />
             </div>
         )
     }
