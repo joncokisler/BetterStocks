@@ -19,9 +19,30 @@ class ProfilePage extends React.Component {
 
     constructor (props) {
         super(props);
-        //do api calls to assu=ign values to states
+        this.state ={
+            watchlist:"",
+            bio:"This is a bio",
+            profilePicture:"", //profile picture is a url-based image at the moment
+            contactInfo: {
+                phoneNumber:null,
+                email:"placeholder@email.com",
+            }
+        }
+
 
         //this.setState()
+
+    }
+    //do api calls to assign values to states
+    componentDidMount() {
+        this.doApiCalls();
+    };
+
+    doApiCalls(){
+        //uncomment when api is implemented
+
+    //     $.getJSON('https://bluhbluh/api')
+    //   .then(({ results }) => this.setState({ someState: someResult }));
 
     }
     //THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
