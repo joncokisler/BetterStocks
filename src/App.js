@@ -1,6 +1,6 @@
 import './App.css';
 
-import StockList from './react-components/StockList'
+import StockList from './react-components/StockList';
 
 function App() {
   const state = {
