@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { AiFillStar } from 'react-icons/ai';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
+import FiveStar from '../FiveStar';
 
 import './styles.css';
 
@@ -57,33 +57,6 @@ class StockListElem extends React.Component {
         return <div className='trendChart'><Line options= { options } data={ data }/></div>;
     }
 
-    render_val1(stock) {
-        if (stock.val1_mode === 'stars') {
-            const stars = [];
-
-            for (let i = 0; i < 5; i++) {
-                const stars_rounded = Math.round(parseFloat(stock.val1) * 10.0) / 10;
-                if (stars_rounded - i < 1) {
-                    stars.push(Math.round(Math.max(0, (stars_rounded - i)) * 100));
-                } else {
-                    stars.push(100);
-                }
-            }
-
-            return (
-                <span>
-                    <AiFillStar className={`star--percent${stars[0]}`} />
-                    <AiFillStar className={`star--percent${stars[1]}`} />
-                    <AiFillStar className={`star--percent${stars[2]}`} />
-                    <AiFillStar className={`star--percent${stars[3]}`} />
-                    <AiFillStar className={`star--percent${stars[4]}`} />
-                </span>
-            );
-        } else {
-            return String(stock.val1);
-        }
-    }
-
     render() {
         const { stock } = this.props;
 
@@ -91,7 +64,9 @@ class StockListElem extends React.Component {
             <tr className='stockListElem'>
                 <td>{ stock.symbol }</td>
                 <td>{ this.render_trend(stock) }</td>
-                <td>{ this.render_val1(stock) }</td>
+                <td>
+                    { stock.val1_mode === 'stars' ? <FiveStar stars={ stock.val1 } /> : stock.val1}
+                </td>
                 <td>{ stock.val2 }</td>
             </tr>
         )
