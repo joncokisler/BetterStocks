@@ -1,0 +1,27 @@
+.userHeader {
+    top: 50px;
+    font-family: Garamond;
+	font-weight: bold;
+    font-size: 200%;
+    left: 80px;
+    position: absolute;
+}
+
+.blackListHeader {
+    top: 50px;
+    font-family: Garamond;
+	font-weight: bold;
+    font-size: 200%;
+    left: 880px;
+    position: absolute;
+}
+
+.scroller {
+    margin-top: 120px;
+    width: 65vw;
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: none;
+    scrollbar-width: thin;
+    position: relative;
+  }

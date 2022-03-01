@@ -1,11 +1,11 @@
-import './App.css';
-import Comments from './react-components/ReviewComponents/Comments/Comment'
-import Header from './react-components/ReviewComponents/Header/Header'
-import Statistics from './react-components/ReviewComponents/Statistics/Statistics';
-import picture1 from './logo.svg'
-import picture2 from './uoft.jpg'
+import './ReviewPage.css';
+import Comments from './Comments/Comment'
+import Header from './Header/Header'
+import Statistics from './Statistics/Statistics';
+import picture1 from './Comments/logo.svg'
+import picture2 from './Comments/uoft.jpg'
 
-function App() {
+function ReviewPage() {
   const state = {
     comments: [
       {userName: 'nugget', displayName: 'ILikeNugget', profilePicture: picture1, rate: 5,
@@ -39,7 +39,7 @@ function App() {
   <Statistics fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />)
 
   return (
-    <div className='APPs'>
+    <div>
       {reviewHeader}
       <div className='scroller'>
         {allComments}
@@ -49,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default ReviewPage;
