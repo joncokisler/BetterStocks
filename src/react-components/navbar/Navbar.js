@@ -17,14 +17,14 @@ class Navbar extends React.Component {
     }
 
     handleTopStocks = () => {
-        this.setState({topstocksRedirect:"/topstocksPage"})
+        this.setState({topstocksRedirect:"/top-stocks"})
     }
 
     handleSearch = () => {
-        this.setState({searchRedirect:"/searchPage"})
+        this.setState({searchRedirect:"/search"})
     }
     handleTrending = () => {
-        this.setState({trendingRedirect:"/trendingPage"})
+        this.setState({trendingRedirect:"/trending-stocks"})
     }
     render() {
 

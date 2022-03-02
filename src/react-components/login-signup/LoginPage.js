@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
 
     handleSignup = () => {
         console.log("Signup pressed")
-        this.setState({signupRedirect:"/signupPage"})
+        this.setState({signupRedirect:"/signup"})
     }
     loginPressed = () => {
         console.log("Login pressed")
