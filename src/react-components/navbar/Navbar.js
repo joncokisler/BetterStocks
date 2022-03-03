@@ -16,7 +16,7 @@ class Navbar extends React.Component {
     render() {
 
         return (
-            <div class="navbar sticky">
+            <div className="navbar sticky">
                 <div id='logo'>
                     <a>BetterStocks</a>
                 </div>
@@ -25,7 +25,7 @@ class Navbar extends React.Component {
                     <ul>
                         <li><NavLink className="nav-items" to="/top-stocks">Top Stocks</NavLink></li>
                         <li><NavLink className="nav-items" to="/trending-stocks">Trending</NavLink></li>
-                        <li><NavLink className="nav-items" to="search-page">Search</NavLink></li>
+                        <li><NavLink className="nav-items" to="/search-page">Search</NavLink></li>
                     </ul>
 
                     <div id="profile-section">
