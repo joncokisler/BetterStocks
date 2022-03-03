@@ -52,9 +52,6 @@ class SignupPage extends React.Component {
         return (
             <div>
                 <Header/>
-                <div id="welcome-header">
-                    <h3>Welcome</h3>
-                </div>
 
                 <div id="inputDiv">
                     <input type="text" name="displayName" onChange={ this.handleInputChange } value={ this.state.displayName } placeholder="Display Name"/>
