@@ -1,0 +1,18 @@
+.stockList {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.stockList th {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 1em;
+}
+
+.stockList td {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}

@@ -1,0 +1,9 @@
+.stockListElem ul li {
+    display: inline-block;
+    padding: 1em;
+}
+
+.stockListElem .trendChart {
+    width: 10em;
+    height: 5em;
+}
