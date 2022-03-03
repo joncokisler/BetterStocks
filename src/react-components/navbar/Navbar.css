@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-
 .navbar{
     overflow:hidden;
     height:7%;
@@ -35,8 +33,12 @@
     font-family: 'Nunito';
 }
 
+
 .nav-items {
     transition: all .2s ease-in-out;
+    text-decoration: underline;
+    color: black;
+    display: inline-block;
 }
 
 .nav-items:hover{
