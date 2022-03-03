@@ -79,7 +79,7 @@ class StockListElem extends React.Component {
                 </td>
                 <td>{ stock.val2 }</td>
             </tr>
-        )
+        );
     }
 }
 

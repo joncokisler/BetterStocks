@@ -3,7 +3,7 @@
     padding: 1em;
 }
 
-.trendChart {
+.stockListElem .trendChart {
     width: 10em;
-    height: 4em;
+    height: 5em;
 }
