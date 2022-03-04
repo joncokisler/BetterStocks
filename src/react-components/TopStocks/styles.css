@@ -1,7 +1,8 @@
-.content {
-    margin-top: 10%;
+.topStocks {
+    margin-top: 8%;
+    font-family: 'Nunito';
 }
 
-.stockList {
+.topStocks .stockList {
     margin-top: 5%;
 }
