@@ -2,6 +2,7 @@ import './ReviewPage.css';
 import Comments from './Comments/Comment'
 import Header from './Header/Header'
 import Statistics from './Statistics/Statistics';
+import WriteComment from './WriteComment/WriteComment';
 import picture1 from './Comments/logo.svg'
 import picture2 from './Comments/uoft.jpg'
 
@@ -38,13 +39,19 @@ function ReviewPage() {
   const statistics = state.statistics.map((stats) =>
   <Statistics fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />)
 
+  const newComment = <WriteComment text={'It\'s not only writers who can benefit from this free online tool. If you\'re a programmer \
+  who\'s working on a project where blocks of text are needed, this tool can be a great way to get that.\
+   It\'s a good way to test your programming and that the tool being created is working well. Above are \
+   a few examples of how the random paragraph generator can be beneficial.'} rate={0} />
+
   return (
     <div>
-      {reviewHeader}
+      {/* {reviewHeader}
       <div className='scroller'>
         {allComments}
       </div>
-      {statistics}
+      {statistics} */}
+      {newComment}
     </div>
   );
 }
