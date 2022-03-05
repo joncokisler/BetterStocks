@@ -1,24 +1,19 @@
 import React from 'react';
 import './Statistics.css';
-import { AiFillStar } from 'react-icons/ai';
+import FiveStar from '../../FiveStar/index';
 
 class Statistics extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            avg: props.avg,
+            numComment: props.numComment,
             fiveStar: props.fiveStar,
             fourStar: props.fourStar,
             threeStar: props.threeStar,
             twoStar: props.twoStar,
-            oneStar: props.oneStar,
-            avg: props.avg,
-            numComment: props.numComment,
-            graph:  [{label:'5 Star', value:1},
-            {label:'4 Star', value: 82},
-            {label:'3 Star', value:80},
-            {label:'2 Star', value:75},
-            {label:'1 Star', value:1}]
+            oneStar: props.oneStar
         };
 
     }
@@ -32,16 +27,26 @@ class Statistics extends React.Component {
                     {this.state.avg}
                 </div>
                 <p><span className='numComments'>{this.state.numComment} comments have been written</span></p>
-                <span className='stars'>
-                    <AiFillStar className={`star--percent100`}  size = {40} />
-                    <AiFillStar className={`star--percent100`}  size = {40}/>
-                    <AiFillStar className={`star--percent100`}  size = {40} />
-                    <AiFillStar className={`star--percent0`}  size = {40} />
-                    <AiFillStar className={`star--percent0`}  size = {40} />
+                <span className='averageStars'>
+                    <FiveStar stars={this.state.avg} size_mult={2.5} />
                 </span>
-                <div className='bars'>
+                <span className='starData'>
+                    <FiveStar stars={5} size_mult={2.5} />
+                    <FiveStar stars={4} size_mult={2.5} />
+                    <FiveStar stars={3} size_mult={2.5} />
+                    <FiveStar stars={2} size_mult={2.5} />
+                    <FiveStar stars={1} size_mult={2.5} />
+                </span>
             
-                </div>
+
+                <span className='numData'>
+                    <h2>{this.state.fiveStar} </h2>
+                    <h2>{this.state.fourStar} </h2>
+                    <h2>{this.state.threeStar} </h2>
+                    <h2>{this.state.twoStar} </h2>
+                    <h2>{this.state.oneStar} </h2>
+                </span>
+                
             </div>
 
         )

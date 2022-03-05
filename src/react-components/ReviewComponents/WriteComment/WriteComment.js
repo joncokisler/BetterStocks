@@ -6,34 +6,46 @@ class WriteComment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: props.value,
+            text: props.rate,
+            temp: props.rate,
             rate: props.rate
         };
     }
 
+    handleInputChange = (event) => {
+        const target = event.target
+        const value = target.value
+
+        this.setState({
+            temp: value
+        })
+    }
+
     star1 = () => {
         this.setState({rate: 1});
-        console.log(this.state.rate);
     }
 
     star2 = () => {
         this.setState({rate: 2});
-        console.log(this.state.rate);
     }
 
     star3 = () => {
         this.setState({rate: 3});
-        console.log(this.state.rate);
     }
 
     star4 = () => {
         this.setState({rate: 4});
-        console.log(this.state.rate);
     }
 
     star5 = () => {
         this.setState({rate: 5});
-        console.log(this.state.rate);
+    }
+
+    submit = () => {
+        this.state.text = this.state.temp
+        
+        // {console.log(this.state.rate)}
+        // {console.log(this.state.text)}
     }
 
     render() {
@@ -55,11 +67,11 @@ class WriteComment extends React.Component {
                 
                 <form >
                     <label>
-                        <textarea name="body" value={this.state.value} className='commentBox' placeholder='Type your comment here...'/>
+                        <textarea className='commentBox' onChange={this.handleInputChange} placeholder='Type your comment here...'/>
                     </label>
                 </form>
-                <button className='backButton button3'>Back</button>
-                <button className='submitButton button3'>Submit</button>
+                <button className='backButton button3' >Back</button>
+                <button className='submitButton button3' onClick={this.submit}>Submit</button>
             </div>
         )
     }

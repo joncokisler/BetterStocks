@@ -1,5 +1,6 @@
 import React from 'react';
 import './Comment.css';
+import FiveStar from '../../FiveStar/index';
 
 class Comment extends React.Component {
 
@@ -35,7 +36,14 @@ class Comment extends React.Component {
                         </div>
 
                         <div className='Content'>
-                            <h2>{this.state.displayName} <span className="grey"> gave {this.state.rate} Star</span></h2>
+                            <h2>{this.state.displayName} </h2>
+                            <div className='emptyStar'>
+                                <FiveStar stars={5} size_mult={1.5} />
+                            </div>
+                            <div className='rateStar'>
+                                <FiveStar stars={this.state.rate} size_mult={1.5} />
+                            </div>
+                            
                             <h2><span className="small"> @{this.state.userName} </span></h2>
                             <div className='textContent'>
                                 <p>

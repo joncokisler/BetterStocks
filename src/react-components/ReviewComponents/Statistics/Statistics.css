@@ -1,77 +1,44 @@
 .statsSection {
-    left: 70vw;
-    width: 30vw;
+    width: 300px;   
+    height: 300px;
+    padding: 10px;
+    border: 1cm;
+    background-color: rgb(255, 255, 255);
+    position: sticky;
 }
 
 .averageScore {
     font-size: 300%;
     font-family: Garamond;
 	font-weight: bold;
-    left: 73vw;
-    top: 25vh;
     position: absolute;
 }
 
 .numComments {
+    left:80px;
+    top: 50px;
     font-size: 100%;
-    left: 79vw;
-    top: 30vh;
+    width: 300px;
     position: absolute;
 }
 
-.stars {
-    left: 78.5vw;
-    top: 24vh;
+.averageStars {
+    width: 200px;
+    top: 10px;
+    left: 80px;
     position: absolute;
 }
 
-.bars {
-    left: 76vw;
-    top: 39vh;
-    width: 1000px;
+.starData {
+    top: 150px;
     position: absolute;
 }
 
-.star--percent100 {
-    clip-path: inset(0 0 0 0);
-}
-
-.star--percent90 {
-    clip-path: inset(0 0.68em 0 0);
-}
-
-.star--percent80 {
-    clip-path: inset(0 0.8em 0 0);
-}
-
-.star--percent70 {
-    clip-path: inset(0 1.2em 0 0);
-}
-
-.star--percent60 {
-    clip-path: inset(0 1.6em 0 0);
-}
-
-.star--percent50 {
-    clip-path: inset(0 2.0em 0 0);
-}
-
-.star--percent40 {
-    clip-path: inset(0 2.4em 0 0);
-}
-
-.star--percent30 {
-    clip-path: inset(0 2.8em 0 0);
-}
-
-.star--percent20 {
-    clip-path: inset(0 3.2em 0 0);
-}
-
-.star--percent10 {
-    clip-path: inset(0 3.4em 0 0);
-}
-
-.star--percent0 {
-    clip-path: inset(0 4em 0 0);
+.numData {
+    top: 150px;
+    width: 500px;
+    left: 250px;
+    font: 1.5em icon;
+    font-weight:lighter ;
+    position: absolute;
 }

@@ -35,7 +35,6 @@
 .reviewSection {
 	padding: 10px;
 	border-radius: 10px;
-	top: 120px;
 	left: 10px;
 	margin-left: 30px;
 	position: relative;
@@ -60,3 +59,17 @@
 h2{
 	margin:0
 	}
+
+
+.rateStar {
+	right: -12vw;
+	top: 30px;
+	position: absolute;
+}
+
+.emptyStar {
+	right: -12vw;
+	top: 30px;
+	color: grey;
+	position: absolute;
+}
