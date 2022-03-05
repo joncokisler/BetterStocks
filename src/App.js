@@ -5,6 +5,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import LoginPage from './react-components/login-signup/LoginPage';
 import SignupPage from './react-components/login-signup/SignupPage';
+import PaperTrade from './react-components/PaperTrade';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
             <Route path='signup' element={ <SignupPage /> } />
             <Route path='top-stocks' element={ <div>top-stocks</div> } />
             <Route path='trending-stocks' element={ <div>trending-stocks</div> } />
+            <Route path='paper-trade' element={ <PaperTrade /> } />
           </Routes>
         </BrowserRouter>
       </div>
