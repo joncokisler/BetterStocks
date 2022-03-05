@@ -1,10 +1,18 @@
+import React from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+
 import './App.css';
-import stock from './react-components/stock-trend/index'
+
+import Stock from './react-components/stock-trend'
 
 function App() {
   return (
     <div className="App">
-      <stock></stock>
+      <BrowserRouter>
+        <Routes>
+          <Route path='stocks' element={ <Stock /> } />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
