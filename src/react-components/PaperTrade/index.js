@@ -52,17 +52,15 @@ function PaperTrade() {
                 break;
 
             case 'sell':
-                if (Object.keys(stockHoldings).includes(stockSymbol)) {
+                if (stockSymbol in stockHoldings) {
                     const stockPrices = ALL_STOCKS.filter((s) => s.symbol === stockSymbol)[0].price;
                     const randPrice = stockPrices[Math.floor(Math.random() * stockPrices.length)];
-                    if (stockSymbol in stockHoldings) {
-                        stockHoldings[stockSymbol].numHoldings--;
-                    } else {
-                        stockHoldings[stockSymbol] = {
-                            numHoldings: 1
-                        }
-                    }
+                    stockHoldings[stockSymbol].numHoldings--;
                     stockHoldings[stockSymbol].currPrice = randPrice;
+                    
+                    if (stockHoldings[stockSymbol].numHoldings === 0) {
+                        delete stockHoldings[stockSymbol];
+                    }
                     setBalance(balance + randPrice);
                     setStockHoldings(stockHoldings);
                 }
