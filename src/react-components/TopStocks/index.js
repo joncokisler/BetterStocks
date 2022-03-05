@@ -23,7 +23,7 @@ class TopStocks extends React.Component {
             <React.Fragment>
                 <NavBar />
                 <div className='topStocks'>
-                    <h1>Top Stocks Today</h1>
+                    <h3>Top Stocks Today</h3>
                     <StockList stocks={ this.state.stock_prices } trend_name='Price Trend' col1_name='Today' col2_name='This Month'/>
                 </div>
             </React.Fragment>
