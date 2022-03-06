@@ -10,6 +10,11 @@ import TrendingStocks from './react-components/TrendingStocks';
 
 class App extends React.Component {
 
+  state = {
+    loggedInUser:"",
+    loginRedirect: false
+  }
+
   users = {
     admin: {
       "userName": "admin",
@@ -51,7 +56,8 @@ class App extends React.Component {
 
 
   render() {
-    if(this.setState.loginRedirect === true){
+    if(this.setState.loginRedirect){
+      this.setState({loginRedirect:false})
       return <Navigate to={"/login"} />
     }
     return (
@@ -60,9 +66,9 @@ class App extends React.Component {
           <Routes>
             <Route path='/' element={<LoginPage />} />
             <Route path='signup' element={<SignupPage />} />
-            <Route path='top-stocks' element={<TopStocks />} />
-            <Route path='trending-stocks' element={<TrendingStocks />} />
-            <Route path='paper-trade' element={<PaperTrade />} />
+            <Route path='top-stocks' loggedInUser = {this.state.loggedInUser} element={<TopStocks />} />
+            <Route path='trending-stocks' loggedInUser = {this.state.loggedInUser} element={<TrendingStocks />} />
+            <Route path='paper-trade' loggedInUser = {this.state.loggedInUser} element={<PaperTrade />} />
           </Routes>
         </BrowserRouter>
       </div>
