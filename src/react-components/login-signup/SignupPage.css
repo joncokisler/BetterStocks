@@ -14,7 +14,7 @@ ul {
 
 
 
-input{
+#inputDiv input{
     background-color: #d9d9d9;
     border:none;
     display: block;
@@ -27,12 +27,12 @@ input{
     transition: all .2s ease-in-out;
     
 }
-input:hover{
+#inputDiv input:hover{
 
     transform: scale(1.08);
     
 }
-input:focus{
+#inputDiv input:focus{
     background-color: #d9d9d9;
     border:none;
     display: block;
@@ -49,8 +49,8 @@ input:focus{
 #submit-button{
     border: black 2px solid;
 }
-::placeholder{
-    color:black;
+#inputDiv input::placeholder{
+    color:gray;
     opacity: 0.8;
     padding:5px;
 }

@@ -1,17 +1,11 @@
 #logo {
-    width:100%;
-    position: relative;
-    display: inline;
+    width:fit-content;
+left:20px;
+top:20px;
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
     height: auto;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 1.5em;
-}
-
-#logo a{
-
-    left: -600px;
-    top: 0px;
-    position: absolute;
-
-
 }
