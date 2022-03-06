@@ -3,7 +3,16 @@
     padding: 1em;
 }
 
-.trendChart {
+.stockListElem .trendChart {
     width: 10em;
-    height: 4em;
+    height: 5em;
+}
+
+.stockListElem .stockRedirect:hover {
+    transition: all 0.1s ease-in;
+    transform: scale(1.2);
+}
+
+.stockListElem .stockRedirect .stockSymbol {
+    color: black;
 }
