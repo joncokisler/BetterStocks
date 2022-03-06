@@ -1,0 +1,47 @@
+.paperTrade .content {
+    margin-top: 5%;
+    font-family: 'Nunito';
+}
+
+.paperTrade .statistics {
+    float: left;
+    margin-left: 10%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.paperTrade .statistics th, 
+.paperTrade .statistics td {
+    border: 1px solid black;
+}
+
+.paperTrade .statistics thead th {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.paperTrade .statistics tbody td {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.paperTrade .buySell {
+    margin-top: 3%;
+}
+
+.paperTrade .buySell label {
+    margin-left: 3em;
+} 
+
+.paperTrade .buySell input {
+    margin-left: 1em;
+}
+
+.paperTrade .holdings {
+    clear: both;
+    margin-top: 10%;
+}
