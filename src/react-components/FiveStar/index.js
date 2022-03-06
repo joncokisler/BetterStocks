@@ -5,7 +5,7 @@ import { AiFillStar } from 'react-icons/ai';
 import './styles.css';
 
 class FiveStar extends React.Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,7 @@ class FiveStar extends React.Component {
 
         const star_fills = [];
         for (let i = 0; i < 5; i++) {
-            const stars_rounded = Math.round(parseFloat(stars) * 10.0) / 10;
+            const stars_rounded = Math.round(parseFloat(stars) * 10.0) / 10 ;
             if (stars_rounded - i < 1) {
                 star_fills.push(Math.round(Math.max(0, (stars_rounded - i)) * 100));
             } else {
@@ -33,7 +33,7 @@ class FiveStar extends React.Component {
         }
 
         return (
-            <div className='fiveStar'>
+            <div className='fiveStar' >
                 <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[0]}`} />
                 <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[1]}`} />
                 <AiFillStar size={ star_pixel_size } className={`star--percent${star_fills[2]}`} />

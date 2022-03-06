@@ -6,6 +6,8 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import LoginPage from './react-components/login-signup/LoginPage';
 import SignupPage from './react-components/login-signup/SignupPage';
 import PaperTrade from './react-components/PaperTrade';
+import TopStocks from './react-components/TopStocks';
+import TrendingStocks from './react-components/TrendingStocks';
 
 class App extends React.Component {
 

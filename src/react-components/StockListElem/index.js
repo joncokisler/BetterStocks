@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
@@ -72,14 +73,18 @@ class StockListElem extends React.Component {
 
         return (
             <tr className='stockListElem'>
-                <td>{ stock.symbol }</td>
+                <td>
+                    <div className='stockRedirect'>
+                        <NavLink className='stockSymbol' to={ `/stocks?symbol=${ stock.symbol }` }>{ stock.symbol }</NavLink>
+                    </div>
+                </td>
                 <td>{ this.render_trend(stock) }</td>
                 <td>
                     { stock.val1_mode === 'stars' ? <FiveStar stars={ stock.val1 } /> : stock.val1}
                 </td>
                 <td>{ stock.val2 }</td>
             </tr>
-        )
+        );
     }
 }
 
