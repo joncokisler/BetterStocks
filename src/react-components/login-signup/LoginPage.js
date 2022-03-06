@@ -47,8 +47,8 @@ class LoginPage extends React.Component {
                 <Header />
 
                 <div id="inputDiv">
-                    <input class="textbox" type="text" name="username" onChange={this.handleInputChange} value={this.state.username} placeholder="Enter Username" />
-                    <input class="textbox" type="password" name="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Enter Password" />
+                    <input className="textbox" type="text" name="username" onChange={this.handleInputChange} value={this.state.username} placeholder="Enter Username" />
+                    <input className="textbox" type="password" name="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Enter Password" />
                     <input id="submit-button" type="submit" value="Log In" onClick={this.loginPressed} />
                 
 
