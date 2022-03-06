@@ -13,7 +13,7 @@ import React, {useState, useEffect} from 'react';
 function ReviewPage() {
   const state = {
     comments: [
-      {userName: 'user', displayName: 'user', profilePicture: picture1, rate: 5,
+      {userName: 'user', displayName: '', profilePicture: picture1, rate: 5,
        text: 'This is a perfect stock!'},
       {userName: 'admin', displayName: 'admin', profilePicture: picture2, rate: 1,
       text: 'I hate this.'}
