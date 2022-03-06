@@ -1,7 +1,4 @@
 import React from 'react';
-import './App.css';
-import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
-
 import LoginPage from './react-components/login-signup/LoginPage';
 import SignupPage from './react-components/login-signup/SignupPage';
 import PaperTrade from './react-components/PaperTrade';
@@ -77,6 +74,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
+
 
 export default App;
