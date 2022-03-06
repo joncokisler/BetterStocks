@@ -93,7 +93,7 @@ function PaperTrade() {
 
     return (
         <div className='paperTrade'>
-            {/* <Navbar /> */}
+            <Navbar />
             <div className='content'>
                 <h3>Paper Trade</h3>
                 
