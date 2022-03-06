@@ -12,6 +12,7 @@ class WriteComment extends React.Component {
         };
     }
 
+
     handleInputChange = (event) => {
         const target = event.target
         const value = target.value
@@ -43,9 +44,7 @@ class WriteComment extends React.Component {
 
     submit = () => {
         this.state.text = this.state.temp
-        
-        // {console.log(this.state.rate)}
-        // {console.log(this.state.text)}
+        this.props.parentCallBack(this.state.text, this.state.rate)
     }
 
     render() {
@@ -70,7 +69,6 @@ class WriteComment extends React.Component {
                         <textarea className='commentBox' onChange={this.handleInputChange} placeholder='Type your comment here...'/>
                     </label>
                 </form>
-                <button className='backButton button3' >Back</button>
                 <button className='submitButton button3' onClick={this.submit}>Submit</button>
             </div>
         )

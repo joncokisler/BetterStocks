@@ -13,6 +13,11 @@ class BlackList extends React.Component {
         };
     }
 
+    
+    onTrigger = () => {
+        this.props.parentCallBack(this.state.userName);
+    }
+
     render() {
 
         return (
@@ -26,7 +31,7 @@ class BlackList extends React.Component {
                             <h2>{this.state.displayName} </h2>
                             <h2><span className="small"> @{this.state.userName} </span></h2>
                         </div>
-                        <button className='blackButton button2'>Remove</button>
+                        <button className='blackButton button2' onClick={this.onTrigger} >Remove</button>
                     </div>
                 </div>
         )

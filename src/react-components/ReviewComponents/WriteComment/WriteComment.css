@@ -1,8 +1,6 @@
 .commentSection {
-    left: 15vw;
-    right: 15vw;
-    width: 70vw;
-    height: 80vh;
+    width: 60vw;
+    height: 70vh;
     top: 5vh;
     background-color: whitesmoke;
     border-radius: 20px;
@@ -29,8 +27,8 @@
     left: 2vw;
     font-size: x-large;
     margin: 10px;
-    height: 50vh;
-    width: 60vw;
+    height: 40vh;
+    width: 50vw;
     padding: 10px;
     position: relative;
     background-color: white;   

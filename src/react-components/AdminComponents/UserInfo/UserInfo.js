@@ -14,6 +14,10 @@ class UserInfo extends React.Component {
         };
     }
 
+    onTrigger = () => {
+        this.props.parentCallBack(this.state.userName);
+    }
+
     render() {
 
         return (
@@ -36,7 +40,7 @@ class UserInfo extends React.Component {
                                 
                             </div>
                         </div>
-                        <button className='addToBlackListButton button1'>Add to BlackList</button>
+                        <button className='addToBlackListButton button1' onClick={this.onTrigger}>Add to BlackList</button>
                         <button className='editButton button1'>Edit</button>
                     </div>
                 </div>

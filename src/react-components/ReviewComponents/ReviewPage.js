@@ -8,23 +8,15 @@ import NavBar from '../navbar/Navbar';
 import { render } from '@testing-library/react';
 import { Navigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function ReviewPage() {
   const state = {
     comments: [
-      {userName: 'nugget', displayName: 'ILikeNugget', profilePicture: picture1, rate: 5,
-       text: 'It\'s not only writers who can benefit from this free online tool. If you\'re a programmer \
-       who\'s working on a project where blocks of text are needed, this tool can be a great way to get that.\
-        It\'s a good way to test your programming and that the tool being created is working well. Above are \
-        a few examples of how the random paragraph generator can be beneficial.'},
-      {userName: 'UofT', displayName: 'University of Toronto', profilePicture: picture2, rate: 1,
-      text: 'It\'s not only writers who can benefit from this free online tool. If you\'re a programmer \
-      who\'s working on a project where blocks of text are needed, this tool can be a great way to get that.\
-       It\'s a good way to test your programming and that the tool being created is working well. Above are \
-       a few examples of how the random paragraph generator can be beneficial. The best way to see if this\
-        random paragraph picker will be useful for your intended purposes is to give it a try. Generate a \
-        number of paragraphs to see if they are beneficial to your current project.If you do find this'}
+      {userName: 'user', displayName: 'user', profilePicture: picture1, rate: 5,
+       text: 'This is a perfect stock!'},
+      {userName: 'admin', displayName: 'admin', profilePicture: picture2, rate: 1,
+      text: 'I hate this.'}
     ],
     reviewHeader: [{text: 'Reviews'}],
     statistics: [{fiveStar: 1, fourStar: 0, threeStar: 0, twoStar: 0, oneStar: 1, avg: '3.0', numComment: 2}],
@@ -32,54 +24,67 @@ function ReviewPage() {
     new: {userName: 'newUser', displayName:'IMissRW', profilePicture: picture1, rate: null, text: null}
   };
 
-  const childElement = React.createRef();
-
-  const allComments = state.comments.map((comment) => 
-                      <Comments userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture} rate={comment.rate} text={comment.text}/>)
-
-  const statistics = state.statistics.map((stats) =>
-  <Statistics  fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />)
-
   const navbar = <NavBar />
 
-  const newComment =  <WriteComment rate={state.new.rate} text={state.new.text}/>
+  const newComment =  <WriteComment parentCallBack={handleInput} />
 
-  // const writeComment =  <WriteComment/>
+  const [userInput, setUserInput] = useState();
+  const [stats, setStats] = useState();
+ 
+  useEffect(() =>{
+    updateUserInput()
+    updateStats()
+  }, [])
 
-  // popUp = () => {
-  //   this.setState({redirect: writeComment})
-  // }
+  function handleScroll() {
+    window.scrollBy(0,1000)
+  }
 
-  render(); {
+  function handleInput(text, rate) {
+    const comment = {userName: 'user', displayName: 'User', profilePicture: picture1, rate: rate, text: text}
+    state.comments.push(comment)
 
-    // if(this.state.redirect){
-    //   return <Navigate to={this.state.redirect}></Navigate>
+    // if (rate == 5){
+    //   state.statistics[0][0] += 1;
     // }
-   
-  
+
+    updateUserInput()
+    updateStats()
+  }
+
+  function updateUserInput(){
+    setUserInput(state.comments.map((comment) =>   
+    <Comments userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
+      rate={comment.rate} text={comment.text}/>))
+  }
+
+  function updateStats() {
+    setStats(state.statistics.map((stats) =>
+    <Statistics  fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
+    twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
+  }
+
+
     return (
       <div>
         {navbar}
-        <div className='reviewSta'>
+        <div className='all'>
           <div className='allReviews'>
             <div className='reviewHeader'>
                   Review
             </div>
-            <button className='writeCommentButton button2' >Write Comment</button>
+            <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
             <div id='reviewScroller'>
-              {allComments}
+              {userInput}
             </div>
           </div>
           <div className='allStats'>
-            {statistics}
+            {stats}
           </div>
-
+          <div className='writeComment'>{newComment}</div>
         </div>
-        {/* <div className='writeComment'>{newComment}</div> */}
-        
       </div>
     )
-  } 
 }
 
 export default ReviewPage;

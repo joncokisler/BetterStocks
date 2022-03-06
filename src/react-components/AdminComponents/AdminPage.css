@@ -1,5 +1,5 @@
 .userHeader {
-    top: 50px;
+    top: 80px;
     font-family: Garamond;
 	font-weight: bold;
     font-size: 200%;
@@ -7,8 +7,20 @@
     position: absolute;
 }
 
+.userContainer{
+    position: absolute;
+    top:150px;
+    left: 60px;
+}
+
+.blacklistContainer{
+    position: absolute;
+    top: 150px;
+    left: 875px;
+}
+
 .blackListHeader {
-    top: 50px;
+    top: 80px;
     font-family: Garamond;
 	font-weight: bold;
     font-size: 200%;
