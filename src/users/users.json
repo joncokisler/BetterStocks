@@ -1,8 +1,8 @@
 {
     "users":[
         {
-            "userName":"johndoe",
-            "displayName":"John Doe",
+            "userName":"admin",
+            "displayName":"John(Admin)",
             "profilePicture":"",
             "bio":"I am an admin. I have powers",
             "email":"admin@email.com",
@@ -10,11 +10,11 @@
             "isAdmin":true
         },
         {
-            "userName":"fredfredster",
-            "displayName":"Fred Fredster",
+            "userName":"user",
+            "displayName":"Fred(User)",
             "profilePicture":"",
             "bio":"This is a bio. This website is great.",
-            "email":"fred@email.com",
+            "email":"user@email.com",
             "phoneNumber":6482453443,
             "isAdmin":false
 
