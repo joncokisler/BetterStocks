@@ -1,0 +1,25 @@
+{
+    "users":[
+        {
+            "userName":"johndoe",
+            "displayName":"John Doe",
+            "profilePicture":"",
+            "bio":"I am an admin. I have powers",
+            "email":"admin@email.com",
+            "phoneNumber":6492737381,
+            "isAdmin":true
+        },
+        {
+            "userName":"fredfredster",
+            "displayName":"Fred Fredster",
+            "profilePicture":"",
+            "bio":"This is a bio. This website is great.",
+            "email":"fred@email.com",
+            "phoneNumber":6482453443,
+            "isAdmin":false
+
+        }
+    ]
+
+
+}
