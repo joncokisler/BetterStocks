@@ -54,3 +54,8 @@ ul {
     opacity: 0.8;
     padding:5px;
 }
+
+#inputDiv a{
+    top:30px;
+    position:relative;
+}
