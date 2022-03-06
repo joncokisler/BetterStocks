@@ -1,8 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-#welcome-header{
-    margin-top:100px;
-    font-family: 'Nunito';
-}
 
 .textbox{
     background-color: #d9d9d9;
@@ -65,7 +61,7 @@
 }
 
 
-::placeholder{
+#inputDiv input::placeholder{
     color:black;
     opacity: 0.8;
     padding:5px;

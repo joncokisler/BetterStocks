@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Navbar.css'
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
+
 
 class Navbar extends React.Component {
 
@@ -12,43 +13,19 @@ class Navbar extends React.Component {
         trendingRedirect:null
     };
 
-    handlepProfile = () => {
-        this.setState({profileRedirect:"/profilePage"})
-    }
-
-    handleTopStocks = () => {
-        this.setState({topstocksRedirect:"/top-stocks"})
-    }
-
-    handleSearch = () => {
-        this.setState({searchRedirect:"/search"})
-    }
-    handleTrending = () => {
-        this.setState({trendingRedirect:"/trending-stocks"})
-    }
     render() {
 
-        if(this.state.profileRedirect){
-            return <Navigate to={this.state.profileRedirect}></Navigate>
-        }if(this.state.topstocksRedirect){
-            return <Navigate to={this.state.topstocksRedirect}></Navigate>
-        }if(this.state.searchRedirect){
-            return <Navigate to={this.state.searchRedirect}></Navigate>
-        }if(this.state.trendingRedirect){
-            return <Navigate to={this.state.trendingRedirect}></Navigate>
-        }
-
         return (
-            <div class="navbar sticky">
+            <div className="navbar sticky">
                 <div id='logo'>
                     <a>BetterStocks</a>
                 </div>
 
                 <div id="nav-section">
                     <ul>
-                        <li><a class="nav-items" onClick={ this.handleTopStocks }>Top Stocks</a></li>
-                        <li><a class="nav-items" onClick={ this.handleTrending}>Trending</a></li>
-                        <li><a class="nav-items" onClick={ this.handleSearch}>Search</a></li>
+                        <li><NavLink className="nav-items" to="/top-stocks">Top Stocks</NavLink></li>
+                        <li><NavLink className="nav-items" to="/trending-stocks">Trending</NavLink></li>
+                        <li><NavLink className="nav-items" to="/search-page">Search</NavLink></li>
                     </ul>
 
                     <div id="profile-section">
