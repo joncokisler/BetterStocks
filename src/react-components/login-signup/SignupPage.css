@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+ul {
+    list-style: none;
+    padding:0;
+}
+#inputDiv{
+    margin-top:20px;
+    margin-right:auto;
+    margin-left:auto;
+    position:relative;
+    top:50px;
+    width:fit-content;
+}
+
+
+
+#inputDiv input{
+    background-color: #d9d9d9;
+    border:none;
+    display: block;
+    margin-top:10px;
+    height:60px;
+    width:200px;
+    color:black;
+    box-sizing: border-box;
+    border-radius:5px;
+    transition: all .2s ease-in-out;
+    
+}
+#inputDiv input:hover{
+
+    transform: scale(1.08);
+    
+}
+#inputDiv input:focus{
+    background-color: #d9d9d9;
+    border:none;
+    display: block;
+    margin-top:10px;
+
+    color:black;
+    box-sizing: border-box;
+    border-radius:10px;
+    border-radius:12px;
+    transform: scale(1.12);
+    
+}
+
+#submit-button{
+    border: black 2px solid;
+}
+#inputDiv input::placeholder{
+    color:gray;
+    opacity: 0.8;
+    padding:5px;
+}
+
+#inputDiv a{
+    top:30px;
+    position:relative;
+}
