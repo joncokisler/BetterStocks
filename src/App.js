@@ -18,8 +18,8 @@ class App extends React.Component {
           <Routes>
             <Route path='/' element={ <LoginPage /> } />
             <Route path='signup' element={ <SignupPage /> } />
-            <Route path='top-stocks' element={ <div>top-stocks</div> } />
-            <Route path='trending-stocks' element={ <div>trending-stocks</div> } />
+            <Route path='top-stocks' element={ <TopStocks /> } />
+            <Route path='trending-stocks' element={ <TrendingStocks /> } />
             <Route path='paper-trade' element={ <PaperTrade /> } />
           </Routes>
         </BrowserRouter>
