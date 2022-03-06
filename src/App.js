@@ -32,7 +32,28 @@ class App extends React.Component {
     }
   }
 
+  handleLoginCallback = (childData) => {
+    if(childData.userName === "admin" && childData.password ==="admin"){
+      this.setState({loggedInUser: users.admin})
+    }
+    else if(childData.userName === "user" && childData.password ==="user"){
+      this.setState({loggedInUser: users.user})
+    }
+    else{
+      console.log("WRONG USER INFO ENTERED")
+      this.handleLoginRedirect()
+    }
+  }
+
+  handleLoginRedirect = () =>{
+    this.setState({loginRedirect:true})
+  }
+
+
   render() {
+    if(this.setState.loginRedirect === true){
+      return <Navigate to={"/login"} />
+    }
     return (
       <div className="App">
         <BrowserRouter>
