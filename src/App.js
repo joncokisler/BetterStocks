@@ -16,11 +16,11 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            {/* <Route path='/' element={ <><Navbar /><Profile/></> } /> */}
             <Route path='/login' element={ <LoginPage/> } />
-            <Route path='signup' element={ <SignupPage /> } />
-            <Route path='top-stocks' element={ <div>top-stocks</div> } />
-            <Route path='trending-stocks' element={ <div>trending-stocks</div> } />
+            <Route path='/signup' element={ <SignupPage /> } />
+            <Route path='/top-stocks' element={ <div>top-stocks</div> } />
+            <Route path='/trending-stocks' element={ <div>trending-stocks</div> } />
+            <Route path='paper-trade' element={ <PaperTrade />} />
           </Routes>
         </BrowserRouter>
       </div>
