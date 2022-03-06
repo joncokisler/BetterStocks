@@ -2,28 +2,10 @@
 import React, { useState } from "react";
 import { ReactDOM } from "react";
 //import axios from "axios";
-import "./searchPage.css";
+import "./searchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-/*
-Autocomplete with the API
 
-var options = {
-  method: 'GET',
-  url: 'https://yfapi.net/v6/finance/autocomplete',
-  params: {  region: 'US',
-  lang: 'en',
-  query: 'apple',},
-  headers: {
-    'x-api-key': 'G2r05dZvbr1i14NlmFlUB3kdIJkUIlsL7Xj0NiR0'
-  }
-};
-
-axios.request(options).then(function (response) {
-	console.log(response.data);
-}).catch(function (error) {
-	console.error(error);
-}); */
 
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
