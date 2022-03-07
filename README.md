@@ -29,6 +29,7 @@ cokisler - Can Cokisler
 *   React Router
 *   Chart.js / react-chart-js-2
 *   React Icons
+*   Material UI
 
 ## Usage
 
