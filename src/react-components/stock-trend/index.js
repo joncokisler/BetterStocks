@@ -26,7 +26,6 @@ function Stock() {
 
     return (
         <div className='stockPage'>
-            <NavBar />
             <h3>{ params.get('symbol') }</h3>
 
             <div className='stockContent'>
