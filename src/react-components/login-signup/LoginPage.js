@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
 
     handleSignup = () => {
         console.log("Signup pressed")
-        this.setState({signupRedirect:"/signupPage"})
+        this.setState({signupRedirect:"/signup"})
     }
     loginPressed = () => {
         console.log("Login pressed")
@@ -46,20 +46,15 @@ class LoginPage extends React.Component {
             <div>
                 <Header />
 
-                <div id="login-header">
-                    <h3>Welcome</h3>
-                </div>
-
                 <div id="inputDiv">
                     <input className="textbox" type="text" name="username" onChange={this.handleInputChange} value={this.state.username} placeholder="Enter Username" />
                     <input className="textbox" type="password" name="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Enter Password" />
                     <input id="submit-button" type="submit" value="Log In" onClick={this.loginPressed} />
-                </div>
+                
 
 
-                <div>
                     <ul>
-                            <li><a href="#" onClick={this.handleForgotPassword}>Forgot Password? </a></li>
+                        <li><a href="#" onClick={this.handleForgotPassword}>Forgot Password? </a></li>
 
                         <li><a href="#" onClick={this.handleSignup}>Sign Up</a></li>
                     </ul>
