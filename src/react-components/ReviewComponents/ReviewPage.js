@@ -9,6 +9,7 @@ import { render } from '@testing-library/react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import React, {useState, useEffect} from 'react';
+import { uid } from 'react-uid';
 
 function ReviewPage() {
   const state = {
@@ -55,13 +56,13 @@ function ReviewPage() {
 
   function updateUserInput(){
     setUserInput(state.comments.map((comment) =>   
-    <Comments userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
+    <Comments key={ uid(comment) } userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
       rate={comment.rate} text={comment.text}/>))
   }
 
   function updateStats() {
     setStats(state.statistics.map((stats) =>
-    <Statistics  fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
+    <Statistics key={ uid(stats) } fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
     twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
   }
 
