@@ -31,13 +31,15 @@
 
 .starData {
     top: 150px;
+    left: -10px;
+    width: 300px;
     position: absolute;
 }
 
 .numData {
     top: 150px;
     width: 500px;
-    left: 250px;
+    left: 150px;
     font: 1.5em icon;
     font-weight:lighter ;
     position: absolute;
