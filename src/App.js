@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './App.css';
 import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
@@ -8,11 +9,14 @@ import PaperTrade from './react-components/PaperTrade';
 import TopStocks from './react-components/TopStocks';
 import ProfilePage from './react-components/profile/ProfilePage';
 import TrendingStocks from './react-components/TrendingStocks';
-import { Nav } from 'react-bootstrap';
+import Stock from './react-components/stock-trend/index';
+import ReviewPage from './react-components/ReviewComponents/ReviewPage';
+
 
 class App extends React.Component {
 
   state = {
+
     loggedInUser: "",
     loginRedirect: false,
     profileRedirect: false,
@@ -27,22 +31,25 @@ class App extends React.Component {
         phoneNumber: 6492737381,
         isAdmin: true,
         watchlist:[]
+
       },
       user: {
         userName: "user",
         displayName: "Fred(User)",
+
         profilePicture: "https://st.depositphotos.com/2309453/3449/i/600/depositphotos_34490345-stock-photo-confident-casual-unshaven-young-man.jpg",
+
         bio: "This is a bio. This website is great.",
         email: "user@email.com",
         phoneNumber: 6482453443,
         isAdmin: false,
+
         watchlist: []
+
 
       }
     }
   }
-
-
 
   handleLoginCallback = (childData) => {
     console.log(childData)
@@ -88,12 +95,14 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
 
-            <Route path='/' element={<LoginPage profileRedirect={this.state.profileRedirect} handleLoginCallback={this.handleLoginCallback} />} />
-            <Route path='/signup' element={<SignupPage />} />
-            <Route path='/top-stocks' element={<TopStocks loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/profile' element={<ProfilePage loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/trending-stocks' element={<TrendingStocks loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/paper-trade' element={<PaperTrade loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/' element={<LoginPage handleLoginCallback={ this.handleLoginCallback }/>} />
+            <Route path='signup' element={<SignupPage />} />
+            <Route path='top-stocks' element={<TopStocks loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='trending-stocks' element={<TrendingStocks loggedInUser = {this.state.loggedInUser}/>} />
+            <Route path='paper-trade' element={<PaperTrade loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='stocks' element={<Stock loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='stocks/reviews' element={<ReviewPage loggedInUser = {this.state.loggedInUser} />} />
+
           </Routes>
 
         </BrowserRouter>

@@ -39,7 +39,9 @@ class ProfilePage extends React.Component {
 
 
 
+
         this.state = {
+
             loggedInUser: {
                 watchlist: this.props.loggedInUser.watchlist,
                 displayName: this.props.loggedInUser.displayName,
@@ -54,6 +56,7 @@ class ProfilePage extends React.Component {
                 isAdmin: this.props.loggedInUser.isAdmin,
 
             }
+
         };
 
     }

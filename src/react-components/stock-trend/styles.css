@@ -1,0 +1,80 @@
+.statistics {
+    top: 100px;
+    left: 1000px;
+    background-color: white;
+    width: 400px;
+    height: 600px;
+    position: absolute;
+}
+
+.scoreSummary {
+    top: 50px;
+    position: relative;
+    font-size: x-large;
+}
+
+#link {
+	padding: 5px;
+	background-color: white;
+}
+
+#link ul {
+	margin: 0px;
+	padding: 3px;
+    top: 500px;
+    left: 100px;
+    position: absolute;
+	
+}
+
+#link ul li {
+	margin-right: 50px;
+	font-weight: bold;
+	list-style: none; /* Gets rid of list bullet points */
+	text-align: center;
+	
+	/* Add a proper display property: We want the stats to have 
+	a height, but also appear side-by-side */
+
+	display: inline-block;
+		
+}
+
+.unit {
+	color: aqua;
+}
+
+.stock{
+    left: 100px;
+    top: 100px;
+    width: 700px;
+    height: 350px;
+    position: absolute;
+    background-color: aquamarine;
+}
+
+.dataTable{
+    top: 550px;
+    left: 100px;
+    position: absolute;
+}
+
+.dataTable thead th {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.dataTable tbody td {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.dataTable{
+    float: left;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
