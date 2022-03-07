@@ -1,9 +1,14 @@
+
 import React from 'react';
+import './App.css';
+import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
+
 import LoginPage from './react-components/login-signup/LoginPage';
 import SignupPage from './react-components/login-signup/SignupPage';
 import PaperTrade from './react-components/PaperTrade';
 import TopStocks from './react-components/TopStocks';
 import TrendingStocks from './react-components/TrendingStocks';
+import Stock from './react-components/stock-trend/index';
 
 class App extends React.Component {
 
@@ -69,11 +74,12 @@ class App extends React.Component {
             <Route path='top-stocks' element={<TopStocks loggedInUser = {this.state.loggedInUser} />} />
             <Route path='trending-stocks' element={<TrendingStocks loggedInUser = {this.state.loggedInUser}/>} />
             <Route path='paper-trade' element={<PaperTrade loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='stock' element={<Stock loggedInUser = {this.state.loggedInUser} />} />
           </Routes>
         </BrowserRouter>
       </div>
     );
   }
-
+}
 
 export default App;
