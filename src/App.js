@@ -13,6 +13,7 @@ import TrendingStocks from './react-components/TrendingStocks';
 import Stock from './react-components/stock-trend/index';
 import ReviewPage from './react-components/ReviewComponents/ReviewPage';
 import SearchPage from './react-components/search-page';
+import AdminPage from './react-components/AdminComponents/AdminPage'
 
 
 class App extends React.Component {
@@ -140,6 +141,13 @@ class App extends React.Component {
               <React.Fragment>
                 <Navbar user={ this.state.loggedInUser }/>
                 <ReviewPage loggedInUser = {this.state.loggedInUser} />
+              </React.Fragment>
+            } />
+
+            <Route path='admin' element={
+              <React.Fragment>
+                <Navbar user={ this.state.loggedInUser }/>
+                <AdminPage loggedInUser = {this.state.loggedInUser} />
               </React.Fragment>
             } />
           
