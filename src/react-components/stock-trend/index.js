@@ -1,12 +1,11 @@
 import React from 'react';
 import { useSearchParams, NavLink } from 'react-router-dom';
 import NavBar from '../navbar/Navbar';
-import ListGroup from 'react-bootstrap/ListGroup'
 
 import './styles.css';
 
 function Stock() {
-    let [params, setParams] = useSearchParams();
+    const [params, setParams] = useSearchParams();
 
     
 

@@ -9,6 +9,7 @@ import PaperTrade from './react-components/PaperTrade';
 import TopStocks from './react-components/TopStocks';
 import TrendingStocks from './react-components/TrendingStocks';
 import Stock from './react-components/stock-trend/index';
+import ReviewPage from './react-components/ReviewComponents/ReviewPage';
 
 class App extends React.Component {
 
@@ -74,7 +75,8 @@ class App extends React.Component {
             <Route path='top-stocks' element={<TopStocks loggedInUser = {this.state.loggedInUser} />} />
             <Route path='trending-stocks' element={<TrendingStocks loggedInUser = {this.state.loggedInUser}/>} />
             <Route path='paper-trade' element={<PaperTrade loggedInUser = {this.state.loggedInUser} />} />
-            <Route path='stock' element={<Stock loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='stocks' element={<Stock loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='stocks/reviews' element={<ReviewPage loggedInUser = {this.state.loggedInUser} />} />
           </Routes>
         </BrowserRouter>
       </div>
