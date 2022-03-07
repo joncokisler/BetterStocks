@@ -6,7 +6,7 @@ import picture1 from './pic1.png';
 import picture2 from './pic2.jpg';
 import NavBar from '../navbar/Navbar';
 import { render } from '@testing-library/react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import React, {useState, useEffect} from 'react';
 
@@ -27,6 +27,9 @@ function ReviewPage() {
   const navbar = <NavBar />
 
   const newComment =  <WriteComment parentCallBack={handleInput} />
+
+  const [params, setParams] = useSearchParams();
+  const stock_symbol = params.get('symbol');
 
   const [userInput, setUserInput] = useState();
   const [stats, setStats] = useState();
