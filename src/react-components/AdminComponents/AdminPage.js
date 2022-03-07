@@ -3,9 +3,8 @@ import { getDefaultNormalizer } from '@testing-library/react'
 import './AdminPage.css'
 import UserInfo from './UserInfo/UserInfo'
 import BlackList from './BlackList/BlackList'
-import picture1 from '../ReviewComponents/Comments/logo.svg'
-import picture2 from '../ReviewComponents/Comments/uoft.jpg'
-import picture3 from './Waterloo_icon.png'
+import picture1 from './pic1.png';
+import picture2 from './pic2.jpg';
 import NavBar from '../navbar/Navbar'
 
 function AdminPage(){
