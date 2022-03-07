@@ -26,10 +26,13 @@ class Navbar extends React.Component {
                         <li><NavLink className="nav-items" to="/top-stocks">Top Stocks</NavLink></li>
                         <li><NavLink className="nav-items" to="/trending-stocks">Trending</NavLink></li>
                         <li><NavLink className="nav-items" to="/search-page">Search</NavLink></li>
+                        {this.props.loggedInUser.isAdmin &&
+                         <li><NavLink className="nav-items" to="/admin">Admin Page </NavLink></li>
+                         }
                     </ul>
 
                     <div id="profile-section">
-                        <h3>Profile</h3>
+                        <h3><NavLink to="/profile">Profile </NavLink></h3>
                     </div>
                 </div>
             </div>
