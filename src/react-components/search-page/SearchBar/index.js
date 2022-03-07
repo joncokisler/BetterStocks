@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import { ReactDOM } from "react";
 //import axios from "axios";
 import "./searchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
