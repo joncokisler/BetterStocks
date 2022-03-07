@@ -33,7 +33,7 @@ class ProfilePage extends React.Component {
             this.props.loggedInUser.watchlist.forEach((stock, index) => {
 
                 // stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
-                this.state.stockList.push(<NavLink className="watchlist-stock" to={`/`}></NavLink>)
+                this.state.stockList.push(<NavLink className="watchlist-stock" to={`/stocks?symbol=${stock}`}></NavLink>)
             })
         }
 
