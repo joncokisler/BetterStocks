@@ -95,13 +95,14 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
 
-            <Route path='/' element={<LoginPage handleLoginCallback={ this.handleLoginCallback }/>} />
+            <Route path='/' element={<LoginPage profileRedirect={this.state.profileRedirect} handleLoginCallback={ this.handleLoginCallback }/>} />
             <Route path='signup' element={<SignupPage />} />
             <Route path='top-stocks' element={<TopStocks loggedInUser = {this.state.loggedInUser} />} />
             <Route path='trending-stocks' element={<TrendingStocks loggedInUser = {this.state.loggedInUser}/>} />
             <Route path='paper-trade' element={<PaperTrade loggedInUser = {this.state.loggedInUser} />} />
             <Route path='stocks' element={<Stock loggedInUser = {this.state.loggedInUser} />} />
             <Route path='stocks/reviews' element={<ReviewPage loggedInUser = {this.state.loggedInUser} />} />
+            <Route path='/profile' element={<ProfilePage loggedInUser={this.state.loggedInUser} />} />
 
           </Routes>
 
