@@ -2,8 +2,8 @@ import './ReviewPage.css';
 import Comments from './Comments/Comment';
 import Statistics from './Statistics/Statistics';
 import WriteComment from './WriteComment/WriteComment';
-import picture1 from './Comments/logo.svg';
-import picture2 from './Comments/uoft.jpg';
+import picture1 from './pic1.png';
+import picture2 from './pic2.jpg';
 import NavBar from '../navbar/Navbar';
 import { render } from '@testing-library/react';
 import { Navigate, useSearchParams } from 'react-router-dom';
@@ -13,15 +13,15 @@ import React, {useState, useEffect} from 'react';
 function ReviewPage() {
   const state = {
     comments: [
-      {userName: 'user', displayName: 'user', profilePicture: picture1, rate: 5,
+      {userName: 'user', displayName: 'Fred(User)', profilePicture: picture1, rate: 5,
        text: 'This is a perfect stock!'},
-      {userName: 'admin', displayName: 'admin', profilePicture: picture2, rate: 1,
+      {userName: 'admin', displayName: 'John(Admin)', profilePicture: picture2, rate: 1,
       text: 'I hate this.'}
     ],
     reviewHeader: [{text: 'Reviews'}],
     statistics: [{fiveStar: 1, fourStar: 0, threeStar: 0, twoStar: 0, oneStar: 1, avg: '3.0', numComment: 2}],
     redirect: null,
-    new: {userName: 'newUser', displayName:'IMissRW', profilePicture: picture1, rate: null, text: null}
+    new: {userName: 'user', displayName:'Fred(User)', profilePicture: picture1, rate: null, text: null}
   };
 
   const newComment =  <WriteComment parentCallBack={handleInput} />
@@ -42,7 +42,7 @@ function ReviewPage() {
   }
 
   function handleInput(text, rate) {
-    const comment = {userName: 'user', displayName: 'User', profilePicture: picture1, rate: rate, text: text}
+    const comment = {userName: 'user', displayName: 'Fred(User)', profilePicture: picture1, rate: rate, text: text}
     state.comments.push(comment)
 
     // if (rate == 5){
