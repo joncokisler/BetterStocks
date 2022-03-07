@@ -78,7 +78,7 @@ class ProfilePage extends React.Component {
                             alt="Profile"
                         />
                         <h2 className="grid-element" id="user-name">
-                            {this.state.loggedInUser.userName}
+                            @{this.state.loggedInUser.userName}
                         </h2>
                         <p className="grid-element" id="bio">
                             {this.state.loggedInUser.bio}
