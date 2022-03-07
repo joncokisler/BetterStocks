@@ -29,27 +29,34 @@ class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
 
-        if(this.props.loggedInUser.watchlist.length >0){
+        if (this.props.loggedInUser.watchlist.length > 0) {
             this.props.loggedInUser.watchlist.forEach((stock, index) => {
 
-            // stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
-            this.state.stockList.push(<NavLink className="watchlist-stock" to={`/`}></NavLink>)
-        })}
+                // stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
+                this.state.stockList.push(<NavLink className="watchlist-stock" to={`/`}></NavLink>)
+            })
+        }
+
 
 
 
         this.state = {
-            watchlist: this.props.loggedInUser.watchlist,
-            displayName: this.props.loggedInUser.displayName,
-            userName: this.props.loggedInUser.userName,
-            bio: this.props.loggedInUser.bio,
 
-            profilePicture:
-                this.props.loggedInUser.profilePicture, //profile picture is a url-based image at the moment
+            loggedInUser: {
+                watchlist: this.props.loggedInUser.watchlist,
+                displayName: this.props.loggedInUser.displayName,
+                userName: this.props.loggedInUser.userName,
+                bio: this.props.loggedInUser.bio,
 
-            phoneNumber: this.props.loggedInUser.phoneNumber,
-            email: this.props.loggedInUser.email,
-            isAdmin: this.props.loggedInUser.isAdmin,
+                profilePicture:
+                    this.props.loggedInUser.profilePicture, //profile picture is a url-based image at the moment
+
+                phoneNumber: this.props.loggedInUser.phoneNumber,
+                email: this.props.loggedInUser.email,
+                isAdmin: this.props.loggedInUser.isAdmin,
+
+            }
+
         };
 
     }
@@ -66,6 +73,7 @@ class ProfilePage extends React.Component {
     //THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
     // IN THE DATA
     render() {
+        console.log(this.state.loggedInUser)
         return (
             <div>
                 <Navbar />
