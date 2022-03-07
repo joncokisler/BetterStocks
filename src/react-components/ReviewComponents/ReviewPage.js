@@ -24,8 +24,6 @@ function ReviewPage() {
     new: {userName: 'user', displayName:'Fred(User)', profilePicture: picture1, rate: null, text: null}
   };
 
-  const navbar = <NavBar />
-
   const newComment =  <WriteComment parentCallBack={handleInput} />
 
   const [params, setParams] = useSearchParams();
@@ -70,7 +68,6 @@ function ReviewPage() {
 
     return (
       <div>
-        {navbar}
         <div className='all'>
           <div className='allReviews'>
             <div className='reviewHeader'>

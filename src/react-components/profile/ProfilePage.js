@@ -1,10 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Header from "../header/Header.js";
-import Navbar from "../navbar/Navbar.js";
+import { uid } from 'react-uid';
 import "./ProfilePage.css";
 import { NavLink, withRouter } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 class ProfilePage extends React.Component {
     state = {
@@ -29,13 +26,17 @@ class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
 
-        if (this.props.loggedInUser.watchlist.length > 0) {
-            this.props.loggedInUser.watchlist.forEach((stock, index) => {
+        try {
 
-                // stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
-                this.state.stockList.push(<NavLink className="watchlist-stock" to={`/stocks?symbol=${stock}`}></NavLink>)
-            })
+        } catch (e) {
+            if (this.props.loggedInUser.watchlist.length > 0) {
+                this.props.loggedInUser.watchlist.forEach((stock, index) => {
+                    // stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
+                    this.state.stockList.push(<NavLink id={ uid(stock) } className="watchlist-stock" to={`/stocks?symbol=${stock}`}></NavLink>)
+                })
+            }
         }
+        
 
 
 
@@ -60,24 +61,11 @@ class ProfilePage extends React.Component {
         };
 
     }
-    //do api calls to assign values to states
-    componentDidMount() {
-        this.doApiCalls();
-    }
-
-    doApiCalls() {
-        //uncomment when api is implemented
-        //     $.getJSON('https://bluhbluh/api')
-        //   .then(({ results }) => this.setState({ someState: someResult }));
-    }
     //THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
     // IN THE DATA
     render() {
-        console.log(this.state.loggedInUser)
         return (
             <div>
-                <Navbar />
-
                 <div id="profile-page">
                     <div id="contact-info">
                         <h2 className="grid-element" id="display-name">
@@ -90,7 +78,7 @@ class ProfilePage extends React.Component {
                             alt="Profile"
                         />
                         <h2 className="grid-element" id="user-name">
-                            {this.state.loggedInUser.userName}
+                            @{this.state.loggedInUser.userName}
                         </h2>
                         <p className="grid-element" id="bio">
                             {this.state.loggedInUser.bio}
