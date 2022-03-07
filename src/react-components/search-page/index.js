@@ -9,8 +9,8 @@ class SearchPage extends React.Component {
             <div className='searchPage'>
                 <div className='content'>
                     <h3>Search For A Stock</h3>
-                    <SearchBar stocks/>
                 </div>
+                <SearchBar stocks/>
             </div>
         );
     }
