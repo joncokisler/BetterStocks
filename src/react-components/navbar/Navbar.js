@@ -32,7 +32,7 @@ class Navbar extends React.Component {
                     </ul>
 
                     <div id="profile-section">
-                        <h3>Profile</h3>
+                        <h3><NavLink to="/profile">Profile </NavLink></h3>
                     </div>
                 </div>
             </div>
