@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import { getDefaultNormalizer } from '@testing-library/react'
+import { uid } from 'react-uid';
 import './AdminPage.css'
 import UserInfo from './UserInfo/UserInfo'
 import BlackList from './BlackList/BlackList'
 import picture1 from './pic1.png';
 import picture2 from './pic2.jpg';
-import NavBar from '../navbar/Navbar'
 
 function AdminPage(){
     const state = {
@@ -45,12 +44,12 @@ function AdminPage(){
     }
 
     function updateUserInfo(){
-        setUserInfo(state.users.map((u) => <UserInfo parentCallBack = {handleAdd} userName={u.userName} displayName={u.displayName} 
+        setUserInfo(state.users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} userName={u.userName} displayName={u.displayName} 
         profilePicture={u.profilePicture} email={u.email} phone={u.phone} />))
     }
 
     function updateBlackListInfo(){
-        setBlacklistInfo(state.blacklist.map((u) => <BlackList parentCallBack = {handleRemove}
+        setBlacklistInfo(state.blacklist.map((u) => <BlackList key={ uid(u) } parentCallBack = {handleRemove}
         userName={u.userName} displayName={u.displayName} 
         profilePicture={u.profilePicture} email={u.email} phone={u.phone} />))
     }
@@ -62,7 +61,6 @@ function AdminPage(){
     
     return(
         <div>
-            {<NavBar />}
             <div className='userHeader'>Users</div>
             <div className='userContainer'>
                 {userInfo}
