@@ -1,3 +1,4 @@
+
 # Better Stocks
 
 *Team 26*
