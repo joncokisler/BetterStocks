@@ -13,7 +13,20 @@ class Navbar extends React.Component {
         trendingRedirect:null
     };
 
+    renderAdmin(user) {
+        try {
+            if (user.isAdmin) {
+                return <li><NavLink className="nav-items" to="/admin">Admin</NavLink></li>;
+            }
+        } catch (e) {
+        }
+
+        return;
+    }
+
     render() {
+
+        const { user } = this.props;
 
         return (
             <div className="navbar sticky">
@@ -25,11 +38,13 @@ class Navbar extends React.Component {
                     <ul>
                         <li><NavLink className="nav-items" to="/top-stocks">Top Stocks</NavLink></li>
                         <li><NavLink className="nav-items" to="/trending-stocks">Trending</NavLink></li>
-                        <li><NavLink className="nav-items" to="/search-page">Search</NavLink></li>
+                        <li><NavLink className="nav-items" to="/paper-trade">Paper Trading</NavLink></li>
+                        <li><NavLink className="nav-items" to="/search">Search</NavLink></li>
+                        { this.renderAdmin(user) }
                     </ul>
 
                     <div id="profile-section">
-                        <h3>Profile</h3>
+                        <h3><NavLink to="/profile">Profile </NavLink></h3>
                     </div>
                 </div>
             </div>

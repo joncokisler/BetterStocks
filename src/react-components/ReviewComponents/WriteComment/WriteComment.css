@@ -23,8 +23,8 @@
 
 
 .commentBox {
-    top: 60px;
-    left: 2vw;
+    top: 70px;
+    left: 0vw;
     font-size: x-large;
     margin: 10px;
     height: 40vh;
@@ -37,7 +37,7 @@
 }
 
 .submitButton{
-    left: 22vw;
+    left: 0vw;
     bottom: -70px;
     position: relative;
     text-align: center;
@@ -77,41 +77,41 @@
       }
 
     .star1{
-        left: 40px;
+        left: 43px;
         top: 35px;
         font-size: medium;
-        position: relative;
+        position: absolute;
         opacity: 0;
     }
 
     .star2{
-        left: 46px;
+        left: 83px;
         top: 35px;
         font-size: medium;
-        position: relative;
+        position: absolute;
         opacity: 0;
     }
 
     .star3{
-        left: 52px;
+        left: 123px;
         top: 35px;
         font-size: medium;
-        position: relative;
+        position: absolute;
         opacity: 0;
     }
 
     .star4{
-        left: 58px;
+        left: 163px;
         top: 35px;
         font-size: medium;
-        position: relative;
+        position: absolute;
         opacity: 0;
     }
 
     .star5{
-        left: 64px;
+        left: 203px;
         top: 35px;
         font-size: medium;
-        position: relative;
+        position: absolute;
         opacity: 0;
     }

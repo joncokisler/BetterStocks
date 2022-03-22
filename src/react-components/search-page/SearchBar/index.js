@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 //import axios from "axios";
 import "./searchBar.css";
+import './data.json';
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -9,7 +10,6 @@ import CloseIcon from "@material-ui/icons/Close";
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
@@ -50,7 +50,7 @@ function SearchBar({ placeholder, data }) {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a className="dataItem" href={value.link} target="_blank">
+              <a className="dataItem" href={value.link} target="data.json">
                 <p>{value.title} </p>
               </a>
             );
