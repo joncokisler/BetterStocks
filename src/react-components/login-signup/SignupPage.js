@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from '../header/Header.js';
 import './SignupPage.css';
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 
 class SignupPage extends React.Component {
 
@@ -59,7 +59,11 @@ class SignupPage extends React.Component {
                     <input type="password" name="password" onChange={ this.handleInputChange } value={ this.state.password } placeholder="Password"/>
                     <input type="password" name="confirmPassword" onChange={ this.handleInputChange } value={ this.state.confirmPassword } placeholder="Confirm Password"/>
                     <input id="submit-button" type="submit" value="Submit" onChange={ this.handleInputChange } onClick={this.submitInfo}/>
+                
+                    <NavLink to="/">Login</NavLink>
                 </div>
+
+
 
             </div>
         )

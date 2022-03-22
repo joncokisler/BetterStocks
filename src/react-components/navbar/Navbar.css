@@ -1,0 +1,60 @@
+.navbar{
+    overflow:hidden;
+    height:7%;
+    border-bottom: 2px solid black;
+    z-index:1;
+    background-color: white;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+#logo{
+    display: inline;
+    float:left;
+    padding-top:5px;
+    margin-bottom:10px;
+}
+
+#nav-section{
+    margin-right:10px;
+    margin-top:20px;
+    width:70%;
+    margin-bottom:10px;
+}
+#nav-section ul{
+    display:inline;
+    list-style: none;
+}
+#nav-section li{
+    display:inline;
+    padding:20px;
+    width:auto;
+    font-family: 'Nunito';
+}
+
+
+.nav-items {
+    transition: all .2s ease-in-out;
+    text-decoration: underline;
+    color: black;
+    display: inline-block;
+}
+
+.nav-items:hover{
+    transform: scale(1.1);
+}
+
+#profile-section{
+    float:right;
+    margin-left:auto;
+    margin-right:0;
+    top:-20px;
+    height:fit-content;
+    position:relative;
+    right:-25vw;
+    font-family: 'Nunito';    
+    margin-bottom:10px;
+}
