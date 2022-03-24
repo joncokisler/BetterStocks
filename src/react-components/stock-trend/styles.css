@@ -1,0 +1,72 @@
+.stockPage {
+    margin-top: 8%;
+}
+
+.stockPage .stockContent {
+    float: left;
+}
+
+.stockPage .statistics {
+    background-color: white;
+    float: right;
+    margin-right: 20em;
+}
+
+.stockPage .scoreSummary {
+    margin-top: 4em;
+    position: relative;
+    font-size: x-large;
+}
+
+.stockPage #link {
+    margin-left: 6em;
+    text-align: left;
+	padding: 5px;
+	background-color: white;
+
+}
+
+.stockPage #link ul {
+	margin: 0px;
+	padding: 3px;
+	
+}
+
+.stockPage #link ul li {
+	margin-right: 2em;
+	font-weight: bold;
+	list-style: none;
+	text-align: center;
+	
+	display: inline-block;
+
+}
+
+.stockPage .stock {
+    width: 50em;
+    height: 27em;
+    margin-left: 5em;
+}
+
+.stockPage .dataTable {
+    margin-left: 6em;
+}
+
+.stockPage.dataTable thead th {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.stockPage .dataTable tbody td {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.stockPage .dataTable {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
