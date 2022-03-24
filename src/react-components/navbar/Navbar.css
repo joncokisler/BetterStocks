@@ -2,6 +2,8 @@
     overflow:hidden;
     height:7%;
     border-bottom: 2px solid black;
+    z-index:1;
+    background-color: white;
 }
 
 .sticky {

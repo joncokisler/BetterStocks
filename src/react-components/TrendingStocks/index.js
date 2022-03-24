@@ -21,9 +21,8 @@ class TrendingStocks extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar />
-                <div className='content'>
-                    <h1>Trending Stocks Today</h1>
+                <div className='trendingStocks'>
+                    <h3>Trending Stocks Today</h3>
                     <StockList stocks={ this.state.stock_ratings } trend_name='Rating Trend' col1_name='Average Rating' col2_name='Reviews'/>
                 </div>
             </React.Fragment>
