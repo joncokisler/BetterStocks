@@ -64,14 +64,14 @@ function StockListing(props) {
 
     const [colFilter, setColFilter] = useState(['symbol', true]);
 
-    const listingColumns = [{name: 'Symbol', type: 'symbol', sortable: true}].concat(props.columns);
+    const listingColumns = [{name: 'symbol', label: 'Symbol', type: 'symbol', sortable: true}].concat(props.columns);
 
     const stocks = [
-        {symbol: 'AAPL', trace: [73, 23, 38, 45], price: -100, stars: 5.00},
-        {symbol: 'AMD', trace: [85, 92, 66, 12], price: 165, stars: 3.234},
-        {symbol: 'INTC', trace: [54, 57, 29, 36], price: 148, stars: 3.823},
-        {symbol: 'NVDA', trace: [11, 33, 47, 37], price: 207, stars: 2.356},
-        {symbol: 'TSLA', trace: [73, 78, 82, 22], price: 207, stars: 1.982735},
+        {symbol: 'AAPL', trace: [73, 23, 38, 45], price: -100.24, stars: 5.00, bob: 1},
+        {symbol: 'AMD', trace: [85, 92, 66, 12], price: 165.23159, stars: 3.234, bob: 2},
+        {symbol: 'INTC', trace: [54, 57, 29, 36], price: 148.349875, stars: 3.823, bob: 3},
+        {symbol: 'NVDA', trace: [11, 33, 47, 37], price: 207.98374, stars: 2.356, bob: 4},
+        {symbol: 'TSLA', trace: [73, 78, 82, 22], price: 207.2465, stars: 1.982735, bob: 5},
       ]
 
     function handleFilter(col) {
@@ -102,11 +102,11 @@ function StockListing(props) {
                 case 'symbol':
                     return <td key={ uid(col) }><NavLink className='stockSymbol' to={ `/stocks?symbol=${ stock.symbol }` }>{ stock.symbol }</NavLink></td>
                 case 'trace':
-                    return <td>{ render_trend(stock['trace']) }</td>;
+                    return <td>{ render_trend(stock[col.name]) }</td>;
                 case 'price':
-                    return <td key={ uid(col) }>{ stock['price'] }</td>;
+                    return <td key={ uid(col) }>{ Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0 }</td>;
                 case 'stars':
-                    return <td key={ uid(col) }><FiveStar stars={ stock['stars'] } /></td>;
+                    return <td key={ uid(col) }><FiveStar stars={ stock[col.name] } /></td>;
                 default:
                     class ColumnTypeError extends Error {
                         constructor(message) {
@@ -139,8 +139,8 @@ function StockListing(props) {
                 <tr>
                     {
                         listingColumns.map(col =>
-                            <th key={ uid(col.name) } className={ col.sortable ? 'clickable' : null} onClick={ () => col.sortable ? handleFilter(col.name) : null }>
-                                { col.name }
+                            <th key={ uid(col) } className={ col.sortable ? 'clickable' : null} onClick={ () => col.sortable ? handleFilter(col.name) : null }>
+                                { col.label }
                                 { col.sortable ? drawFilterArrow(col.name) : null}
                             </th>
                         )

@@ -136,17 +136,20 @@ class App extends React.Component {
                 <Navbar user={ this.state.loggedInUser }/>
                 <StockListing loggedInUser={this.state.loggedInUser} columns={ [
                   {
-                    name: 'Trace',
+                    name: 'trace',
+                    label: 'Trace',
                     type: 'trace',
                     sortable: false,
                   }, 
                   {
-                    name: 'Price',
+                    name: 'price',
+                    label: 'Price',
                     type: 'price',
                     sortable: true,
                   },
                   {
-                    name: 'Stars',
+                    name: 'stars',
+                    label: 'Stars',
                     type: 'stars',
                     sortable: true,
                   }
