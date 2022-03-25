@@ -67,11 +67,11 @@ function StockListing(props) {
     const listingColumns = [{name: 'Symbol', type: 'symbol', sortable: true}].concat(props.columns);
 
     const stocks = [
-        {symbol: 'AAPL', trace: [73, 23, 38, 45], price: -100, stars: 5},
-        {symbol: 'AMD', trace: [85, 92, 66, 12], price: 165, stars: 3},
-        {symbol: 'INTC', trace: [54, 57, 29, 36], price: 148, stars: 3},
-        {symbol: 'NVDA', trace: [11, 33, 47, 37], price: 207, stars: 2},
-        {symbol: 'TSLA', trace: [73, 78, 82, 22], price: 207, stars: 1},
+        {symbol: 'AAPL', trace: [73, 23, 38, 45], price: -100, stars: 5.00},
+        {symbol: 'AMD', trace: [85, 92, 66, 12], price: 165, stars: 3.234},
+        {symbol: 'INTC', trace: [54, 57, 29, 36], price: 148, stars: 3.823},
+        {symbol: 'NVDA', trace: [11, 33, 47, 37], price: 207, stars: 2.356},
+        {symbol: 'TSLA', trace: [73, 78, 82, 22], price: 207, stars: 1.982735},
       ]
 
     function handleFilter(col) {
