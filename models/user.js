@@ -72,6 +72,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    watchList: [mongoose.Schema.Types.ObjectId],
     paperTrade: PaperTradeSchema
 })
 
@@ -98,7 +99,7 @@ UserSchema.pre('save', function(next) {
 // Allows us to find a User document by comparing the hashed password
 //  to a given one, for example when logging in.
 UserSchema.statics.findByUsernamePassword = function(username, password) {
-    const User = this // binds this to the User model
+    const User = this; // binds this to the User model
 
     // First find the user by their email
     return User.findOne({ username: username }).then((user) => {

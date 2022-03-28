@@ -31,6 +31,11 @@ const Stock = mongoose.model('Stock', {
         unique: true,
         minlength: 1,
         trim: true,
+        uppercase: true,
+    },
+    timestamp: {
+        type: Date,
+        required: true
     },
     price: {
         type: Number,
