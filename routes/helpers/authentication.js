@@ -29,10 +29,10 @@ module.exports = {
         }
     },
 
-    isAdmin: async (req, res, next) => {
+    adminAuthenticate: async (req, res, next) => {
         if (req.session.user) {
             const u = await User.findById(req.session.user);
-            if (!u) {
+            if (!u || !u.admin) {
                 res.status(401).send('Unauthorized');
             } else {
                 next();

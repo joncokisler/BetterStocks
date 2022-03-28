@@ -41,11 +41,7 @@ const Stock = mongoose.model('Stock', {
         type: Number,
         required: true
     },
-    reviews: [ReviewSchema],
-    creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    }
+    reviews: [ReviewSchema]
 })
 
 module.exports = { Stock };

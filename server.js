@@ -63,6 +63,7 @@ app.use(
 
 // API ROUTES
 app.use(require('./routes/users'));
+app.use(require('./routes/stocks'));
 
 
 /*** Webpage routes below **********************************/
