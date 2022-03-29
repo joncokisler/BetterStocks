@@ -33,7 +33,8 @@
 
 #user-name{
     grid-column: 1 / 2;
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
+    align-self: end;
 }
 
 #bio{
@@ -46,6 +47,12 @@
     grid-column: 1/2;
     align-self: start;
     grid-row: 4/5;
+}
+
+#phone-number{
+    grid-column: 1;
+    align-self: end;
+    grid-row: 3;
 }
 
 #watchlist-section{
