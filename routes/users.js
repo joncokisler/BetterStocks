@@ -122,7 +122,7 @@ router.post('/api/users', mongoChecker, async (req, res) => {
         blacklist: false,
         admin: false,
         watchList: [],
-        papertrade: {
+        paperTrade: {
             capital: 1000,  // default capital amount
             holdings: []
         }
@@ -136,7 +136,6 @@ router.post('/api/users', mongoChecker, async (req, res) => {
         if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
             res.status(500).send('Internal server error');
         } else {
-            log(error)
             res.status(400).send('Bad request');
         }
     }

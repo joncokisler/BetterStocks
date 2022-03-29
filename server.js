@@ -64,6 +64,7 @@ app.use(
 // API ROUTES
 app.use(require('./routes/users'));
 app.use(require('./routes/stocks'));
+app.use(require('./routes/game'));
 app.use(require('./routes/gameWords'));
 
 
