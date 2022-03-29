@@ -65,95 +65,23 @@
     }
 
     .button1:hover{
-        box-shadow: 0 4px 6px 0 rgba(0,0,0,0.24);
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
       }
 
     .editButton{
-      top: 75px;
-      right: 10px;
-      position: absolute;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      background-color: rgb(255, 255, 255);
-      margin: 4px 2px;
-      width: 80px;
-      padding: 10px;
-      cursor: pointer;
-      border: none;
-      transition-duration: 0.4s;
-      border-radius: 5px;
+    top: 75px;
+    right: 10px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    margin: 4px 2px;
+    width: 80px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    transition-duration: 0.4s;
+    border-radius: 5px;
     }
-
-    .submitButton{
-      left: 270px;
-      top: 450px;
-      position: absolute;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      background-color: rgb(230, 229, 227);
-      width: 80px;
-      height: 40px;
-      padding: 10px;
-      cursor: pointer;
-      border: none;
-      transition-duration: 0.4s;
-      border-radius: 5px;
-    }
-
-    /* Popup style */
-    #popup-box {
-      z-index: 1;
-      position: fixed;
-      background: #00000050;
-      width: 100%;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      display: none;
-    }
-     
-    .box {
-      position: relative;
-      top: 70px;
-      width: 600px;
-      margin: 0 auto;
-      height: 500px;
-      background: #fff;
-      border-radius: 4px;
-      padding: 20px;
-      border: 1px solid #999;
-    }
-     
-    .close-icon {
-      content: 'X';
-      cursor: pointer;
-      right: 5px;
-      top: 5px;
-      position: absolute;
-      background: #dfdede;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      line-height: 17px;
-      text-align: center;
-      border: 1px solid rgb(65, 65, 65);
-      font-size: 20px;
-    }
-
-.editInfoTitle{
-  font-size: small;
-  position: relative;
-  left: 40px;
-  text-align: left;
-}
-
-.editTextbox{
-  left: -30px;
-  position: relative;
-  height: 30px;
-  width: 450px;
-}
