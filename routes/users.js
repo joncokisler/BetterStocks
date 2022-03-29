@@ -230,19 +230,13 @@ router.patch('/api/users/', mongoChecker, authenticate, async (req, res) => {
 router.post('/api/users/watchlist', mongoChecker, authenticate, async (req, res) => {
     try {
         const user = await User.findById(req.session.user);
-        if (!watchlist) {
-            res.status(404).send('Resource not found');
-            return;
-        }
-
-        const stock = await Stock.find({symbol: req.body.stock});
+        const stock = await Stock.findOne({symbol: req.body.stock});
         if (!stock) {
             res.status(400).send('Bad request');
             return;
         }
-        user.watchlist.push(stock._id);
+        user.watchList.push(stock._id);
         const result = await user.save();
-
         res.send(user);
 
     } catch (error) {
