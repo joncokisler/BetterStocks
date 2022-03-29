@@ -26,7 +26,7 @@ router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => 
         reviews: []
     });
     try {
-        const result = stock.save();
+        const result = await stock.save();
         res.send(stock);
     } catch (error) {
         if (isMongoError(error)) {
