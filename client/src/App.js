@@ -1,169 +1,202 @@
+import React from "react";
+import "./App.css";
+import { Navigate, Route, Routes, BrowserRouter } from "react-router-dom";
 
-import React from 'react';
-import './App.css';
-import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom';
-
-import Navbar from './react-components/navbar/Navbar';
-import LoginPage from './react-components/login-signup/LoginPage';
-import SignupPage from './react-components/login-signup/SignupPage';
-import PaperTrade from './react-components/PaperTrade';
-import TopStocks from './react-components/TopStocks';
-import ProfilePage from './react-components/profile/ProfilePage';
-import TrendingStocks from './react-components/TrendingStocks';
-import Stock from './react-components/stock-trend/index';
-import ReviewPage from './react-components/ReviewComponents/ReviewPage';
-import SearchPage from './react-components/search-page';
-import AdminPage from './react-components/AdminComponents/AdminPage'
-
+import Navbar from "./react-components/navbar/Navbar";
+import LoginPage from "./react-components/login-signup/LoginPage";
+import SignupPage from "./react-components/login-signup/SignupPage";
+import PaperTrade from "./react-components/PaperTrade";
+import TopStocks from "./react-components/TopStocks";
+import ProfilePage from "./react-components/profile/ProfilePage";
+import TrendingStocks from "./react-components/TrendingStocks";
+import Stock from "./react-components/stock-trend/index";
+import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
+import SearchPage from "./react-components/search-page";
+import AdminPage from "./react-components/AdminComponents/AdminPage";
 
 class App extends React.Component {
+	state = {
+		loggedInUser: "",
+		loginRedirect: false,
+		profileRedirect: false,
 
-  state = {
+		users: {
+			admin: {
+				userName: "admin",
+				displayName: "John(Admin)",
+				profilePicture:
+					"https://image.shutterstock.com/mosaic_250/2797510/1617540484/stock-photo-closeup-photo-of-amazing-short-hairdo-lady-looking-up-empty-space-deep-thinking-creative-person-arm-1617540484.jpg",
+				bio: "I am an admin. I have powers",
+				email: "admin@email.com",
+				phoneNumber: 6492737381,
+				isAdmin: true,
+				watchlist: [],
+			},
+			user: {
+				userName: "user",
+				displayName: "Fred(User)",
 
-    loggedInUser: "",
-    loginRedirect: false,
-    profileRedirect: false,
+				profilePicture:
+					"https://st.depositphotos.com/2309453/3449/i/600/depositphotos_34490345-stock-photo-confident-casual-unshaven-young-man.jpg",
 
-    users: {
-      admin: {
-        userName: "admin",
-        displayName: "John(Admin)",
-        profilePicture: "https://image.shutterstock.com/mosaic_250/2797510/1617540484/stock-photo-closeup-photo-of-amazing-short-hairdo-lady-looking-up-empty-space-deep-thinking-creative-person-arm-1617540484.jpg",
-        bio: "I am an admin. I have powers",
-        email: "admin@email.com",
-        phoneNumber: 6492737381,
-        isAdmin: true,
-        watchlist:[]
+				bio: "This is a bio. This website is great.",
+				email: "user@email.com",
+				phoneNumber: 6482453443,
+				isAdmin: false,
 
-      },
-      user: {
-        userName: "user",
-        displayName: "Fred(User)",
+				watchlist: [],
+			},
+		},
+	};
 
-        profilePicture: "https://st.depositphotos.com/2309453/3449/i/600/depositphotos_34490345-stock-photo-confident-casual-unshaven-young-man.jpg",
+	handleLoginCallback = (childData) => {
+		// console.log(childData)
+		// console.log(`USERNAME IS ${childData.username} `)
+		// console.log(`PASSWORD IS ${childData.password} `)
 
-        bio: "This is a bio. This website is great.",
-        email: "user@email.com",
-        phoneNumber: 6482453443,
-        isAdmin: false,
+		if (childData.username === "admin" && childData.password === "admin") {
+			this.setState({ loggedInUser: this.state.users.admin });
+			// console.log("ISOKAY")
+			this.setState({ profileRedirect: true });
+		} else if (childData.username === "user" && childData.password === "user") {
+			this.setState({ loggedInUser: this.state.users.user });
+			this.setState({ profileRedirect: true });
+		} else {
+			// console.log("WRONG USER INFO ENTERED")
+			this.handleLoginRedirect();
+		}
 
-        watchlist: []
+		// console.log(this.state.loggedInUser.userName)
+	};
 
+	handleLoginCallbackServer = async (userJSON) => {
+		const response = await fetch("/users/login", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: userJSON,
+		});
+		if (!response.ok) this.handleLoginRedirect();
+		else this.setState({ loggedInUser: response.json() });
+	};
 
-      }
-    }
-  }
+	handleLoginRedirect = () => {
+		this.setState({ loginRedirect: true });
+	};
 
-  handleLoginCallback = (childData) => {
-    // console.log(childData)
-    // console.log(`USERNAME IS ${childData.username} `)
-    // console.log(`PASSWORD IS ${childData.password} `)
-    
-    if (childData.username === "admin" && childData.password === "admin") {
-      this.setState({ loggedInUser: this.state.users.admin })
-      // console.log("ISOKAY")
-      this.setState({ profileRedirect: true })
-    }
-    
-    else if (childData.username === "user" && childData.password === "user") {
-      this.setState({ loggedInUser: this.state.users.user })
-      this.setState({ profileRedirect: true })
-    }
-    
-    else {
-      // console.log("WRONG USER INFO ENTERED")
-      this.handleLoginRedirect()
-    }
+	constructor(props) {
+		super(props);
+		this.handleLoginCallback = this.handleLoginCallback.bind(this);
+	}
+	render() {
+		// console.log(this.state.loggedInUser)
 
-    // console.log(this.state.loggedInUser.userName)
-  }
+		if (this.state.loginRedirect) {
+			this.setState({ loginRedirect: false });
+		}
 
-  handleLoginRedirect = () => {
-    this.setState({ loginRedirect: true })
-  }
+		return (
+			<div className="App">
+				<BrowserRouter>
+					<Routes>
+						<Route
+							path="/"
+							element={
+								<LoginPage
+									profileRedirect={this.state.profileRedirect}
+									handleLoginCallback={this.handleLoginCallback}
+								/>
+							}
+						/>
 
-  constructor(props) {
-    super(props)
-    this.handleLoginCallback = this.handleLoginCallback.bind(this)
-  }
-  render() {
-    // console.log(this.state.loggedInUser)
+						<Route path="signup" element={<SignupPage />} />
 
-    if (this.state.loginRedirect) {
-      this.setState({ loginRedirect: false })
-    }
+						<Route
+							path="top-stocks"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<TopStocks loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
+						<Route
+							path="trending-stocks"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<TrendingStocks loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='/' element={<LoginPage profileRedirect={this.state.profileRedirect} handleLoginCallback={ this.handleLoginCallback }/>} />
+						<Route
+							path="paper-trade"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<PaperTrade loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='signup' element={<SignupPage />} />
+						<Route
+							path="search"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<SearchPage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='top-stocks' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <TopStocks loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
+						<Route
+							path="stocks"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<Stock loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='trending-stocks' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <TrendingStocks loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
+						<Route
+							path="stocks/reviews"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<ReviewPage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='paper-trade' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <PaperTrade loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
+						<Route
+							path="admin"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<AdminPage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
 
-            <Route path='search' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <SearchPage loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
-
-            <Route path='stocks' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <Stock loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
-
-            <Route path='stocks/reviews' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <ReviewPage loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
-
-            <Route path='admin' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <AdminPage loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
-          
-            <Route path='profile' element={
-              <React.Fragment>
-                <Navbar user={ this.state.loggedInUser }/>
-                <ProfilePage loggedInUser = {this.state.loggedInUser} />
-              </React.Fragment>
-            } />
-
-          </Routes>
-
-        </BrowserRouter>
-      </div>
-    );
-  }
+						<Route
+							path="profile"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<ProfilePage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
+					</Routes>
+				</BrowserRouter>
+			</div>
+		);
+	}
 }
 
 export default App;
