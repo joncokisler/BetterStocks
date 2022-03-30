@@ -81,9 +81,37 @@ router.get('/api/game/highscores/:n', mongoChecker, authenticate, async (req, re
             res.send(scores);
         }
     } catch (error) {
+        if (isMongoError(error)) {
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(404).send('Resource not found');
+        }
+    }
+});
+
+/**
+ * GET /api/game/highscore/user
+ * 
+ * Retrieve the highest score for the currently logged in user.
+ * 
+ * Parameters: None
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and the user's highest score. 404 if the current user does not have a high score.
+ */
+router.get('/api/game/highscore/user', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const highScore = await Game.findOne({user: req.session.user});
+        if (!highScore) {
+            res.status(404).send('Resource not found');
+        } else {
+            res.send(highScore);
+        }
+    } catch (error) {
         res.status(500).send('Internal server error');
     }
-})
+});
 
 
 module.exports = router;
