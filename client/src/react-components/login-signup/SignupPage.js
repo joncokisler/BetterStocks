@@ -54,10 +54,10 @@ class SignupPage extends React.Component {
                 <Header/>
 
                 <div id="inputDiv">
-                    <input class = "signup-box" type="text" name="displayName" onChange={ this.handleInputChange } value={ this.state.displayName } placeholder="Display Name"/>
-                    <input class = "signup-box" type="text" name="username" onChange={ this.handleInputChange } value={ this.state.username } placeholder="Username"/>
-                    <input class = "signup-box" type="password" name="password" onChange={ this.handleInputChange } value={ this.state.password } placeholder="Password"/>
-                    <input class = "signup-box" type="password" name="confirmPassword" onChange={ this.handleInputChange } value={ this.state.confirmPassword } placeholder="Confirm Password"/>
+                    <input className = "signup-box" type="text" name="displayName" onChange={ this.handleInputChange } value={ this.state.displayName } placeholder="Display Name"/>
+                    <input className = "signup-box" type="text" name="username" onChange={ this.handleInputChange } value={ this.state.username } placeholder="Username"/>
+                    <input className = "signup-box" type="password" name="password" onChange={ this.handleInputChange } value={ this.state.password } placeholder="Password"/>
+                    <input className = "signup-box" type="password" name="confirmPassword" onChange={ this.handleInputChange } value={ this.state.confirmPassword } placeholder="Confirm Password"/>
                     <input id="submit-button" type="submit" value="Submit" onChange={ this.handleInputChange } onClick={this.submitInfo}/>
                 
                     <NavLink to="/">Login</NavLink>
