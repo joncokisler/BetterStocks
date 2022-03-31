@@ -9,7 +9,7 @@ import picture2 from './pic2.jpg';
 function AdminPage(){
     const state = {
         users: [
-            {userName: 'user1', displayName: 'user', profilePicture: picture1, email: 'user@yahoo.com', phone: '123-123-1122', coins: 100},
+            {userName: 'kaawejhWO', displayName: 'user', profilePicture: picture1, email: 'user@yahoo.com', phone: '123-123-1122', coins: 100},
             {userName: 'user2', displayName: 'user', profilePicture: picture2, email: 'user@yahoo.com', phone: '123-123-1122', coins: 1000}],
         blacklist: [ {userName: 'user3', displayName: 'user', profilePicture: null, email: 'user@yahoo.com', phone: '123-123-1122', coins: 0}]   
     }
