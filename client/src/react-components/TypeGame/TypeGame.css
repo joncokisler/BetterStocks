@@ -1,0 +1,107 @@
+#game{
+    display: block;
+}
+
+#gameInput{
+    position: absolute;
+    top: 75vh;
+    left: 40vw;
+    width: 30vw;
+    height: 50px;
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.wordBox{
+    position: absolute;
+    padding: auto;
+    top: 10vh;
+    left: 40vw;
+    width: 30vw;
+    height: 63vh;
+}
+
+.word{
+    color:black;
+    font-size: large;
+}
+
+.scores{
+    top: 80px;
+    left: 100px;
+    width: 400px;
+    height: 400px;
+    text-align: left;
+    position: absolute;
+}
+
+.red{
+    color: red;
+}
+
+#gameOver{
+    background-color: white;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.gameOverScore{
+    top: 50px;
+
+    position: relative;
+}
+
+.leaderBoard{
+    background-color: rgba(159, 168, 221, 0.8);
+    position: absolute;
+    top: 250px;
+    left: 30vw;
+    width: 600px;
+    height: 300px;
+    border-radius: 10px;
+    border-style: dotted;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 100px auto auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    position: relative;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+.grid-item-bold {
+    position: relative;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .playAgain{
+    top: 610px;
+    left: 46vw;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color:  rgba(159, 168, 221, 0.8);
+    margin: 4px 2px;
+    width: 150px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    transition-duration: 0.2s;
+    border-radius: 5px;
+    }
+
+    .button10:hover{
+        box-shadow: 0 4px 6px 0 rgba(0,0,0,0.24);
+}
