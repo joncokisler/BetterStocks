@@ -62,4 +62,43 @@ router.patch('/api/admin/users/:username', mongoChecker, adminAuthenticate, asyn
     }
 });
 
+/**
+ * DELETE /api/stocks/:stock/reviews/:reviewID
+ * 
+ * Delete a review from this stock page.
+ * 
+ * Parameters: stock (stock symbol), reviewID (ObjectID of the review to delete)
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and the stock representation
+ */
+ router.delete('/api/admin/stocks/:stock/reviews/:reviewId', mongoChecker, adminAuthenticate, async (req, res) => {
+    try {
+        const stock = await Stock.findOne({symbol: req.params.stock});
+        if (!stock) {
+            res.status(404).send('Resource not found');
+            return;
+        }
+
+        const filteredReview = stock.reviews.filter(review => review._id.equals(req.params.reviewId));
+        if (filteredReview.length !== 1) {
+            res.status(404).send('Resource not found');
+            return;
+        }
+        const reviewToRemove = filteredReview[0];
+        if (!reviewToRemove.author.equals(req.session.user)) {
+            res.status(403).send('Forbidden');
+            return;
+        }
+
+        const filtered = stock.reviews.filter(review => !review._id.equals(req.params.reviewId));
+        stock.reviews = filtered;
+        const result = await stock.save();
+        res.send(stock);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+    }
+});
+
 module.exports = router;
