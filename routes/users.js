@@ -10,7 +10,8 @@ const { Stock } = require('../models/stock');
 
 const env = process.env.NODE_ENV;
 const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON; // option to turn on the test user.
-const TEST_USER_ID = '623e007952cdf8af877cef4c' // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+const TEST_USER_ID = '62426710bcdafe2eb2c532de'; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+const TEST_USER_USERNAME = 'testUser';
 
 /***************** AUTHENTICATION **************************/
 
@@ -82,18 +83,18 @@ router.get("/users/logout", (req, res) => {
  * Body: None
  * 
  * Returns:
- *     * 200 if a valid session is found and {currentUser: <user ID>}.
+ *     * 200 if a valid session is found and {currentUser: <user ID>, username: <username>}.
  *     * 401 if no valid session is found
  */
 router.get("/users/check-session", (req, res) => {
     if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
         req.session.user = TEST_USER_ID;
-        res.send({ currentUser: TEST_USER_ID });
+        res.send({ currentUser: TEST_USER_ID, username: TEST_USER_USERNAME });
         return;
     }
 
     if (req.session.user) {
-        res.send({ currentUser: req.session.user });
+        res.send({ currentUser: req.session.user, username: req.session.username });
     } else {
         res.status(401).send();
     }

@@ -66,6 +66,7 @@ app.use(require('./routes/users'));
 app.use(require('./routes/stocks'));
 app.use(require('./routes/game'));
 app.use(require('./routes/gameWords'));
+app.use(require('./routes/paperTrade'));
 
 
 /*** Webpage routes below **********************************/
