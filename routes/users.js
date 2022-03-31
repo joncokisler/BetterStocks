@@ -89,12 +89,12 @@ router.get("/users/logout", (req, res) => {
 router.get("/users/check-session", (req, res) => {
     if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
         req.session.user = TEST_USER_ID;
-        res.send({ currentUser: TEST_USER_ID, username: TEST_USER_USERNAME });
+        res.send({ userID: TEST_USER_ID, username: TEST_USER_USERNAME });
         return;
     }
 
     if (req.session.user) {
-        res.send({ currentUser: req.session.user, username: req.session.username });
+        res.send({ userID: req.session.user, username: req.session.username });
     } else {
         res.status(401).send();
     }
