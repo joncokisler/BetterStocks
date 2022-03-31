@@ -1,0 +1,26 @@
+.stockListing {
+    margin-top: 7em;
+    font-family: 'Nunito';
+}
+
+.stockListing .stockList {
+    margin-top: 2em;
+}
+
+.stockListing .clickable {
+    cursor: pointer;
+}
+
+.stockListing .stockSymbol:hover {
+    transition: all 0.05s ease-in;
+    font-weight: bold;
+}
+
+.stockListing .stockSymbol {
+    color: black;
+}
+
+.stockListing .trendChart {
+    width: 10em;
+    height: 5em;
+}
