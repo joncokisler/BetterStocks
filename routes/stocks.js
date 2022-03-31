@@ -67,6 +67,40 @@ router.get('/api/stocks/:symbol', mongoChecker, authenticate, async (req, res) =
     }
 });
 
+/**
+ * PUT /api/stocks/:symbol/price
+ * 
+ * Update a given stock's price.
+ * 
+ * Parameters: symbol (stock symbol)
+ * 
+ * Body: {price: <new stock price>}
+ * 
+ * Returns: 200 on success and the stock representation in the database
+ */
+ router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const stock = await Stock.findOne({symbol: req.params.symbol});
+        if (!stock) {
+            res.status(404).send('Resource not found');
+            return;
+        } else if (!req.body.price) {
+            res.status(400).send('Bad request');
+            return;
+        }
+        stock.price = req.body.price;
+        stock.timestamp = Date.now();
+        const result = await stock.save();
+        res.send(stock);
+    } catch (error) {
+        if (isMongoError(error)) {
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad request');
+        }
+    }
+});
+
 
 /************* STOCK REVIEW CRUD ****************/
 
