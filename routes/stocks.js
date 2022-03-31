@@ -78,7 +78,7 @@ router.get('/api/stocks/:symbol', mongoChecker, authenticate, async (req, res) =
  * 
  * Returns: 200 on success and the stock representation in the database
  */
- router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, res) => {
+router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, res) => {
     try {
         const stock = await Stock.findOne({symbol: req.params.symbol});
         if (!stock) {

@@ -56,11 +56,7 @@ const UserSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        trim: true,
-        validate: {
-            validator: validator.isMobilePhone,
-            message: 'Not a valid phone'
-        }
+        trim: true
     },
     blacklist: {
         type: Boolean,
