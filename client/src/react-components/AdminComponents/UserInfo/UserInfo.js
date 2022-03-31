@@ -93,6 +93,7 @@ class UserInfo extends React.Component {
                         </div>
                         <button className='addToBlackListButton button1' onClick={this.onTrigger}>Add to BlackList</button>
                         <button className='editButton button1' onClick={this.openPopup}>Edit</button>
+                        {console.log("open")}
                     </div>
                     <div id="popup-box">
                         <div className="box">
