@@ -80,6 +80,30 @@ class App extends React.Component {
 		});
 		if (!response.ok) this.handleLoginRedirect();
 		else this.setState({ loggedInUser: response.json() });
+		console.log(this.state.loggedInUser);
+	};
+
+	submitInfo = async (signupJSON) => {
+		console.log("submitting sugnup info");
+
+		const user = {
+			displayName: this.state.displayName,
+			username: this.state.username,
+			password: this.state.password,
+			confirmPassword: this.state.confirmPassword,
+		};
+		const response = await fetch("/api/users", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: signupJSON,
+		});
+		if (!response.ok) throw new Error(response.status);
+		else this.setState({ loggedInUser: response.json() });
+
+		console.log(this.state.loggedInUser);
 	};
 
 	handleLoginRedirect = () => {
@@ -111,7 +135,10 @@ class App extends React.Component {
 							}
 						/>
 
-						<Route path="signup" element={<SignupPage />} />
+						<Route
+							path="signup"
+							element={<SignupPage submitInfo={this.signupJSON} />}
+						/>
 
 						<Route
 							path="top-stocks"
