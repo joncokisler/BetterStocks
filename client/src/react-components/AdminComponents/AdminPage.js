@@ -9,8 +9,9 @@ import picture2 from './pic2.jpg';
 function AdminPage(){
     const state = {
         users: [
-            {userName: 'user', displayName: 'user', profilePicture: picture1, email: 'user@yahoo.com', phone: '123-123-1122'}],
-        blacklist: []   
+            {userName: 'kaawejhWO', displayName: 'user', profilePicture: picture1, email: 'user@yahoo.com', phone: '123-123-1122', coins: 100},
+            {userName: 'user2', displayName: 'user', profilePicture: picture2, email: 'user@yahoo.com', phone: '123-123-1122', coins: 1000}],
+        blacklist: [ {userName: 'user3', displayName: 'user', profilePicture: null, email: 'user@yahoo.com', phone: '123-123-1122', coins: 0}]   
     }
 
     const [userInfo, setUserInfo] = useState();
@@ -24,6 +25,19 @@ function AdminPage(){
                 temp = state.users.splice(i, 1)
                 state.blacklist.push(temp[0])
                 break
+            }
+        }
+        updateUserInfo()
+        updateBlackListInfo()
+    }
+
+    function handleUpdate(userName, displayName, email, phone, coins){
+        for (let i = 0; i < state.users.length; i++){
+            if(state.users[i]["userName"] == userName){
+                state.users[i]["displayName"] = displayName
+                state.users[i]["email"] = email
+                state.users[i]["phone"] = phone
+                state.users[i]["coins"] = coins     
             }
         }
         updateUserInfo()
@@ -44,14 +58,14 @@ function AdminPage(){
     }
 
     function updateUserInfo(){
-        setUserInfo(state.users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} userName={u.userName} displayName={u.displayName} 
-        profilePicture={u.profilePicture} email={u.email} phone={u.phone} />))
+        setUserInfo(state.users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} parentUpdate = {handleUpdate} userName={u.userName} displayName={u.displayName} 
+        profilePicture={u.profilePicture} email={u.email} phone={u.phone} coins = {u.coins} />))
     }
 
     function updateBlackListInfo(){
         setBlacklistInfo(state.blacklist.map((u) => <BlackList key={ uid(u) } parentCallBack = {handleRemove}
         userName={u.userName} displayName={u.displayName} 
-        profilePicture={u.profilePicture} email={u.email} phone={u.phone} />))
+        profilePicture={u.profilePicture} email={u.email} phone={u.phone} coins = {u.coins} />))
     }
 
     useEffect(() =>{

@@ -15,6 +15,7 @@ import ReviewPage from './react-components/ReviewComponents/ReviewPage';
 import SearchPage from './react-components/search-page';
 import AdminPage from './react-components/AdminComponents/AdminPage';
 import StockListing from './react-components/StockListing';
+import GamePage from './react-components/TypeGame/TypeGame'
 
 
 class App extends React.Component {
@@ -175,6 +176,13 @@ class App extends React.Component {
               <React.Fragment>
                 <Navbar user={ this.state.loggedInUser }/>
                 <ProfilePage loggedInUser = {this.state.loggedInUser} />
+              </React.Fragment>
+            } />
+
+            <Route path='game' element={
+              <React.Fragment>
+                <Navbar user={ this.state.loggedInUser }/>
+                <GamePage loggedInUser = {this.state.loggedInUser} />
               </React.Fragment>
             } />
 
