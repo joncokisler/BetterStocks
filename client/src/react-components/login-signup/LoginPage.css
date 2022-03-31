@@ -1,16 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+#inputDivLogin{
+    margin-top:150px;
+    margin-right:auto;
+    margin-left:auto;
+    position:relative;
+    top:50px;
+    width:fit-content;
+}
 
 .textbox{
     background-color: #d9d9d9;
     border:none;
     display: block;
-    margin-top:10px;
+    margin-top:20px;
     height:60px;
     width:200px;
-    padding:10px;
     color:black;
     box-sizing: border-box;
     border-radius:5px;
+    padding:20px;
     transition: all .2s ease-in-out;
     
 }
@@ -20,7 +28,6 @@
     
 }
 .textbox:focus{
-    background-color: #d9d9d9;
     border:none;
     display: block;
     margin-top:10px;
@@ -34,10 +41,12 @@
 }
 
 #submit-button{
-    background-color: #d9d9d9;
+    background-color: #787878;
     border:none;
     display: block;
-    margin-top:10px;
+    margin-top:65px;
+    margin-right:auto;
+    margin-left:auto;
     height:60px;
     width:200px;
     color:black;
