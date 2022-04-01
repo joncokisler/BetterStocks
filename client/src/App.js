@@ -13,6 +13,8 @@ import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
 import SearchPage from "./react-components/search-page";
 import AdminPage from "./react-components/AdminComponents/AdminPage";
+import StockListing from "./react-components/StockListing";
+import GamePage from "./react-components/TypeGame/TypeGame";
 
 class App extends React.Component {
 	state = {
@@ -131,7 +133,7 @@ class App extends React.Component {
 							element={
 								<LoginPage
 									profileRedirect={this.state.profileRedirect}
-									handleLoginCallbackServer={this.handleLoginCallbackServer}
+									handleLoginCallback={this.handleLoginCallbackServer}
 								/>
 							}
 						/>
@@ -182,11 +184,33 @@ class App extends React.Component {
 						/>
 
 						<Route
-							path="stocks"
+							path="stocklisting"
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
-									<Stock loggedInUser={this.state.loggedInUser} />
+									<StockListing
+										loggedInUser={this.state.loggedInUser}
+										columns={[
+											{
+												name: "trace",
+												label: "Trace",
+												type: "trace",
+												sortable: false,
+											},
+											{
+												name: "price",
+												label: "Price",
+												type: "price",
+												sortable: true,
+											},
+											{
+												name: "stars",
+												label: "Stars",
+												type: "stars",
+												sortable: true,
+											},
+										]}
+									/>
 								</React.Fragment>
 							}
 						/>
@@ -217,6 +241,16 @@ class App extends React.Component {
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
 									<ProfilePage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
+
+						<Route
+							path="game"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<GamePage loggedInUser={this.state.loggedInUser} />
 								</React.Fragment>
 							}
 						/>

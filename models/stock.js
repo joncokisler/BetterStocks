@@ -31,16 +31,17 @@ const Stock = mongoose.model('Stock', {
         unique: true,
         minlength: 1,
         trim: true,
+        uppercase: true,
+    },
+    timestamp: {
+        type: Date,
+        required: true
     },
     price: {
         type: Number,
         required: true
     },
-    reviews: [ReviewSchema],
-    creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    }
+    reviews: [ReviewSchema]
 })
 
 module.exports = { Stock };

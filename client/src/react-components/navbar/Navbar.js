@@ -36,10 +36,9 @@ class Navbar extends React.Component {
 
                 <div id="nav-section">
                     <ul>
-                        <li><NavLink className="nav-items" to="/top-stocks">Top Stocks</NavLink></li>
-                        <li><NavLink className="nav-items" to="/trending-stocks">Trending</NavLink></li>
+                        <li><NavLink className="nav-items" to="/stocklisting">Stocks</NavLink></li>
                         <li><NavLink className="nav-items" to="/paper-trade">Paper Trading</NavLink></li>
-                        <li><NavLink className="nav-items" to="/search">Search</NavLink></li>
+                        <li><NavLink className="nav-items" to="/game">TypeGame</NavLink></li>
                         { this.renderAdmin(user) }
                     </ul>
 
