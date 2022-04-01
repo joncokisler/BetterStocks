@@ -132,7 +132,7 @@ class App extends React.Component {
               </React.Fragment>
             } />
 
-            <Route path='stocks' element={
+            <Route path='stocklisting' element={
               <React.Fragment>
                 <Navbar user={ this.state.loggedInUser }/>
                 <StockListing loggedInUser={this.state.loggedInUser} columns={ [
