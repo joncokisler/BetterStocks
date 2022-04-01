@@ -89,17 +89,18 @@ class App extends React.Component {
 	submitInfo = (signupJSON) => {
 		console.log("submitting sugnup info");
 
-		const response = fetch("/api/users", {
+		fetch("/api/users", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 			},
 			body: signupJSON,
+		}).then((response) => {
+			console.log(response);
+			if (!response.ok) throw new Error(response.status);
+			else this.setState({ loggedInUser: response.json() });
 		});
-		console.log(response);
-		if (!response.ok) throw new Error(response.status);
-		else this.setState({ loggedInUser: response.json() });
 
 		console.log("HELLOOO", this.state.loggedInUser);
 	};
