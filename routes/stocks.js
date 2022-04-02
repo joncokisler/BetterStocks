@@ -38,20 +38,50 @@ router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => 
 
 });
 
+// /**
+//  * GET /api/stocks/:symbol
+//  * 
+//  * Get current stock information.
+//  * 
+//  * Parameters: symbol (stock symbol)
+//  * 
+//  * Body: None
+//  * 
+//  * Returns: 200 on success and the stock representation in the database
+//  */
+// router.get('/api/stocks/:symbol', mongoChecker, authenticate, async (req, res) => {
+//     try {
+//         const stock = await Stock.findOne({symbol: req.params.symbol});
+//         if (!stock) {
+
+//             // gather stock info from Yahoo Finance and store
+
+//             res.status(404).send('Resource not found');
+//         } else {
+//             // check timestamp and update if necessary
+
+//             res.send(stock);
+//         }
+//     } catch (error) {
+//         res.status(500).send('Internal server error');
+//     }
+// });
+
 /**
- * GET /api/stocks/:symbol
+ * GET /api/stocks/list?stock=aapl&stock=...
  * 
- * Get current stock information.
+ * Get list of stock information
  * 
- * Parameters: symbol (stock symbol)
+ * Parameters: In the query parameters, use the "stock" key for multiple stocks.
  * 
  * Body: None
  * 
- * Returns: 200 on success and the stock representation in the database
+ * Returns: 200 on success and the array of stocks.
  */
-router.get('/api/stocks/:symbol', mongoChecker, authenticate, async (req, res) => {
+ router.get('/api/stocks/', mongoChecker, authenticate, async (req, res) => {
     try {
-        const stock = await Stock.findOne({symbol: req.params.symbol});
+        const stocksToGet = req.query.stock;
+        const stock = await Stock.find({symbol: {$in: stocksToGet}});
         if (!stock) {
 
             // gather stock info from Yahoo Finance and store

@@ -35,6 +35,7 @@ router.post('/api/papertrade', mongoChecker, authenticate, async (req, res) => {
 
         if (!req.body.stock) {
             res.status(400).send({reason: 'Invalid stock symbol'});
+            return;
         }
         const stock = await Stock.findOne({symbol: req.body.stock});
         if (!stock) {
@@ -49,11 +50,11 @@ router.post('/api/papertrade', mongoChecker, authenticate, async (req, res) => {
         ptrade.capital -= stock.price;
 
         const holdings = ptrade.holdings;
-        let held_stock = holdings.filter(holding => holding.stock.equals(stock._id));
+        let held_stock = holdings.filter(holding => holding.stock === stock.symbol);
         if (held_stock.length === 1) {
             held_stock[0].units++;
         } else if (held_stock.length === 0) {
-            held_stock = holdings.push({stock: stock._id, units: 1});
+            held_stock = holdings.push({stock: stock.symbol, units: 1});
         }
         const result = await user.save();
         res.send({capital: ptrade.capital, holdings: holdings});
@@ -93,6 +94,7 @@ router.post('/api/papertrade', mongoChecker, authenticate, async (req, res) => {
 
         if (!req.body.stock) {
             res.status(400).send({reason: 'Invalid stock symbol'});
+            return;
         }
 
         const stock = await Stock.findOne({symbol: req.body.stock});
@@ -102,7 +104,7 @@ router.post('/api/papertrade', mongoChecker, authenticate, async (req, res) => {
         }
 
         const holdings = ptrade.holdings;
-        let held_stock = holdings.filter(holding => holding.stock.equals(stock._id));
+        let held_stock = holdings.filter(holding => holding.stock === stock.symbol);
         if (held_stock.length === 1 && held_stock[0].units > 0) {
             held_stock[0].units--;
         } else if (held_stock.length === 0 || held_stock[0].units <= 0) {
