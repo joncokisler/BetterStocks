@@ -7,7 +7,8 @@ const bcrypt = require('bcryptjs');
 
 const HoldingSchema = new mongoose.Schema({
     stock: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
+        uppercase: true,
         required: true
     },
     units: {
@@ -19,6 +20,11 @@ const HoldingSchema = new mongoose.Schema({
 
 const PaperTradeSchema = new mongoose.Schema({
     capital: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    totalMoneyIn: {
         type: Number,
         required: true,
         min: 0
