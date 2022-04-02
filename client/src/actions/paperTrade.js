@@ -61,7 +61,8 @@ export function getStocks(holdings, setStockHoldings) {
                     holdingsWithUnits.push({
                         stock: holding.stock,
                         price: stocks[holding.stock].price,
-                        units: holding.units
+                        units: holding.units,
+                        history: stocks[holding.stock].history
                     });
                 }
                 setStockHoldings(holdingsWithUnits);

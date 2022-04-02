@@ -33,8 +33,11 @@ function PaperTrade() {
         try {
             setBalance(userInfo.paperTrade.capital);
             setInitBalance(userInfo.paperTrade.totalMoneyIn);
-            getStocks(userInfo.paperTrade.holdings, setStockHoldings);
             setPerfPercent(((value + balance - initBalance) / initBalance) * 100)
+            const stocks = userInfo.paperTrade.holdings.map(h => (
+                {stock: h.stock, units: h.units}
+            ));
+            getStocks(stocks, setStockHoldings);
         } catch (error) {
         }
     }, [userInfo]);
@@ -51,7 +54,7 @@ function PaperTrade() {
             setPerfPercent(((value + balance - initBalance) / initBalance) * 100);
         } catch (error) {
         }
-    }, [value, balance, initBalance, stockHoldings]);
+    }, [value, balance, initBalance]);
 
     /* Handle a buy/sell event */
     function stockBuySell(e) {
@@ -79,10 +82,20 @@ function PaperTrade() {
         const holdingsArr = Object.entries(stockHoldings).sort(compareHoldings);
         return holdingsArr.reduce((holdings, keyValue) => {
             const [s, info] = keyValue;
+            let filterStart = new Date();
+            filterStart.setDate(filterStart.getDate() - 1);
+            // console.log(filterStart.toJSON());
+            // console.log(info.history.map(entry => console.log(entry.timestamp)));
+            // console.log(Date.parse(info.history[1].timestamp) > filterStart);
+            // console.log(info.history.filter(entry => entry.timestamp >= filterStart).map(entry => entry.price));
+            const trend = info.history
+                            .filter(entry => Date.parse(entry.timestamp) >= filterStart)
+                            .map(entry => entry.price)
+                            .concat([info.price]);
             if (info.units > 0) {
                 holdings.push({
                     symbol: info.stock,
-                    trend: [],  // TODO add price trace
+                    trend: trend,
                     val1: Number(info.price).toFixed(2),
                     val2: info.units
                 });
