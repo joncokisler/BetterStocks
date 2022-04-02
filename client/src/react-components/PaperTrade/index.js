@@ -84,10 +84,6 @@ function PaperTrade() {
             const [s, info] = keyValue;
             let filterStart = new Date();
             filterStart.setDate(filterStart.getDate() - 1);
-            // console.log(filterStart.toJSON());
-            // console.log(info.history.map(entry => console.log(entry.timestamp)));
-            // console.log(Date.parse(info.history[1].timestamp) > filterStart);
-            // console.log(info.history.filter(entry => entry.timestamp >= filterStart).map(entry => entry.price));
             const trend = info.history
                             .filter(entry => Date.parse(entry.timestamp) >= filterStart)
                             .map(entry => entry.price)
