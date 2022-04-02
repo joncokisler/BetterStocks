@@ -23,6 +23,7 @@ router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => 
         symbol: req.body.symbol,
         timestamp: Date.now(),
         price: req.body.price,
+        history: [],
         reviews: []
     });
     try {
@@ -35,11 +36,10 @@ router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => 
             res.status(400).send('Bad request');
         }
     }
-
 });
 
 /**
- * GET /api/stocks/list?stock=aapl&stock=...
+ * GET /api/stocks?stock=aapl&stock=...
  * 
  * Get list of stock information
  * 
@@ -49,7 +49,7 @@ router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => 
  * 
  * Returns: 200 on success and the array of stocks.
  */
- router.get('/api/stocks/', mongoChecker, authenticate, async (req, res) => {
+router.get('/api/stocks/', mongoChecker, authenticate, async (req, res) => {
     try {
         const stocksToGet = req.query.stock;
         const stock = await Stock.find({symbol: {$in: stocksToGet}});
@@ -89,6 +89,7 @@ router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, 
             res.status(400).send('Bad request');
             return;
         }
+        stock.history.push({timestamp: stock.timestamp, price: stock.price});
         stock.price = req.body.price;
         stock.timestamp = Date.now();
         const result = await stock.save();
