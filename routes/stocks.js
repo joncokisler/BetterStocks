@@ -69,6 +69,43 @@ router.get('/api/stocks/', mongoChecker, authenticate, async (req, res) => {
 });
 
 /**
+ * GET /api/stocks/history/:stock?interval=1d
+ * 
+ * Get the specified stock's historical price.
+ * 
+ * Parameters: interval (interval of time backwards) accepts the following values:
+ *     "1d"
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and an array of {timestamp: <timestamp>, price: <price>} sorted by increasing timestamp
+ */
+router.get('/api/stocks/history/:symbol', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const interval = req.query.interval;
+        let filterStart = undefined;
+        if (interval === '1d') {
+            filterStart = new Date();
+            filterStart = filterStart.setDate(filterStart.getDate - 1);
+        }
+        if (!filterStart) {
+            res.status(400).send('Bad request');
+            return;
+        }
+
+        const stock = Stock.findOne({symbol: req.params.symbol});
+        if (!stock) {
+            res.status(404).send('Resource not found');
+            return;
+        }
+        const history = stock.history.filter(timeprice => timeprice.timestamp >= filterStart);
+        res.send(history);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+    }
+});
+
+/**
  * PUT /api/stocks/:symbol/price
  * 
  * Update a given stock's price.
