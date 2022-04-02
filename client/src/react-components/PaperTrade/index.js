@@ -6,14 +6,6 @@ import { getUsername, getUserInfo, getStocks, buyStock, sellStock } from '../../
 
 import './styles.css';
 
-const ALL_STOCKS = [  // price temporarily a list to simulate price changes
-    {symbol: 'AAPL', price: [73, 23, 38, 45]},
-    {symbol: 'AMD', price: [85, 92, 66, 12]},
-    {symbol: 'INTC', price: [54, 57, 29, 36]},
-    {symbol: 'NVDA', price: [11, 33, 47, 37]},
-    {symbol: 'TSLA', price: [73, 78, 82, 22]},
-];
-
 function PaperTrade() {
     const [initBalance, setInitBalance] = useState(0);
 
