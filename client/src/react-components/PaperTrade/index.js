@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import StockList from '../StockList';
 
-import { getUsername, getUserInfo, getStocks, buyStock } from '../../actions/paperTrade';
+import { getUsername, getUserInfo, getStocks, buyStock, sellStock } from '../../actions/paperTrade';
 
 import './styles.css';
 
@@ -41,27 +41,25 @@ function PaperTrade() {
         try {
             setBalance(userInfo.paperTrade.capital);
             setInitBalance(userInfo.paperTrade.totalMoneyIn);
-            setStockHoldings(userInfo.paperTrade.holdings);
+            getStocks(userInfo.paperTrade.holdings, setStockHoldings);
             setPerfPercent(((value + balance - initBalance) / initBalance) * 100)
         } catch (error) {
         }
     }, [userInfo]);
-    useEffect(() => {setPerfPercent(((value + balance - initBalance) / initBalance) * 100)}, [value, balance, initBalance]);
     useEffect(() => {
         try {
             const stocks = userInfo.paperTrade.holdings.map(h => (
                 {stock: h.stock, units: h.units}
             ));
             getStocks(stocks, setStockHoldings);
+            setValue(Object.entries(stockHoldings).reduce((v, keyValue) => {
+                const [s, info] = keyValue;
+                return v + (info.price * info.units);
+            }, 0));
+            setPerfPercent(((value + balance - initBalance) / initBalance) * 100);
         } catch (error) {
         }
-    }, [userInfo]);
-    useEffect(() => {
-        setValue(Object.entries(stockHoldings).reduce((v, keyValue) => {
-            const [s, info] = keyValue;
-            return v + (info.price * info.units);
-        }, 0));
-    }, [userInfo]);
+    }, [value, balance, initBalance, stockHoldings]);
 
     /* Handle a buy/sell event */
     function stockBuySell(e) {
@@ -72,18 +70,7 @@ function PaperTrade() {
                 break;
 
             case 'sell':
-                if (stockSymbol in stockHoldings) {
-                    const stockPrices = ALL_STOCKS.filter((s) => s.symbol === stockSymbol)[0].price;
-                    const randPrice = stockPrices[Math.floor(Math.random() * stockPrices.length)];
-                    stockHoldings[stockSymbol].numHoldings--;
-                    stockHoldings[stockSymbol].currPrice = randPrice;
-                    
-                    if (stockHoldings[stockSymbol].numHoldings === 0) {
-                        delete stockHoldings[stockSymbol];
-                    }
-                    setBalance(balance + randPrice);
-                    setStockHoldings(stockHoldings);
-                }
+                sellStock(stockSymbol, setBalance, setErrorMessage);
                 break;
 
             default:
@@ -104,7 +91,7 @@ function PaperTrade() {
                 holdings.push({
                     symbol: info.stock,
                     trend: [],  // TODO add price trace
-                    val1: info.price,
+                    val1: Number(info.price).toFixed(2),
                     val2: info.units
                 });
             }

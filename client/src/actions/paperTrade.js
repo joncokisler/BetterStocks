@@ -103,3 +103,37 @@ export function buyStock(stock, setBalance, setErrorMessage) {
             .catch(error => {});
     }
 }
+
+export function sellStock(stock, setBalance, setErrorMessage) {
+    if (stock) {
+        const req = new Request(
+            `${API_HOST}/api/papertrade`,
+            {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    stock: stock
+                })
+            }
+        );
+        fetch(req)
+            .then(res => {
+                return [res.status, res.json()];
+            })
+            .then(data => {
+                if (data[0] === 400) {
+                    data[1].then(json => {
+                        setErrorMessage(json.reason);
+                    }).then(error => {});
+                    return Promise.reject();
+                } else {
+                    return data[1];
+                }
+            })
+            .then(json => {
+                setBalance(json.capital);
+                setErrorMessage('');
+            })
+            .catch(error => {});
+    }
+}
