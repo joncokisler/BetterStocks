@@ -91,7 +91,7 @@ function StockListing(props) {
     const listingColumns = [{name: 'symbol', label: 'Symbol', type: 'symbol', sortable: true}].concat(props.columns);
 
     useEffect(() => {
-        getStocksPrefix(searchString, setStocks);
+        getStocksPrefix(searchString ? searchString : '.', setStocks);
     }, [searchString]);
 
     function handleFilter(col) {
