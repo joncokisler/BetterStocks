@@ -33,7 +33,6 @@ function PaperTrade() {
         try {
             setBalance(userInfo.paperTrade.capital);
             setInitBalance(userInfo.paperTrade.totalMoneyIn);
-            setPerfPercent(((value + balance - initBalance) / initBalance) * 100)
             const stocks = userInfo.paperTrade.holdings.map(h => (
                 {stock: h.stock, units: h.units}
             ));
@@ -47,6 +46,11 @@ function PaperTrade() {
                 {stock: h.stock, units: h.units}
             ));
             getStocks(stocks, setStockHoldings);
+        } catch (error) {
+        }
+    }, [value, balance, initBalance]);
+    useEffect(() => {
+        try {
             setValue(Object.entries(stockHoldings).reduce((v, keyValue) => {
                 const [s, info] = keyValue;
                 return v + (info.price * info.units);
@@ -54,7 +58,7 @@ function PaperTrade() {
             setPerfPercent(((value + balance - initBalance) / initBalance) * 100);
         } catch (error) {
         }
-    }, [value, balance, initBalance]);
+    }, [stockHoldings]);
 
     /* Handle a buy/sell event */
     function stockBuySell(e) {
