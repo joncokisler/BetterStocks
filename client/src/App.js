@@ -192,20 +192,20 @@ class App extends React.Component {
 										loggedInUser={this.state.loggedInUser}
 										columns={[
 											{
-												name: "trace",
-												label: "Trace",
+												name: "history",
+												label: "24-Hr Price History",
 												type: "trace",
 												sortable: false,
 											},
 											{
 												name: "price",
-												label: "Price",
+												label: "Last Known Price",
 												type: "price",
 												sortable: true,
 											},
 											{
-												name: "stars",
-												label: "Stars",
+												name: "week_stars",
+												label: "7-Day Avg. Review Rating",
 												type: "stars",
 												sortable: true,
 											},
