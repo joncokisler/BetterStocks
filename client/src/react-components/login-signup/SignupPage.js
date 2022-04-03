@@ -74,14 +74,16 @@ class SignupPage extends React.Component {
 						placeholder="Confirm Password"
 					/>
 					<input
-						id="submit-button"
+						id="submit-button-signup"
 						type="submit"
 						value="Submit"
 						onChange={this.handleInputChange}
 						onClick={this.submitInfo}
 					/>
 
-					<NavLink to="/">Login</NavLink>
+					<NavLink className="bottom-loginsignup-button" to="/">
+						Login
+					</NavLink>
 				</div>
 			</div>
 		);

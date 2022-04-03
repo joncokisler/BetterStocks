@@ -90,21 +90,29 @@ class LoginPage extends React.Component {
 						placeholder="Enter Password"
 					/>
 					<input
-						id="submit-button"
+						id="submit-button-login"
 						type="submit"
 						value="Log In"
 						onClick={this.loginPressed}
 					/>
 
-					<ul>
-						<li>
-							<a href="#" onClick={this.handleForgotPassword}>
+					<ul className="bottom-links-list">
+						<li className="bottom-links-listitem">
+							<a
+								className="bottom-loginsignup-button"
+								href="#"
+								onClick={this.handleForgotPassword}
+							>
 								Forgot Password?{" "}
 							</a>
 						</li>
 
-						<li>
-							<a href="#" onClick={this.handleSignup}>
+						<li className="bottom-links-listitem">
+							<a
+								className="bottom-loginsignup-button"
+								href="#"
+								onClick={this.handleSignup}
+							>
 								Sign Up
 							</a>
 						</li>
