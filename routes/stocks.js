@@ -106,6 +106,36 @@ router.get('/api/stocks/history/:symbol', mongoChecker, authenticate, async (req
 });
 
 /**
+ * GET /api/stocks/search?prefix=A&n=5
+ * 
+ * Get a listing of stocks with symbols beginning with the given prefix.
+ * 
+ * Parameters: prefix (beginning of the stock symbol to search for), n (maximum number of stocks to return, default 10)
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and an array of matching stocks sorted alphabetically
+ */
+router.get('/api/stocks/search', mongoChecker, authenticate, async (req, res) => {
+    try {
+        if (!req.query.prefix) {
+            res.status(400).send('Bad request');
+            return;
+        }
+        const stocks = await Stock.find({symbol: {
+            $regex: `^${req.query.prefix}`
+        }}).sort({symbol: 1}).limit(req.query.n ? req.query.n : 10);
+        res.send(stocks);
+    } catch (error) {
+        if (isMongoError(error)) {
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad request');
+        }
+    }
+});
+
+/**
  * PUT /api/stocks/:symbol/price
  * 
  * Update a given stock's price.
