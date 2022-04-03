@@ -141,13 +141,14 @@ function StockListing(props) {
         let dateFilterStart = new Date();
         dateFilterStart.setDate(dateFilterStart.getDate() - 7);
         for (const stock of stockList) {
+            console.log(stock.reviews);
             stock.week_stars = stock.reviews
-                                    .filter(rev => rev.timestamp >= dateFilterStart)
+                                    .filter(rev => Date.parse(rev.timestamp) >= dateFilterStart)
                                     .reduce((acc, rev) => {
                                         return [acc[0] + 1, acc[1] + rev.stars];
                                     }, [0, 0]);
-            if (stock.week_stars[0] > 0) { // no reviews
-                stock.week_stars = stock.week_stars[1] * 1.0 / stock.week_stars[1];
+            if (stock.week_stars[0] > 0) {
+                stock.week_stars = stock.week_stars[1] * 1.0 / stock.week_stars[0];
             } else {
                 stock.week_stars = -1;
             }
