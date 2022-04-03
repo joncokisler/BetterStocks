@@ -1,18 +1,33 @@
 .paperTrade .content {
-    margin-top: 5%;
+    margin-top: 7em;
     font-family: 'Nunito';
 }
 
-.paperTrade .statistics {
-    float: left;
-    margin-left: 10%;
-    border-collapse: collapse;
-    border: 1px solid black;
+.paperTrade .topInfo {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
-.paperTrade .statistics th, 
-.paperTrade .statistics td {
-    border: 1px solid black;
+.paperTrade .topInfo .statistics {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.paperTrade .topInfo .statistics .statistic {
+    padding: 1em;
+}
+
+.paperTrade .topInfo .statistics .statistic strong {
+    text-decoration-line: underline;
+    text-decoration-color: grey;
+    text-decoration-style: dotted;
+    cursor: help;
 }
 
 .paperTrade .statistics thead th {
@@ -30,18 +45,18 @@
 }
 
 .paperTrade .buySell {
-    margin-top: 3%;
+    margin-left: 10em;
+    margin-right: 10em;
 }
-
-.paperTrade .buySell label {
-    margin-left: 3em;
-} 
 
 .paperTrade .buySell input {
     margin-left: 1em;
 }
 
+.paperTrade .buySell #stockBuySellErrorMsg {
+    color: red;
+}
+
 .paperTrade .holdings {
-    clear: both;
-    margin-top: 10%;
+    margin-top: 4em;
 }

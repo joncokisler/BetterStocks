@@ -56,6 +56,9 @@ class StockListElem extends React.Component {
                 legend: {
                     display: false
                 }
+            },
+            animation: {
+                duration: 0
             }
         };
 
