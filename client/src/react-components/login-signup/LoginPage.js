@@ -75,6 +75,8 @@ class LoginPage extends React.Component {
 				<Header />
 
 				<div id="inputDivLogin">
+				<div id="phrase">Better Trades Today For An Easier Tomorrow</div>
+
 					<input
 						className="textbox"
 						type="text"
