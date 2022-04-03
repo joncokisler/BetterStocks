@@ -83,13 +83,17 @@ ul {
 	text-decoration: underline;
 	color: grey;
 	font-style: italic;
+	font-family: 'Nunito';
 	min-width: 100px;
 }
 .bottom-loginsignup-button a {
 	width: 100px;
+	
 }
 .bottom-links-listitem {
 	display: inline-block;
 	margin-right: 10px;
 	min-width: 100px;
+	font-family: 'Nunito';
 }
+
