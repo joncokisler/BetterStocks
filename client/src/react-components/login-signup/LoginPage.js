@@ -36,7 +36,7 @@ class LoginPage extends React.Component {
 		};
 		const userJSON = JSON.stringify(userData);
 
-		const currentUser = this.props.handleLoginCallbackServer(userJSON);
+		const currentUser = this.props.handleLoginCallback(userJSON);
 	};
 
 	handleForgotPassword = () => {
