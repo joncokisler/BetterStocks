@@ -145,22 +145,22 @@ function TypeGame(){
                     <div className="grid-item">2</div>
                     <div className="grid-item">{state.topUsers[1].userName}</div>  
                     <div className="grid-item">{state.topUsers[1].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>
+                    <div className="grid-item">{state.topUsers[1].score}</div>
 
                     <div className="grid-item">3</div>
                     <div className="grid-item">{state.topUsers[2].userName}</div>
                     <div className="grid-item">{state.topUsers[2].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>  
+                    <div className="grid-item">{state.topUsers[2].score}</div>  
 
                     <div className="grid-item">4</div>
                     <div className="grid-item">{state.topUsers[3].userName}</div>
                     <div className="grid-item">{state.topUsers[3].displayName}</div>  
-                    <div className="grid-item">{state.topUsers[0].score}</div>
+                    <div className="grid-item">{state.topUsers[3].score}</div>
 
                     <div className="grid-item">5</div>
                     <div className="grid-item">{state.topUsers[4].userName}</div>
                     <div className="grid-item">{state.topUsers[4].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>    
+                    <div className="grid-item">{state.topUsers[4].score}</div>    
                 </div>
                 <button className='playAgain button10' onClick={handlePlayAgain}>Play Again</button>
             </div>
