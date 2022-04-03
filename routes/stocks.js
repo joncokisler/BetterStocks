@@ -106,11 +106,11 @@ router.get('/api/stocks/history/:symbol', mongoChecker, authenticate, async (req
 });
 
 /**
- * GET /api/stocks/search?prefix=...
+ * GET /api/stocks/search?prefix=A&n=5
  * 
  * Get a listing of stocks with symbols beginning with the given prefix.
  * 
- * Parameters: prefix (beginning of the stock symbol to search for)
+ * Parameters: prefix (beginning of the stock symbol to search for), n (maximum number of stocks to return, default 10)
  * 
  * Body: None
  * 
@@ -124,7 +124,7 @@ router.get('/api/stocks/search', mongoChecker, authenticate, async (req, res) =>
         }
         const stocks = await Stock.find({symbol: {
             $regex: `^${req.query.prefix}`
-        }});
+        }}).sort({symbol: 1}).limit(req.query.n ? req.query.n : 10);
         res.send(stocks);
     } catch (error) {
         if (isMongoError(error)) {
