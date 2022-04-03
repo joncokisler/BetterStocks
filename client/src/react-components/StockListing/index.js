@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { uid } from 'react-uid';
 
 import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
+import { BiSearch } from 'react-icons/bi';
 
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
@@ -11,15 +12,25 @@ import './styles.css';
 
 import FiveStar from '../FiveStar';
 
+import { getStocksPrefix } from '../../actions/stockListing';
+
 function render_trend(trend) {
-    const labels = []
+    const labels = [];
+    let dateFilterStart = new Date();
+    dateFilterStart.setDate(dateFilterStart.getDate() - 1);
     for (const [index, element] of trend.entries()) {
-        labels.push(index);
+        if (Date.parse(element.timestamp) >= dateFilterStart) {
+            labels.push(index);
+        }
+    }
+
+    if (labels.length <= 1) {
+        return <p>No Data</p>;
     }
 
     let trend_color = 'rgba(80, 80, 80, 0.7)';
     if (trend.length >= 2) {
-        const begin_end_diff = trend[trend.length - 1] - trend[0];
+        const begin_end_diff = trend[trend.length - 1].price - trend[0].price;
         if (begin_end_diff > 0) {
             trend_color = 'rgba(30, 150, 0, 0.7)';
         } else if (begin_end_diff < 0) {
@@ -47,32 +58,41 @@ function render_trend(trend) {
             legend: {
                 display: false
             }
+        },
+        animation: {
+            duration: 0
         }
     };
 
     const data = {
         labels: labels,
         datasets: [
-            {data: labels.map((i) => trend[i])}
+            {data: labels.map((i) => trend[i].price)}
         ]
     };
     return <div className='trendChart'><Line options={ options } data={ data }/></div>;
+}
+
+function render_stars(star_num) {
+    if (star_num !== -1) {
+        return <FiveStar stars={ star_num } />
+    } else {
+        return <p>No Reviews</p>
+    }
 }
 
 
 function StockListing(props) {
 
     const [colFilter, setColFilter] = useState(['symbol', true]);
+    const [searchString, setSearchString] = useState('');
+    const [stocks, setStocks] = useState([]);
 
     const listingColumns = [{name: 'symbol', label: 'Symbol', type: 'symbol', sortable: true}].concat(props.columns);
 
-    const stocks = [
-        {symbol: 'AAPL', trace: [73, 23, 38, 45], price: -100.24, stars: 5.00},
-        {symbol: 'AMD', trace: [85, 92, 66, 12], price: 165.23159, stars: 3.234},
-        {symbol: 'INTC', trace: [54, 57, 29, 36], price: 148.349875, stars: 3.823},
-        {symbol: 'NVDA', trace: [11, 33, 47, 37], price: 207.98374, stars: 2.356},
-        {symbol: 'TSLA', trace: [73, 78, 82, 22], price: 207.2465, stars: 1.982735},
-      ]
+    useEffect(() => {
+        getStocksPrefix(searchString ? searchString : '.', setStocks);
+    }, [searchString]);
 
     function handleFilter(col) {
         const c = col.toLowerCase();
@@ -106,7 +126,7 @@ function StockListing(props) {
                 case 'price':
                     return <td key={ uid(col) }>{ Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0 }</td>;
                 case 'stars':
-                    return <td key={ uid(col) }><FiveStar stars={ stock[col.name] } /></td>;
+                    return <td key={ uid(col) }>{ render_stars(stock.week_stars) }</td>;
                 default:
                     class ColumnTypeError extends Error {
                         constructor(message) {
@@ -117,14 +137,31 @@ function StockListing(props) {
                     throw new ColumnTypeError(`Invalid column type of "${col.type}"`);
             }
         }
-        let sortedStocks = stockList.sort((a, b) => a[colFilter[0]] - b[colFilter[0]]);
+
+        let dateFilterStart = new Date();
+        dateFilterStart.setDate(dateFilterStart.getDate() - 7);
+        for (const stock of stockList) {
+            stock.week_stars = stock.reviews
+                                    .filter(rev => Date.parse(rev.timestamp) >= dateFilterStart)
+                                    .reduce((acc, rev) => {
+                                        return [acc[0] + 1, acc[1] + rev.stars];
+                                    }, [0, 0]);
+            if (stock.week_stars[0] > 0) {
+                stock.week_stars = stock.week_stars[1] * 1.0 / stock.week_stars[0];
+            } else {
+                stock.week_stars = -1;
+            }
+        }
+
+        const sortFn = colFilter[0] === 'symbol' ? (a, b) => a['symbol'].localeCompare(b['symbol']) : (a, b) => a[colFilter[0]] - b[colFilter[0]];
+        let sortedStocks = stockList.sort(sortFn);
         if (!colFilter[1]) {
             sortedStocks = sortedStocks.reverse();
         }
 
         return <React.Fragment>
             {
-                stockList.map(stock => <tr key={ uid(stock) }>
+                sortedStocks.map(stock => <tr key={ uid(stock) }>
                     {
                         listingColumns.map(col => makeCell(col, stock))
                     }
@@ -134,6 +171,13 @@ function StockListing(props) {
     }
 
     return <div className='stockListing'>
+        <h3>Stock Search</h3>
+        <form className='stockSearch'>
+            <label>
+                <BiSearch />
+                <input type='text' value={ searchString } onChange={(e) => setSearchString(e.target.value.toUpperCase())} placeholder='Symbol' />
+            </label>
+        </form>
         <table className='stockList'>
             <thead>
                 <tr>
