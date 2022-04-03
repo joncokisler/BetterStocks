@@ -96,7 +96,7 @@ class LoginPage extends React.Component {
 						onClick={this.loginPressed}
 					/>
 
-					<ul>
+					<ul className="bottom-links-list">
 						<li className="bottom-links-listitem">
 							<a
 								className="bottom-loginsignup-button"
