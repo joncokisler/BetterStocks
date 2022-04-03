@@ -141,7 +141,6 @@ function StockListing(props) {
         let dateFilterStart = new Date();
         dateFilterStart.setDate(dateFilterStart.getDate() - 7);
         for (const stock of stockList) {
-            console.log(stock.reviews);
             stock.week_stars = stock.reviews
                                     .filter(rev => Date.parse(rev.timestamp) >= dateFilterStart)
                                     .reduce((acc, rev) => {
