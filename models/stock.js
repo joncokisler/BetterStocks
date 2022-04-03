@@ -37,6 +37,18 @@ const Stock = mongoose.model('Stock', {
         type: Date,
         required: true
     },
+    history: [
+        {
+            timestamp: {
+                type: Date,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
     price: {
         type: Number,
         required: true

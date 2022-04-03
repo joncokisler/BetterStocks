@@ -49,6 +49,7 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
         // add to user capital
         user = await User.findById(req.session.user);
         user.paperTrade.capital += Number(req.body.score);
+        user.paperTrade.totalMoneyIn += Number(req.body.score);
         const result = await user.save();
         res.send();
     } catch (error) {
