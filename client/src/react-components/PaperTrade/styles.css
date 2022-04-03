@@ -23,6 +23,13 @@
     padding: 1em;
 }
 
+.paperTrade .topInfo .statistics .statistic strong {
+    text-decoration-line: underline;
+    text-decoration-color: grey;
+    text-decoration-style: dotted;
+    cursor: help;
+}
+
 .paperTrade .statistics thead th {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -44,6 +51,10 @@
 
 .paperTrade .buySell input {
     margin-left: 1em;
+}
+
+.paperTrade .buySell #stockBuySellErrorMsg {
+    color: red;
 }
 
 .paperTrade .holdings {

@@ -17,7 +17,7 @@ export function getUsername(setUsername) {
             setUsername(json.username);
             return json.username;
         })
-        .catch(error => {console.log(error)});
+        .catch(error => {});
 }
 
 export function getUserInfo(username, setUserInfo) {
@@ -34,7 +34,7 @@ export function getUserInfo(username, setUserInfo) {
             .then(json => {
                 setUserInfo(json);
             })
-            .catch(error => {console.log(error)});
+            .catch(error => {});
     }
 }
 
@@ -67,7 +67,7 @@ export function getStocks(holdings, setStockHoldings) {
                 }
                 setStockHoldings(holdingsWithUnits);
             })
-            .catch(error => {console.log(error)});
+            .catch(error => {});
     }
 }
 

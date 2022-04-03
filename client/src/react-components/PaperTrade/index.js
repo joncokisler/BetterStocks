@@ -113,15 +113,15 @@ function PaperTrade() {
                     {/* Portfolio Statistics */}
                     <div className='statistics'>
                         <div className='statistic'>
-                            <strong>Current Balance</strong>
+                            <strong title='Amount available to invest'>Capital</strong>
                             <p>{ `$${balance.toFixed(2)}` }</p>
                         </div>
                         <div className='statistic'>
-                            <strong>Portfolio Value</strong>
+                            <strong title='Value of owned stocks + capital'>Portfolio Value</strong>
                             <p>{ `$${(balance + value).toFixed(2)}` }</p>
                         </div>
                         <div className='statistic'>
-                            <strong>All Time Performance</strong>
+                            <strong title='Percent increase of portfolio value from stock trades alone'>All Time Performance</strong>
                             <p>{ `${perfPercent.toFixed(2)}%` }</p>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ function PaperTrade() {
                         </label>
                         <input type='submit' name='buy' value='Buy' />
                         <input type='submit' name='sell' value='Sell' />
-                        <p>{ errorMessage }</p>
+                        <p id='stockBuySellErrorMsg'>{ errorMessage }</p>
                     </form>
                 </div>
 
