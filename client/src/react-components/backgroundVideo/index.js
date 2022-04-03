@@ -1,11 +1,11 @@
 import React from 'react';
 import './backgroundVideo.css';
 
-export default function backgroundVideo() {
+export default function BackgroundVideo() {
     return (
         <div>
             <video loop autoPlay muted id="bg-video">
-                <source src={require('./backgroundVideo.mp4')} type="video/mp4"/>
+                <source src={require('./backgroundVid.mp4')} type="video/mp4"/>
             </video>
         </div>
     )

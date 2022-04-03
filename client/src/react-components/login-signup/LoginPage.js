@@ -5,6 +5,7 @@ import "./LoginPage.css";
 import { withRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import SignupPage from "./SignupPage.js";
+import BackgroundVideo from "../backgroundVideo/index.js";
 
 class LoginPage extends React.Component {
 	state = {
@@ -70,6 +71,7 @@ class LoginPage extends React.Component {
 		}
 		return (
 			<div>
+				<BackgroundVideo/>
 				<Header />
 
 				<div id="inputDivLogin">
