@@ -32,6 +32,10 @@ function ReviewPage() {
   const [params, setParams] = useSearchParams();
   const stock_symbol = params.get('symbol');
 
+  useEffect(() => {
+    getReviews(stock_symbol, reviews, setReviews);
+  }, [params]);
+
  
   useEffect(() =>{
     updateReview()
@@ -55,15 +59,19 @@ function ReviewPage() {
   }
 
   function updateReview(){
-    setReviews(state.comments.map((comment) =>   
-    <Comments key={ uid(comment) } userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
-      rate={comment.rate} text={comment.text}/>))
+    // setReviews(state.comments.map((comment) =>   
+    // <Comments key={ uid(comment) } userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
+    //   rate={comment.rate} text={comment.text}/>))
   }
 
   function updateStats() {
     setStats(state.statistics.map((stats) =>
     <Statistics key={ uid(stats) } fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
     twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
+  }
+
+  function renderReviews() {
+    return reviews.map(review => <Comments key={ uid(review) } userName={ review.author } displayName={ review.displayName } rate={ review.stars } text={ review.review } />);
   }
 
 
@@ -76,7 +84,7 @@ function ReviewPage() {
             </div>
             <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
             <div id='reviewScroller'>
-              {reviews}
+              {renderReviews()}
             </div>
           </div>
           <div className='allStats'>
