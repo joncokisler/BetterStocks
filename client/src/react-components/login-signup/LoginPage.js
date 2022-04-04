@@ -72,10 +72,9 @@ class LoginPage extends React.Component {
 		return (
 			<div>
 				<BackgroundVideo/>
-				<Header />
-
+				<Header/>
 				<div id="inputDivLogin">
-				<div id="phrase">Better Trades Today For An Easier Tomorrow</div>
+				<div id="phrase"> Better Trades Today For An Easier Tomorrow</div>
 
 					<input
 						className="textbox"
