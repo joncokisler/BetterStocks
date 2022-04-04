@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import './TypeGame.css'
+import { getHighscore, getTopScores, addScore, getAllWords } from '../../actions/Game';
 
 
 function TypeGame(){
     const state = {
-        wordBank: {"stock": "easy", 
-                "money": "easy",
-                "better stock": "easy",
-                "cost": "medium",
-                "reward": "medium",
-                "bear market": "hard",
-                "prisoner's dilemma": "hard",
-                "broker": "medium",
-                "bid": "easy"},
+        wordBank: [],
         topUsers: [{displayName: "hah", userName: "user1", score: "1000"},
                     {displayName: "lalal", userName: "user2", score: "900"},
                     {displayName: "hum", userName: "user3", score: "800"},
@@ -28,9 +21,8 @@ function TypeGame(){
     const [best, setBest] = useState(50);
     
     function newWord(){
-        const words = Object.keys(state.wordBank)
-        const index = Math.floor(Math.random() * words.length)
-        return words[index]
+        const index = Math.floor(Math.random() * state.wordBank.length)
+        return state.wordBank[index].word
     }
 
     useEffect(() =>{
@@ -46,11 +38,19 @@ function TypeGame(){
         }
     }, [started])
 
+    useEffect(()=>{
+        state.wordBank = getAllWords()
+    }, [])
+
     useEffect(() =>{
         if(score > best){
             setBest(score)
         }
     }, [score])
+
+    useEffect(()=>{
+        setBest(getHighscore())
+    }, [])
 
     function startTimer(){
         setStarted(Date.now())
@@ -66,6 +66,9 @@ function TypeGame(){
             setTime(timeLeft)
         }else{
             setTime(0)
+            addScore(score)
+            state.topUsers = getTopScores(5)
+            updateLeaderboard()
             const game = document.getElementById("game")
             const over = document.getElementById("gameOver")
             game.style.display = "none"
@@ -96,7 +99,14 @@ function TypeGame(){
             const input = e.target.value
             const word = String(words[8])
             if(input == word){
-                const difficulty = state.wordBank[word]
+                var index = 0
+                for(var i = 0; i < state.wordBank.length;i++){
+                    if(state.wordBank[i].word = word){
+                        break
+                    }
+                    index += 1
+                }
+                const difficulty = state.wordBank[index].difficulty
                 if(difficulty == 'easy'){
                     setScores(score + 10)
                 }else if(difficulty == 'medium'){
@@ -111,6 +121,27 @@ function TypeGame(){
             }
             e.target.value = ''
         }
+    }
+
+    const [leaderboard, setLeaderboard] = useState([])
+
+    useEffect(()=>{
+        state.topUsers = getTopScores(5)
+        updateLeaderboard()
+    }, [])
+
+    function updateLeaderboard(){
+        let count = 0
+        setLeaderboard(state.topUsers.map((user) => {
+            count += 1
+            return(<>
+                <div className='grid-item-bold'>{count}</div>
+                <div className='grid-item-bold'>{user.userName}</div>
+                <div className='grid-item-bold'>{user.displayName}</div>
+                <div className='grid-item-bold'>{user.score}</div>
+            </>
+            )
+        }))
     }
     
     return(
@@ -138,31 +169,8 @@ function TypeGame(){
                     <div className="grid-item-bold">User Name</div>
                     <div className="grid-item-bold">Display Name</div>  
                     <div className="grid-item-bold">Score</div>
-                    
-                    <div className="grid-item">1</div>
-                    <div className="grid-item">{state.topUsers[0].userName}</div>
-                    <div className="grid-item">{state.topUsers[0].displayName}</div>  
-                    <div className="grid-item">{state.topUsers[0].score}</div>
 
-                    <div className="grid-item">2</div>
-                    <div className="grid-item">{state.topUsers[1].userName}</div>  
-                    <div className="grid-item">{state.topUsers[1].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>
-
-                    <div className="grid-item">3</div>
-                    <div className="grid-item">{state.topUsers[2].userName}</div>
-                    <div className="grid-item">{state.topUsers[2].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>  
-
-                    <div className="grid-item">4</div>
-                    <div className="grid-item">{state.topUsers[3].userName}</div>
-                    <div className="grid-item">{state.topUsers[3].displayName}</div>  
-                    <div className="grid-item">{state.topUsers[0].score}</div>
-
-                    <div className="grid-item">5</div>
-                    <div className="grid-item">{state.topUsers[4].userName}</div>
-                    <div className="grid-item">{state.topUsers[4].displayName}</div>
-                    <div className="grid-item">{state.topUsers[0].score}</div>    
+                    {leaderboard}
                 </div>
                 <button className='playAgain button10' onClick={handlePlayAgain}>Play Again</button>
             </div>
