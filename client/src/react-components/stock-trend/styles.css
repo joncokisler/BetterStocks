@@ -23,6 +23,7 @@
     text-align: left;
 	padding: 5px;
 	background-color: white;
+    flex: auto;
 
 }
 

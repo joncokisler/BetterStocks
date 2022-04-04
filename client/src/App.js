@@ -6,12 +6,9 @@ import Navbar from "./react-components/navbar/Navbar";
 import LoginPage from "./react-components/login-signup/LoginPage";
 import SignupPage from "./react-components/login-signup/SignupPage";
 import PaperTrade from "./react-components/PaperTrade";
-import TopStocks from "./react-components/TopStocks";
 import ProfilePage from "./react-components/profile/ProfilePage";
-import TrendingStocks from "./react-components/TrendingStocks";
 import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
-import SearchPage from "./react-components/search-page";
 import AdminPage from "./react-components/AdminComponents/AdminPage";
 import StockListing from "./react-components/StockListing";
 import GamePage from "./react-components/TypeGame/TypeGame";
@@ -155,7 +152,7 @@ class App extends React.Component {
 								</React.Fragment>
 							}
 						/>
-						
+
 						<Route
 							path="stocklisting"
 							element={
@@ -184,6 +181,16 @@ class App extends React.Component {
 											},
 										]}
 									/>
+								</React.Fragment>
+							}
+						/>
+
+						<Route
+							path='stocks'
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<Stock />
 								</React.Fragment>
 							}
 						/>
@@ -227,6 +234,13 @@ class App extends React.Component {
 								</React.Fragment>
 							}
 						/>
+
+						<Route
+							path='*'
+							element={
+								<p>404</p>
+							}
+						 />
 					</Routes>
 				</BrowserRouter>
 			</div>
