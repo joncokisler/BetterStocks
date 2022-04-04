@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './TypeGame.css'
-import { getHighscore, getTopScores, addScore, getAllWords } from '../../actions/Game';
+import { getHighscore, getTopScores, addScore, getAllWords } from '../../actions/game';
 
 
 function TypeGame(){
