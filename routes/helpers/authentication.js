@@ -13,6 +13,7 @@ module.exports = {
     authenticate: (req, res, next) => {
         if (env !== 'production' && USE_TEST_USER)
             req.session.user = TEST_USER_ID;
+            req.session.username = TEST_USER_USERNAME;
 
         if (req.session.user) {
             User.findById(req.session.user).then((user) => {
