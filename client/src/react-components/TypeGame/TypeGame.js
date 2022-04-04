@@ -126,7 +126,7 @@ function TypeGame(){
                     {words.map((word) => <p className='word'>{word}</p>)}
                 </div>
                 <p className='instructions'>Type the word above the box and press enter. 
-                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best ot get on the leaderboard! </p>
+                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best to get on the leaderboard! </p>
             </div>
             
             <div id='gameOver'>
