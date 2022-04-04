@@ -24,12 +24,14 @@
 .Content {
 	margin-left: 80px;
 	font-size: 80%;
+	font-family: 'Nunito';
 
 }
 
 .textContent {
 	padding: 5px;
 	margin-right: 40px;
+	font-family: 'Nunito';
 }
 
 .section {
@@ -63,6 +65,7 @@
     border: none;
     transition-duration: 0.4s;
     border-radius: 5px;
+	font-family: 'Nunito';
     }
 
     .button2:hover{
