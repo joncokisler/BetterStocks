@@ -123,13 +123,14 @@ function StockListing(props) {
 
     function makeTableBody(stockList) {
         function makeCell(col, stock) {
+            const numFormat = new Intl.NumberFormat('en-US', {minimumFractionDigits:2});
             switch (col.type.toLowerCase()) {
                 case 'symbol':
                     return <td key={ uid(col) }><NavLink className='stockSymbol' to={ `/stocks?symbol=${ stock.symbol }` }>{ stock.symbol }</NavLink></td>
                 case 'trace':
                     return <td key={ uid(col) }>{ render_trend(stock[col.name]) }</td>;
                 case 'price':
-                    return <td key={ uid(col) }>{ Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0 }</td>;
+                    return <td key={ uid(col) }>{ numFormat.format(Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0) }</td>;
                 case 'stars':
                     return <td key={ uid(col) }>{ render_stars(stock.week_stars) }</td>;
                 default:
