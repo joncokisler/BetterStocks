@@ -3,8 +3,9 @@ import Comments from './Comments/Comment';
 import Statistics from './Statistics/Statistics';
 import WriteComment from './WriteComment/WriteComment';
 import { Navigate, useSearchParams } from 'react-router-dom';
+import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
-import { getReviews } from '../../actions/Review';
+import { getReviews } from '../../actions/review';
 
 function ReviewPage() {
   const state = {
@@ -55,13 +56,13 @@ function ReviewPage() {
 
   function updateReview(){
     setReviews(state.comments.map((comment) =>   
-    <Comments userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
+    <Comments key={ uid(comment) } userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
       rate={comment.rate} text={comment.text}/>))
   }
 
   function updateStats() {
     setStats(state.statistics.map((stats) =>
-    <Statistics  fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
+    <Statistics key={ uid(stats) } fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
     twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
   }
 
