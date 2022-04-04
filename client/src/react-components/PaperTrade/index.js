@@ -149,7 +149,7 @@ function PaperTrade() {
                 <div className='holdings'>
                     {/* List of Holdings */ }
                     <h4>Holdings</h4>
-                    <StockList stocks={ convertHoldingsToListing() } trend_name="Today's Price" col1_name='Current Price' col2_name='Units' />
+                    <StockList stocks={ convertHoldingsToListing() } trend_name="24-Hr Price History" col1_name='Last Known Price' col2_name='Units' />
                 </div>
             </div>
         </div>

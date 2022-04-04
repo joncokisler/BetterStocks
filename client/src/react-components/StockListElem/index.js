@@ -21,6 +21,10 @@ class StockListElem extends React.Component {
     }
 
     render_trend(stock) {
+        if (stock.trend.length <= 1) {
+            return <p>No Data</p>;
+        }
+
         const labels = []
         for (const [index, element] of stock.trend.entries()) {
             labels.push(index);
@@ -74,6 +78,8 @@ class StockListElem extends React.Component {
     render() {
         const { stock } = this.props;
 
+        const numFormat = new Intl.NumberFormat('en-US', {minimumFractionDigits:2});
+
         return (
             <tr className='stockListElem'>
                 <td>
@@ -83,7 +89,7 @@ class StockListElem extends React.Component {
                 </td>
                 <td>{ this.render_trend(stock) }</td>
                 <td>
-                    { stock.val1_mode === 'stars' ? <FiveStar stars={ stock.val1 } /> : stock.val1}
+                    { stock.val1_mode === 'stars' ? <FiveStar stars={ stock.val1 } /> : numFormat.format(stock.val1) }
                 </td>
                 <td>{ stock.val2 }</td>
             </tr>

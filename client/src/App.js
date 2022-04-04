@@ -16,6 +16,9 @@ import AdminPage from "./react-components/AdminComponents/AdminPage";
 import StockListing from "./react-components/StockListing";
 import GamePage from "./react-components/TypeGame/TypeGame";
 
+import ENV from './config.js';
+const API_HOST = ENV.api_host;
+
 class App extends React.Component {
 	state = {
 		loggedInUser: "",
@@ -73,7 +76,7 @@ class App extends React.Component {
 
 	handleLoginCallbackServer = (userJSON) => {
 		console.log(userJSON);
-		fetch("http://localhost:3100/users/login", {
+		fetch(`${API_HOST}/users/login`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -91,7 +94,7 @@ class App extends React.Component {
 	submitInfo = (signupJSON) => {
 		console.log("submitting sugnup info");
 
-		fetch("/api/users", {
+		fetch(`${API_HOST}/api/users`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
@@ -144,26 +147,6 @@ class App extends React.Component {
 						/>
 
 						<Route
-							path="top-stocks"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<TopStocks loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
-						<Route
-							path="trending-stocks"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<TrendingStocks loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
-						<Route
 							path="paper-trade"
 							element={
 								<React.Fragment>
@@ -172,17 +155,7 @@ class App extends React.Component {
 								</React.Fragment>
 							}
 						/>
-
-						<Route
-							path="search"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<SearchPage loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
+						
 						<Route
 							path="stocklisting"
 							element={
