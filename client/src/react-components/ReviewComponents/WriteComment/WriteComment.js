@@ -6,9 +6,9 @@ class WriteComment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: props.rate,
+            text: '',
             temp: props.rate,
-            rate: props.rate
+            rate: 5
         };
     }
 

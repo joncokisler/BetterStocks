@@ -5,7 +5,7 @@ import WriteComment from './WriteComment/WriteComment';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
-import { getReviews } from '../../actions/review';
+import { getReviews, makeReview } from '../../actions/review';
 
 function ReviewPage() {
   const state = {
@@ -38,7 +38,6 @@ function ReviewPage() {
 
  
   useEffect(() =>{
-    updateReview()
     updateStats()
   }, [])
 
@@ -47,21 +46,9 @@ function ReviewPage() {
   }
 
   function handleInput(text, rate) {
-    const comment = {userName: 'user', displayName: 'Fred(User)', profilePicture: null, rate: rate, text: text}
-    state.comments.push(comment)
+    makeReview(stock_symbol, text, rate, setReviews);
 
-    // if (rate == 5){
-    //   state.statistics[0][0] += 1;
-    // }
-
-    updateReview()
-    updateStats()
-  }
-
-  function updateReview(){
-    // setReviews(state.comments.map((comment) =>   
-    // <Comments key={ uid(comment) } userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
-    //   rate={comment.rate} text={comment.text}/>))
+    updateStats();
   }
 
   function updateStats() {

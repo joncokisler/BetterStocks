@@ -26,6 +26,22 @@ export async function getReviews(stock, reviews, setReviews) {
     } catch (error) {
         console.log(error);
     }
-    
 }
 
+export async function makeReview(stock, review, stars, setReviews) {
+    try {
+        const reviewUrl = `${API_HOST}/api/stocks/${stock}/reviews`;
+        const res = await fetch(reviewUrl, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                review: review,
+                stars: stars
+            })
+        });
+        const reviews = await res.json();
+        setReviews(reviews.reverse());
+    } catch (error) {
+        console.log(error);
+    }
+}

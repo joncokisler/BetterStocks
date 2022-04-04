@@ -13,7 +13,6 @@ class Comment extends React.Component {
             rate: props.rate,
             text: props.text
         };
-        console.log(props);
     }
 
     render() {
