@@ -74,7 +74,7 @@ class LoginPage extends React.Component {
 				<BackgroundVideo/>
 				<Header/>
 				<div id="inputDivLogin">
-				<div id="phrase"> Better Trades Today For An Easier Tomorrow</div>
+				<div id="phrase"> Better trades today for an easier tomorrow</div>
 
 					<input
 						className="textbox"
