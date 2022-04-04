@@ -1,9 +1,10 @@
 .userHeader {
-    top: 80px;
+    margin-top: 5rem;
+    margin-left: 22rem;
+    margin-right: auto;
     font-family: "Nunito";
 	font-weight: bold;
     font-size: 200%;
-    left: 80px;
     position: absolute;
 }
 
@@ -20,11 +21,11 @@
 }
 
 .blackListHeader {
-    top: 80px;
+    margin-top: 5rem;
+    margin-left: 70rem;    
     font-family: "Nunito";
 	font-weight: bold;
     font-size: 200%;
-    left: 880px;
     position: absolute;
 }
 
