@@ -14,6 +14,10 @@ const STOCKS_TO_WATCH = [
 ];
 
 async function updateStocks() {
+    if (!YAHOO_KEY) {
+        console.log('Yahoo Finance API key (ENV) NOT FOUND. No stock price updates completed.');
+        return;
+    }
     for (const stocks of STOCKS_TO_WATCH) {
         const url = `https://yfapi.net/v8/finance/spark?interval=15m&range=1d&symbols=${stocks.reduce((acc, s) => acc + s + ',', '').slice(0, -1)}`;
         const resp = await fetch(url, {

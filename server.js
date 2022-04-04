@@ -88,13 +88,11 @@ app.get("*", (req, res) => {
 
 const updateStocks = require('./stockUpdate/stockUpdate');
 
-// const minutes = 30;
-// setInterval(() => {
-//     console.log('UPDATING STOCKS!');
-//     updateStocks();
-// }, minutes * 60 * 1000);
-
-// updateStocks();
+const minutes = 30;
+setInterval(() => {
+    console.log('UPDATING STOCKS!');
+    updateStocks();
+}, minutes * 60 * 1000);
 
 /*************************************************/
 // Express server listening...
