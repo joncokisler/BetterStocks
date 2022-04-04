@@ -117,7 +117,7 @@ function TypeGame(){
         <div>
             <div id='game'>
                 <div className='scores'>
-                    <h1>Time Left: <span className='red'>{time}</span> s</h1>
+                    <h1>Time Left: <span className='red'>{time}</span>s</h1>
                     <h1>Score: {score}</h1>
                     <h1>Best: {best}</h1>
                 </div>
@@ -125,6 +125,8 @@ function TypeGame(){
                 <div className='wordBox'>
                     {words.map((word) => <p className='word'>{word}</p>)}
                 </div>
+                <p className='instructions'>Type the word above the box and press enter. 
+                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best ot get on the leaderboard! </p>
             </div>
             
             <div id='gameOver'>
