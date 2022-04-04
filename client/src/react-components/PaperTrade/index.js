@@ -86,12 +86,17 @@ function PaperTrade() {
         const holdingsArr = Object.entries(stockHoldings).sort(compareHoldings);
         return holdingsArr.reduce((holdings, keyValue) => {
             const [s, info] = keyValue;
-            let filterStart = new Date();
-            filterStart.setDate(filterStart.getDate() - 1);
+            let dateFilterStart = new Date();
+            if (dateFilterStart.getDay() === 6) {  // Saturday
+                dateFilterStart.setDate(dateFilterStart.getDate() - 2);
+            } else if (dateFilterStart.getDay() === 0) {  // Sunday
+                dateFilterStart.setDate(dateFilterStart.getDate() - 3);
+            } else {
+                dateFilterStart.setDate(dateFilterStart.getDate() - 1);
+            }
             const trend = info.history
-                            .filter(entry => Date.parse(entry.timestamp) >= filterStart)
-                            .map(entry => entry.price)
-                            .concat([info.price]);
+                            .filter(entry => Date.parse(entry.timestamp) >= dateFilterStart)
+                            .map(entry => entry.price);
             if (info.units > 0) {
                 holdings.push({
                     symbol: info.stock,
@@ -108,6 +113,8 @@ function PaperTrade() {
         <div className='paperTrade'>
             <div className='content'>
                 <h3>Paper Trade</h3>
+
+                { [0, 6].includes((new Date()).getDay()) ? <p>Markets are currently <strong>closed!</strong>&nbsp;&nbsp;Price data is shown for the last open trading day.</p> : null }
 
                 <div className='topInfo'>
                     {/* Portfolio Statistics */}
@@ -128,13 +135,14 @@ function PaperTrade() {
 
                     {/* Buy/Sell buttons */}
                     <form className='buySell' onSubmit={ stockBuySell } >
+                        <p>Enter a stock by symbol and then buy or sell to your heart's content!</p>
                         <label>
                             Stock:
                             <input type='text' value={ stockSymbol } onChange={(e) => setStockSymbol(e.target.value.toUpperCase())} placeholder='Symbol' />
                         </label>
                         <input type='submit' name='buy' value='Buy' />
                         <input type='submit' name='sell' value='Sell' />
-                        <p id='stockBuySellErrorMsg'>{ errorMessage }</p>
+                        <p id='stockBuySellErrorMsg'>{ errorMessage.length > 0 ? errorMessage + '!' : null }</p>
                     </form>
                 </div>
 

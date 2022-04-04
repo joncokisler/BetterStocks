@@ -30,21 +30,18 @@ class Navbar extends React.Component {
 
         return (
             <div className="navbar sticky">
-                <div id='logo'>
-                    <a>BetterStocks</a>
-                </div>
 
                 <div id="nav-section">
                     <ul>
+                        <a className="logo">BetterStocks</a>
                         <li><NavLink className="nav-items" to="/stocklisting">Stocks</NavLink></li>
                         <li><NavLink className="nav-items" to="/paper-trade">Paper Trading</NavLink></li>
                         <li><NavLink className="nav-items" to="/game">TypeGame</NavLink></li>
                         { this.renderAdmin(user) }
+                        <li><NavLink className="nav-items" to="/profile">Profile</NavLink></li>
                     </ul>
 
-                    <div id="profile-section">
-                        <h3><NavLink to="/profile">Profile </NavLink></h3>
-                    </div>
+
                 </div>
             </div>
         )

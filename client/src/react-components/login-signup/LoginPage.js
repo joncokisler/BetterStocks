@@ -5,6 +5,7 @@ import "./LoginPage.css";
 import { withRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import SignupPage from "./SignupPage.js";
+import BackgroundVideo from "../backgroundVideo/index.js";
 
 class LoginPage extends React.Component {
 	state = {
@@ -70,9 +71,11 @@ class LoginPage extends React.Component {
 		}
 		return (
 			<div>
-				<Header />
-
+				<BackgroundVideo/>
+				<Header/>
 				<div id="inputDivLogin">
+				<div id="phrase"> Better trades today for an easier tomorrow</div>
+
 					<input
 						className="textbox"
 						type="text"

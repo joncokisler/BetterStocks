@@ -1,44 +1,45 @@
 .navbar{
     overflow:hidden;
     height:7%;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid grey;
     z-index:1;
     background-color: white;
 }
 
 .sticky {
+    float: left;
     position: fixed;
     top: 0;
     width: 100%;
   }
-#logo{
-    display: inline;
-    float:left;
-    padding-top:5px;
-    margin-bottom:10px;
+
+ .logo {
+    padding-right: 2rem;
+    font-size: 1.5em;
+	font-variant: small-caps;
+	font-family: 'Nunito';
 }
 
 #nav-section{
-    margin-right:10px;
-    margin-top:20px;
-    width:70%;
-    margin-bottom:10px;
-}
-#nav-section ul{
+    margin-left: auto;
+    margin-right: auto;
     display:inline;
     list-style: none;
 }
+
+
 #nav-section li{
+    flex:left;
     display:inline;
-    padding:20px;
+    padding: 10px;
     width:auto;
     font-family: 'Nunito';
+    font-size: 15px;
 }
 
-
 .nav-items {
+    text-decoration: none;
     transition: all .2s ease-in-out;
-    text-decoration: underline;
     color: black;
     display: inline-block;
 }
@@ -47,14 +48,3 @@
     transform: scale(1.1);
 }
 
-#profile-section{
-    float:right;
-    margin-left:auto;
-    margin-right:0;
-    top:-20px;
-    height:fit-content;
-    position:relative;
-    right:-25vw;
-    font-family: 'Nunito';    
-    margin-bottom:10px;
-}
