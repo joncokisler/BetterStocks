@@ -3,7 +3,7 @@
 import ENV from '../config.js';
 const API_HOST = ENV.api_host;
 
-export async function getReviews(stock, reviews, setReviews) {
+export async function getReviews(stock, setReviews) {
     try {
         const reviewUrl = `${API_HOST}/api/stocks/${stock}/reviews`;
         const res = await fetch(reviewUrl);

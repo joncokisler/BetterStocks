@@ -8,24 +8,9 @@ import React, {useState, useEffect} from 'react';
 import { getReviews, makeReview } from '../../actions/review';
 
 function ReviewPage() {
-  const state = {
-    comments: [
-      {userName: 'user', displayName: 'Fred(User)', profilePicture: null, rate: 5,
-       text: 'This is a perfect stock!'},
-      {userName: 'admin', displayName: 'John(Admin)', profilePicture: null, rate: 1,
-      text: 'I hate this.'}
-    ],
-    statistics: [{fiveStar: 1, fourStar: 0, threeStar: 0, twoStar: 0, oneStar: 1, avg: '3.0', numComment: 2}],
-    redirect: null,
-    new: {userName: 'user', displayName:'Fred(User)', profilePicture: null, rate: null, text: null}
-  };
 
   const [reviews, setReviews] = useState([])
   const [stats, setStats] = useState();
-
-  // useEffect(() => {
-  //   setReviews(getReviews(stock))
-  // }, [])
 
   const newComment =  <WriteComment parentCallBack={handleInput} />
 
@@ -33,13 +18,8 @@ function ReviewPage() {
   const stock_symbol = params.get('symbol');
 
   useEffect(() => {
-    getReviews(stock_symbol, reviews, setReviews);
+    getReviews(stock_symbol, setReviews);
   }, [params]);
-
- 
-  useEffect(() =>{
-    updateStats()
-  }, [])
 
   function handleScroll() {
     window.scrollBy(0,1000)
@@ -47,20 +27,30 @@ function ReviewPage() {
 
   function handleInput(text, rate) {
     makeReview(stock_symbol, text, rate, setReviews);
-
-    updateStats();
-  }
-
-  function updateStats() {
-    setStats(state.statistics.map((stats) =>
-    <Statistics key={ uid(stats) } fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
-    twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
   }
 
   function renderReviews() {
     return reviews.map(review => <Comments key={ uid(review) } userName={ review.author } displayName={ review.displayName } rate={ review.stars } text={ review.review } />);
   }
 
+  function renderStats() {
+    const starCounts = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    };
+    reviews.map(review => {
+      starCounts[review.stars]++;
+    });
+    let avg = Object.entries(starCounts).reduce((acc, entry) => acc + (entry[0] * entry[1]), 0) * 1.0 / reviews.length;
+    if (reviews.length === 0) {
+      avg = 0;
+    }
+
+    return <Statistics key={ uid(starCounts) } fiveStar={ starCounts[5] } fourStar={ starCounts[4] } threeStar={ starCounts[3] } twoStar={ starCounts[2] } oneStar={ starCounts[1] } avg={ avg } numComment={ reviews.length } />
+  }
 
     return (
       <div>
@@ -71,11 +61,11 @@ function ReviewPage() {
             </div>
             <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
             <div id='reviewScroller'>
-              {renderReviews()}
+              { renderReviews() }
             </div>
           </div>
           <div className='allStats'>
-            {stats}
+            { renderStats() }
           </div>
           <div className='writeComment'>{newComment}</div>
         </div>
