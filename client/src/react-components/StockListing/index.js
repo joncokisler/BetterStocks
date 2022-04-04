@@ -23,6 +23,7 @@ function render_trend(trend) {
             labels.push(index);
         }
     }
+    console.log(labels.length);
 
     if (labels.length <= 1) {
         return <p>No Data</p>;
@@ -63,9 +64,8 @@ function render_trend(trend) {
             duration: 0
         }
     };
-
     const data = {
-        labels: labels,
+        labels: [...Array(labels.length).keys()],
         datasets: [
             {data: labels.map((i) => trend[i].price)}
         ]
@@ -141,6 +141,7 @@ function StockListing(props) {
         let dateFilterStart = new Date();
         dateFilterStart.setDate(dateFilterStart.getDate() - 7);
         for (const stock of stockList) {
+            stock.history = stock.history.concat([{timestamp: stock.timestamp, price: stock.price}]);
             stock.week_stars = stock.reviews
                                     .filter(rev => Date.parse(rev.timestamp) >= dateFilterStart)
                                     .reduce((acc, rev) => {
