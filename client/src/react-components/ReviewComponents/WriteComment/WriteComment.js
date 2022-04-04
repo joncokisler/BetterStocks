@@ -69,7 +69,7 @@ class WriteComment extends React.Component {
                         <textarea className='commentBox' onChange={this.handleInputChange} placeholder='Type your comment here...'/>
                     </label>
                 </form>
-                <button className='submitButton button3' onClick={this.submit}>Submit</button>
+                <button className='submit button3' onClick={this.submit}>Submit</button>
             </div>
         )
     }

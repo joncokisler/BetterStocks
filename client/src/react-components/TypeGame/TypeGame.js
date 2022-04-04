@@ -117,7 +117,7 @@ function TypeGame(){
         <div>
             <div id='game'>
                 <div className='scores'>
-                    <h1>Time Left: <span className='red'>{time}</span> s</h1>
+                    <h1>Time Left: <span className='red'>{time}</span>s</h1>
                     <h1>Score: {score}</h1>
                     <h1>Best: {best}</h1>
                 </div>
@@ -125,6 +125,8 @@ function TypeGame(){
                 <div className='wordBox'>
                     {words.map((word) => <p className='word'>{word}</p>)}
                 </div>
+                <p className='instructions'>Type the word above the box and press enter. 
+                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best to get on the leaderboard! </p>
             </div>
             
             <div id='gameOver'>
@@ -145,22 +147,22 @@ function TypeGame(){
                     <div className="grid-item">2</div>
                     <div className="grid-item">{state.topUsers[1].userName}</div>  
                     <div className="grid-item">{state.topUsers[1].displayName}</div>
-                    <div className="grid-item">{state.topUsers[1].score}</div>
+                    <div className="grid-item">{state.topUsers[0].score}</div>
 
                     <div className="grid-item">3</div>
                     <div className="grid-item">{state.topUsers[2].userName}</div>
                     <div className="grid-item">{state.topUsers[2].displayName}</div>
-                    <div className="grid-item">{state.topUsers[2].score}</div>  
+                    <div className="grid-item">{state.topUsers[0].score}</div>  
 
                     <div className="grid-item">4</div>
                     <div className="grid-item">{state.topUsers[3].userName}</div>
                     <div className="grid-item">{state.topUsers[3].displayName}</div>  
-                    <div className="grid-item">{state.topUsers[3].score}</div>
+                    <div className="grid-item">{state.topUsers[0].score}</div>
 
                     <div className="grid-item">5</div>
                     <div className="grid-item">{state.topUsers[4].userName}</div>
                     <div className="grid-item">{state.topUsers[4].displayName}</div>
-                    <div className="grid-item">{state.topUsers[4].score}</div>    
+                    <div className="grid-item">{state.topUsers[0].score}</div>    
                 </div>
                 <button className='playAgain button10' onClick={handlePlayAgain}>Play Again</button>
             </div>

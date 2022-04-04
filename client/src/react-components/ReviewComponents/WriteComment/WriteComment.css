@@ -1,5 +1,5 @@
 .commentSection {
-    width: 60vw;
+    width: 55vw;
     height: 70vh;
     top: 5vh;
     background-color: whitesmoke;
@@ -28,7 +28,7 @@
     font-size: x-large;
     margin: 10px;
     height: 40vh;
-    width: 50vw;
+    width: 45vw;
     padding: 10px;
     position: relative;
     background-color: white;   
@@ -36,7 +36,7 @@
     border: none;
 }
 
-.submitButton{
+.submit{
     left: 0vw;
     bottom: -70px;
     position: relative;
