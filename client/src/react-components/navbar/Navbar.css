@@ -1,7 +1,7 @@
 .navbar{
     overflow:hidden;
     height:7%;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid grey;
     z-index:1;
     background-color: white;
 }
@@ -15,8 +15,9 @@
 
  .logo {
     padding-right: 2rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 1.5em;
+	font-variant: small-caps;
+	font-family: 'Nunito';
 }
 
 #nav-section{
