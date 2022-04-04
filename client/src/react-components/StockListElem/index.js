@@ -21,6 +21,10 @@ class StockListElem extends React.Component {
     }
 
     render_trend(stock) {
+        if (stock.trend.length <= 1) {
+            return <p>No Data</p>;
+        }
+
         const labels = []
         for (const [index, element] of stock.trend.entries()) {
             labels.push(index);
