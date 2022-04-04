@@ -17,13 +17,18 @@ import { getStocksPrefix } from '../../actions/stockListing';
 function render_trend(trend) {
     const labels = [];
     let dateFilterStart = new Date();
-    dateFilterStart.setDate(dateFilterStart.getDate() - 1);
+    if (dateFilterStart.getDay() === 6) {  // Saturday
+        dateFilterStart.setDate(dateFilterStart.getDate() - 2);
+    } else if (dateFilterStart.getDay() === 0) {  // Sunday
+        dateFilterStart.setDate(dateFilterStart.getDate() - 3);
+    } else {
+        dateFilterStart.setDate(dateFilterStart.getDate() - 1);
+    }
     for (const [index, element] of trend.entries()) {
         if (Date.parse(element.timestamp) >= dateFilterStart) {
             labels.push(index);
         }
     }
-    console.log(labels.length);
 
     if (labels.length <= 1) {
         return <p>No Data</p>;
@@ -173,6 +178,9 @@ function StockListing(props) {
 
     return <div className='stockListing'>
         <h3>Stock Search</h3>
+
+        <p>Search for a stock by symbol!&nbsp;&nbsp;Results will appear in the list below.</p>
+        { [0, 6].includes((new Date()).getDay()) ? <p>Markets are currently <strong>closed!</strong>&nbsp;&nbsp;Price data is shown for the last open trading day.</p> : null }
         <form className='stockSearch'>
             <label>
                 <BiSearch />
