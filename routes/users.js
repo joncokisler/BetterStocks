@@ -182,7 +182,7 @@ router.get('/api/users/:username', mongoChecker, authenticate, async (req, res) 
  * 
  * Body: Array of operations to complete: {"op", "replace", "path", "/<attribute to replace>", "value": <new value>}
  * 
- *     The only attributes that can be modified are: "displayName", "email", "phone"
+ *     The only attributes that can be modified are: "displayName", "email", "phone", "bio"
  * 
  * Returns: 200 on success and the updated user's database representation.
  */
@@ -190,7 +190,7 @@ router.patch('/api/users/', mongoChecker, authenticate, async (req, res) => {
     const fieldsToUpdate = {};
     req.body.map(change => {
         const propToChange = change.path.substr(1);
-        if (['displayName', 'email', 'phone'].includes(propToChange)) {
+        if (['displayName', 'email', 'phone', 'bio'].includes(propToChange)) {
             fieldsToUpdate[propToChange] = change.value;
         }
     });
@@ -219,7 +219,7 @@ router.patch('/api/users/', mongoChecker, authenticate, async (req, res) => {
 /*********** WATCH LIST CRUD *************/
 
 /**
- * POST /api/users/watchlist 
+ * POST /api/users/watchlist
  * 
  * Add a stock to the logged in user's watch list.
  * 
