@@ -88,6 +88,10 @@ app.get("*", (req, res) => {
 
 const updateStocks = require('./stockUpdate/stockUpdate');
 
+
+console.log('UPDATING STOCKS!');
+updateStocks();
+
 const minutes = 30;
 setInterval(() => {
     console.log('UPDATING STOCKS!');
