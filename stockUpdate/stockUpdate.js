@@ -31,7 +31,6 @@ async function updateStocks() {
             return;
         }
         const json = await resp.json()
-        console.log(json);
         for (const [symbol, data] of Object.entries(json)) {
             try {
                 const timestamps = data['timestamp'];
