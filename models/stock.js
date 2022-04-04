@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 
 const ReviewSchema = new mongoose.Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
+        minlength: 1
     },
     timestamp: {
         type: Date,

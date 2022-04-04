@@ -193,7 +193,7 @@ router.post('/api/stocks/:stock/reviews', mongoChecker, authenticate, async (req
             return;
         }
         const review = stock.reviews.create({
-            author: req.session.user,
+            author: req.session.username,
             timestamp: Date.now(),
             review: req.body.review,
             stars: req.body.stars
