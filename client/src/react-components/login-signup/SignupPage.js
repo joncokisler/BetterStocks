@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Header from "../header/Header.js";
 import "./SignupPage.css";
 import { withRouter, NavLink } from "react-router-dom";
-
+import BackgroundVideo from "../backgroundVideo/index.js";
 class SignupPage extends React.Component {
 	state = {
 		displayName: "",
@@ -39,6 +39,7 @@ class SignupPage extends React.Component {
 	render() {
 		return (
 			<div>
+				<BackgroundVideo/>
 				<Header />
 				<div id="inputDiv">
 					<input

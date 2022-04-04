@@ -8,7 +8,7 @@ ul {
 	margin-right: auto;
 	margin-left: auto;
 	position: relative;
-	top: 50px;
+	top: -60px;
 	width: fit-content;
 }
 
@@ -81,15 +81,19 @@ ul {
 
 .bottom-loginsignup-button {
 	text-decoration: underline;
-	color: black;
+	color: grey;
 	font-style: italic;
+	font-family: 'Nunito';
 	min-width: 100px;
 }
 .bottom-loginsignup-button a {
 	width: 100px;
+	
 }
 .bottom-links-listitem {
 	display: inline-block;
 	margin-right: 10px;
 	min-width: 100px;
+	font-family: 'Nunito';
 }
+
