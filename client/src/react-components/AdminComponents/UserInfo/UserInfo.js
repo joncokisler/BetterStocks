@@ -8,7 +8,7 @@ class UserInfo extends React.Component {
         this.state = {
             userName: props.userName,
             displayName: props.displayName,
-            // profilePicture: props.profilePicture,
+            profilePicture: props.profilePicture,
             email: props.email,
             phone: props.phone,
             coins: props.coins,
@@ -71,9 +71,9 @@ class UserInfo extends React.Component {
         return (
             <div className='userSection'>
                     <div className='user'>
-                        {/* <div className='IconContainer'>
+                        <div className='IconContainer'>
                             <img className="Icon" src={this.state.profilePicture} />
-                        </div> */}
+                        </div>
 
                         <div className='Content'>
                             <h2>{this.state.displayName} </h2>

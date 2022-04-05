@@ -7,6 +7,10 @@ import { editUserInfo, editBlacklist, updateUserList } from '../../actions/admin
 
 function AdminPage(){
 
+    const state = {
+        profilePicture:
+                "https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg"
+    };
     const [userInfo, setUserInfo] = useState();
     const [blacklistInfo, setBlacklistInfo] = useState();
 
@@ -44,16 +48,16 @@ function AdminPage(){
     }
 
     function updateUserInfo(){
-        // setUserInfo(users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} parentUpdate={handleUpdate}
-        // userName={u.username} displayName={u.displayName} email={u.email} phone={u.phoneNumber} 
-        // coins = {u.betterCoins} />))
+        setUserInfo(users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} parentUpdate={handleUpdate}
+        userName={u.username} displayName={u.displayName} email={u.email} phone={u.phoneNumber} 
+        coins = {u.betterCoins} profilePicture={state.profilePicture}/>))
 
     }
 
     function updateBlacklistInfo(){
-        // setBlacklistInfo(blacklistInfo.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleRemove}
-        // userName={u.username} displayName={u.displayName} email={u.email} phone={u.phoneNumber} 
-        // coins = {u.betterCoins} />))
+        setBlacklistInfo(blacklistInfo.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleRemove}
+        userName={u.username} displayName={u.displayName} email={u.email} phone={u.phoneNumber} 
+        coins = {u.betterCoins} profilePicture={state.profilePicture}/>))
 
     }
     return(

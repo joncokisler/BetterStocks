@@ -7,8 +7,12 @@ import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
 import { getCurrentUser, getReviews, makeReview } from '../../actions/review';
 
-function ReviewPage(props) {
+function ReviewPage() {
 
+  const state = {
+    profilePicture:
+			"https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg"
+  };
   const [IsBlackList, setIsBlackList] = useState()
   const [reviews, setReviews] = useState([])
   const [stats, setStats] = useState()
@@ -48,7 +52,7 @@ function ReviewPage(props) {
   }
 
   function renderReviews() {
-    return reviews.map(review => <Comments key={ uid(review) } userName={ review.author } displayName={ review.displayName } rate={ review.stars } text={ review.review } />);
+    return reviews.map(review => <Comments key={ uid(review) } userName={ review.author } displayName={ review.displayName } rate={ review.stars } text={ review.review } profilePicture={state.profilePicture}/>);
   }
 
   function renderStats() {
