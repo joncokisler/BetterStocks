@@ -8,6 +8,7 @@ import SignupPage from "./react-components/login-signup/SignupPage";
 import PaperTrade from "./react-components/PaperTrade";
 import TopStocks from "./react-components/TopStocks";
 import ProfilePage from "./react-components/profile/ProfilePage";
+import ProfileEditPage from "./react-components/profile/ProfileEditPage";
 import TrendingStocks from "./react-components/TrendingStocks";
 import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
@@ -71,21 +72,21 @@ class App extends React.Component {
 		// console.log(this.state.loggedInUser.userName)
 	};
 
-	handleLoginCallbackServer = (userJSON) => {
+	handleLoginCallbackServer = async (userJSON) => {
 		console.log(userJSON);
-		fetch("http://localhost:3100/users/login", {
+		const response = await fetch("http://localhost:3100/users/login", {
 			method: "POST",
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
 			},
 			body: userJSON,
-		}).then((response) => {
-			console.log(response);
-			if (!response.ok) this.handleLoginRedirect();
-			else this.setState({ loggedInUser: response.json() });
-			console.log(this.state.loggedInUser);
 		});
+		console.log(response);
+		if (!response.ok) this.handleLoginRedirect();
+		else this.setState({ loggedInUser: response.json() });
+		console.log(this.state.loggedInUser);
+		return response;
 	};
 
 	submitInfo = (signupJSON) => {
@@ -241,6 +242,16 @@ class App extends React.Component {
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
 									<ProfilePage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
+
+						<Route
+							path="profile-edit"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<ProfileEditPage loggedInUser={this.state.loggedInUser} />
 								</React.Fragment>
 							}
 						/>

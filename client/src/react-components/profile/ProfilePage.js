@@ -17,61 +17,82 @@ class ProfilePage extends React.Component {
 			email: "",
 			isAdmin: false,
 		},
+		profilePictureStock:
+			"https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg",
 
 		stockList: [],
 	};
 
-	openPopup = (e) => {
-		const x = e.target.parentNode.nextSibling;
-		if (x.style.display === "none") {
-			x.style.display = "block";
-		} else {
-			x.style.display = "none";
-		}
-	};
+	constructProfileElements = async () => {
+		let currentUsername;
+		let currentUserID;
 
-	closePopup = (e) => {
-		const x = e.target.parentNode.parentNode;
-		if (x.style.display === "none") {
-			x.style.display = "block";
-		} else {
-			x.style.display = "none";
-		}
-	};
+		const sessionResponse = await fetch("/users/check-session", {
+			method: "GET",
+			headers: {
+				Accept: "application/json text/plain, */*",
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		});
+		const sessionResponseJSON = await sessionResponse.json();
+		console.log(sessionResponseJSON);
 
-	handleSubmitChange = (e) => {
-		const parent = e.target.parentNode;
-		const newName = parent.children[3].value;
-		const newEmail = parent.children[5].value;
-		const newPhone = parent.children[7].value;
+		if (!sessionResponse.ok) {
+			console.log("check session response is not okay");
+			console.log("---STOP users/check-sesion ---");
+			return;
+		}
+		currentUsername = sessionResponseJSON.username;
+		currentUserID = sessionResponseJSON.userID;
 
-		if (newName != "") {
-			this.setState({ ["displayName"]: newName });
-		}
-		if (newEmail != "") {
-			this.setState({ ["email"]: newEmail });
-		}
-		if (newPhone != "") {
-			this.setState({ ["phone"]: newPhone });
-		}
+		let response = await fetch(`/api/users/${currentUsername}`, {
+			method: "GET",
+			headers: {
+				Accept: "application/json text/plain, */*",
+				"Content-Type": "application/json",
+			},
+		});
 
-		this.props.parentUpdate(
-			this.state.userName,
-			this.state.displayName,
-			this.state.email,
-			this.state.phone,
-			this.state.coins
-		);
-		const x = e.target.parentNode.parentNode;
-		if (x.style.display === "none") {
-			x.style.display = "block";
-		} else {
-			x.style.display = "none";
-		}
+		if (!response.ok) console.log("user data gathering response is not okay");
+		response = await response.json();
+		console.log(response);
+		this.setState({ loggedInUser: response });
+
+		// fetch("/users/check-session", {
+		// 	method: "GET",
+		// 	headers: {
+		// 		Accept: "application/json text/plain, */*",
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	credentials: "include",
+		// }).then((response) => {
+		// 	console.log(response.json());
+		// 	if (!response.ok) console.log("check session response is not okay");
+		// 	else {
+		// 		currentUsername = response.body.username;
+		// 		currentUserID = response.body.userID;
+		// 		console.log(response.body);
+		// 	}
+		// 	fetch(`/api/users/${currentUsername}`, {
+		// 		method: "GET",
+		// 		headers: {
+		// 			Accept: "application/json text/plain, */*",
+		// 			"Content-Type": "application/json",
+		// 		},
+		// 	}).then((response) => {
+		// 		if (!response.ok)
+		// 			console.log("user data gathering response is not okay");
+		// 		else {
+		// 			this.setState({ loggedInUser: response.body });
+		// 		}
+		// 	});
+		// });
 	};
 
 	constructor(props) {
 		super(props);
+		this.constructProfileElements();
 
 		try {
 		} catch (e) {
@@ -88,21 +109,6 @@ class ProfilePage extends React.Component {
 				});
 			}
 		}
-
-		this.state = {
-			loggedInUser: {
-				watchlist: this.props.loggedInUser.watchlist,
-				displayName: this.props.loggedInUser.displayName,
-				userName: this.props.loggedInUser.userName,
-				bio: this.props.loggedInUser.bio,
-
-				profilePicture: this.props.loggedInUser.profilePicture, //profile picture is a url-based image at the moment
-
-				phoneNumber: this.props.loggedInUser.phoneNumber,
-				email: this.props.loggedInUser.email,
-				isAdmin: this.props.loggedInUser.isAdmin,
-			},
-		};
 	}
 	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
 	// IN THE DATA
@@ -117,11 +123,11 @@ class ProfilePage extends React.Component {
 						<img
 							id="profile-picture"
 							className="grid-element"
-							src={this.state.loggedInUser.profilePicture}
+							src={this.state.profilePictureStock}
 							alt="Profile"
 						/>
 						<h2 className="grid-element" id="user-name">
-							@{this.state.loggedInUser.userName}
+							@{this.state.loggedInUser.username}
 						</h2>
 						<p className="grid-element" id="bio">
 							{this.state.loggedInUser.bio}
@@ -129,6 +135,8 @@ class ProfilePage extends React.Component {
 						<p className="grid-element" id="phone-number">
 							{this.state.loggedInUser.phoneNumber}
 						</p>
+
+						{/* <input className="grid-element" id="phone-number" */}
 						<NavLink className="grid-element" id="change-password" to="/login">
 							Change Password
 						</NavLink>
