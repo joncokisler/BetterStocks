@@ -4,10 +4,12 @@ import "./ProfilePage.css";
 import { Navigate, NavLink, withRouter } from "react-router-dom";
 import ENV from "../../config.js";
 import logOutPic from "./logout.png";
+import editButtonImage from "./edit-button-img.png";
 const API_HOST = ENV.api_host;
 class ProfilePage extends React.Component {
 	state = {
 		logOutRedirect: false,
+		editProfileRedirect: false,
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
 			displayName: "",
@@ -111,6 +113,10 @@ class ProfilePage extends React.Component {
 		});
 	};
 
+	editAccount = () => {
+		this.setState({ editProfileRedirect: true });
+	};
+
 	constructor(props) {
 		super(props);
 		this.constructProfileElements();
@@ -136,6 +142,9 @@ class ProfilePage extends React.Component {
 	render() {
 		if (this.state.logOutRedirect) {
 			return <Navigate to="/login"></Navigate>;
+		}
+		if (this.state.editProfileRedirect) {
+			return <Navigate to="/profile-edit"></Navigate>;
 		}
 		return (
 			<div>
@@ -163,6 +172,15 @@ class ProfilePage extends React.Component {
 							<img className="logOut" src={logOutPic} />
 							<button onClick={this.logOutAccount} className="logOutButton">
 								Log Out
+							</button>
+						</div>
+						<div>
+							<img className="edit-profile-img" src={editButtonImage} />
+							<button
+								onClick={this.editAccount}
+								className="edit-profile-button"
+							>
+								Edit Profile
 							</button>
 						</div>
 
