@@ -56,10 +56,6 @@ app.use(
 			expires: 60000,
 			httpOnly: true,
 		},
-		genid: function (req) {
-			return genuuid(); // use UUIDs for session IDs
-		},
-		secret: "keyboard cat",
 		// store the sessions on the database in production
 		store:
 			env === "production"
@@ -121,7 +117,7 @@ setInterval(() => {
 
 /*************************************************/
 // Express server listening...
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3100;
 app.listen(port, () => {
 	log(`Listening on port ${port}...`);
 });
