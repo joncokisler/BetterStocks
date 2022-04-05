@@ -15,7 +15,6 @@ class Statistics extends React.Component {
             twoStar: props.twoStar,
             oneStar: props.oneStar
         };
-
     }
 
 

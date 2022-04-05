@@ -10,7 +10,7 @@ const { Stock } = require("../models/stock");
 
 const env = process.env.NODE_ENV;
 const USE_TEST_USER = env !== "production" && process.env.TEST_USER_ON; // option to turn on the test user.
-const TEST_USER_ID = "624641cdfcff616c8941f445"; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+const TEST_USER_ID = "624b5cdf42d2bd54c4f9f692"; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
 const TEST_USER_USERNAME = "user";
 
 /***************** AUTHENTICATION **************************/
@@ -43,8 +43,7 @@ router.post("/users/login", mongoChecker, (req, res) => {
 			req.session.username = user.username;
 			req.session.userObject = user;
 			user.password = undefined;
-			console.log(`SESSION USER IN LOGIN CALL: ${req.session.username}`);
-			console.log(req);
+			// console.log(req);
 			req.session.save(() => {
 				res.send(user);
 			});
@@ -93,16 +92,15 @@ router.get("/users/logout", (req, res) => {
  *     * 401 if no valid session is found
  */
 router.get("/users/check-session", (req, res) => {
-	// if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-	//     req.session.user = TEST_USER_ID;
-	//     res.send({ userID: TEST_USER_ID, username: TEST_USER_USERNAME });
-	//     return;
-	// }
-	console.log(req);
-	if (req.session.userObject.username) {
+	if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
+	    req.session.user = TEST_USER_ID;
+	    res.send({ userID: TEST_USER_ID, username: TEST_USER_USERNAME });
+	    return;
+	}
+	if (req.session.username) {
 		res.send({
 			userID: req.session.user,
-			username: req.session.userObject.username,
+			username: req.session.username,
 		});
 	} else {
 		res.status(401).send();
@@ -189,6 +187,31 @@ router.get(
 );
 
 /**
+ * GET /api/users/
+ * 
+ * Retrieve all users.
+ * 
+ * Parameters: None
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and the database representations of all users.
+ */
+ router.get('/api/users/', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const users = await User.find();
+        const passwordRemoval = users.map(u => {
+            u.password = undefined;
+            return u
+        });
+        res.send(passwordRemoval);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+    }
+
+});
+
+/**
  * PATCH /api/users/
  *
  * Change information for the current session's user.
@@ -260,8 +283,15 @@ router.post(
 				res.status(400).send("Bad request");
 				return;
 			}
-			user.watchList.push(stock._id);
-			const result = await user.save();
+
+
+			const watched = user.watchList.filter(elem => elem._id.equals(stock._id))
+			console.log(watched);
+
+			if (watched.length === 0) {
+				user.watchList.push(stock._id);
+				const result = await user.save();
+			}
 			user.password = undefined;
 			res.send(user);
 		} catch (error) {

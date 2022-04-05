@@ -1,35 +1,46 @@
 .all {
-  width: 100vw;
   opacity: 1;
-  top: -15vh;
   max-height: 100%;
   float: left;
   position: relative;
+  margin-left: 6vw;
 }
 
-.writeComment {
-  opacity: 1;
+.all #writeComment {
+  opacity: 0.3;
   position: relative;
-  top: 90vh;
+  top: 60vh;
   padding: 150px;
-  left: -100px
+  left: -50px;
+  display: block;
 }
 
-.allReviews {
-  top: 150px;
+.all #blockMessage {
+  position: absolute;
+  top: 120vh;
+  font-weight: bold;
+  font-size: 200%;
+  color: red;
+  padding: 150px;
+  left: 50px;
+  height: 200px;
+  display: block;
+}
+
+.all .allReviews {
   width: 900px;
   height: 600px;
   position: absolute;
 } 
 
-.allStats {
-  top:250px;
+.all .allStats {
+  top: 8em;
   left: 60vw;
   position: absolute;
 }
 
 
-#reviewScroller {
+.all #reviewScroller {
   width: 58vw;
   bottom: 50px;
   top: 80px;
@@ -42,8 +53,7 @@
   position: relative;
 }
 
-.reviewHeader {
-  font-family: Garamond;
+.all .reviewHeader {
   font-weight: bold;
   font-size: 200%;
   left: 40px;
@@ -51,7 +61,7 @@
   position: absolute; 
 }
 
-.writeCommentButton{
+.all .writeCommentButton{
   left: 20vw;
   top: 8vh;
   position: relative;
@@ -69,6 +79,6 @@
   border-radius: 5px;
   }
 
-  .button2:hover{
-      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
-    }
+.all .button2:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}

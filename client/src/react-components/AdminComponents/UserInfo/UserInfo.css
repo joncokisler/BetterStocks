@@ -2,11 +2,12 @@
 	background-color: whitesmoke;
 	border-radius: 10px;
 	padding: 10px;
-	width: 600px;
+	width: 40vw;
 	text-align: left;
 	display: table;	
 	overflow: scroll;
-	min-height: 100px;
+	min-height: 150px;
+  min-width: 400px;
   font-family: 'Nunito';
 
 }
@@ -32,6 +33,8 @@
 
 .textContent {
 	padding: 5px;
+  top: -1rem;
+  position: relative;
 	margin-right: 40px;
   color: rgb(71, 71, 71);
 	font-family: 'Nunito';
@@ -53,7 +56,7 @@
 
 .addToBlackListButton{
     top: 25px;
-    right: 10px;
+    left: 30vw;
     position: absolute;
     text-align: center;
     text-decoration: none;
@@ -76,8 +79,8 @@
 }
 
 .editButton{
-  top: 75px;
-  right: 10px;
+  top: 80px;
+  left: 34vw;
   position: absolute;
   text-align: center;
   text-decoration: none;

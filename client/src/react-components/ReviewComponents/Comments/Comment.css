@@ -22,6 +22,9 @@
 }
 
 .Content {
+	width: 650px;
+	min-height: 100px;
+	position: absolute;
 	margin-left: 80px;
 	font-size: 80%;
 
@@ -62,14 +65,18 @@ h2{
 
 
 .rateStar {
-	right: -9vw;
-	top: 30px;
 	position: absolute;
 }
 
 .emptyStar {
-	right: -9vw;
-	top: 30px;
 	color: grey;
+	position: absolute;
+}
+
+.starContainer {
+	width: 130px;
+	height: 30px;
+	right: 1px;
+	top: 10px;
 	position: absolute;
 }

@@ -8,6 +8,7 @@
     margin-top: 35rem;
     width: 30vw;
     height: 50px;
+    position: relative;
     font-size: large;
     padding-left: 10px;
     padding-right: 10px;
@@ -18,7 +19,7 @@
     margin-left: auto;
     margin-right: auto;   
     margin-top: -32.5rem;
-    margin-bottom: 13rem;
+    margin-bottom: 2rem;
 }
 
 .word{
@@ -33,9 +34,13 @@
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+    left: 60vw;
+    top: 20vh;
+    right: 5vw;
+    position: absolute;
     display: inline-block;
     font-weight: bold;
-    max-width: 30em;
+    max-width: 25em;
     font-size: large;
     color: rgb(71, 71, 71);
 	font-family: 'Nunito';

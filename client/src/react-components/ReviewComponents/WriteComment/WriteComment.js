@@ -6,9 +6,9 @@ class WriteComment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: props.rate,
+            text: '',
             temp: props.rate,
-            rate: props.rate
+            rate: 5
         };
     }
 
@@ -69,7 +69,7 @@ class WriteComment extends React.Component {
                         <textarea className='commentBox' onChange={this.handleInputChange} placeholder='Type your comment here...'/>
                     </label>
                 </form>
-                <button className='submitButton button3' onClick={this.submit}>Submit</button>
+                <button className='submit button3' onClick={this.submit}>Submit</button>
             </div>
         )
     }

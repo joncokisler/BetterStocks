@@ -26,16 +26,13 @@ const { Game } = require('../models/game');
  * Returns: 200 on success
  */
 router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
-    if (!req.body.score) {
-        res.status(400).send('Bad request');
-        return;
-    }
+
     try {
         // add to high scores
-        let user = await Game.findOne({user: req.session.user});
+        let user = await Game.findOne({username: req.session.username});
         if (!user) {
             user = new Game({
-                user: req.session.user,
+                username: req.session.username,
                 timestamp: Date.now(),
                 highScore: req.body.score
             });
@@ -47,12 +44,13 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
         }
 
         // add to user capital
-        user = await User.findById(req.session.user);
-        user.paperTrade.capital += Number(req.body.score);
-        user.paperTrade.totalMoneyIn += Number(req.body.score);
-        const result = await user.save();
-        res.send();
+        const user2 = await User.findById(req.session.user);
+        user2.paperTrade.capital += Number(req.body.score);
+        user2.paperTrade.totalMoneyIn += Number(req.body.score);
+        const result = await user2.save();
+        res.send(user);
     } catch (error) {
+        console.log(error);
         if (isMongoError(error)) {
             res.status(500).send('Internal server error');
         } else {
@@ -63,7 +61,7 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
 });
 
 /**
- * GET /api/game/highscores/:n
+ * GET /api/game/highscores?n=5
  * 
  * Retrieve up to n of the highest scores for the game.
  * 
@@ -73,9 +71,9 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
  * 
  * Returns: 200 on success and an array of up to n of the highest scores
  */
-router.get('/api/game/highscores/:n', mongoChecker, authenticate, async (req, res) => {
+router.get('/api/game/highscores', mongoChecker, authenticate, async (req, res) => {
     try {
-        const scores = await Game.find().sort({highScore: -1}).limit(req.params.n);
+        const scores = await Game.find().sort({highScore: -1}).limit(req.query.n);
         if (!scores) {
             res.status(404).send('Resource not found');
         } else {
@@ -103,7 +101,7 @@ router.get('/api/game/highscores/:n', mongoChecker, authenticate, async (req, re
  */
 router.get('/api/game/highscore/user', mongoChecker, authenticate, async (req, res) => {
     try {
-        const highScore = await Game.findOne({user: req.session.user});
+        const highScore = await Game.findOne({username: req.session.user});
         if (!highScore) {
             res.status(404).send('Resource not found');
         } else {

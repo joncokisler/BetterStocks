@@ -3,85 +3,56 @@ import { uid } from 'react-uid';
 import './AdminPage.css'
 import UserInfo from './UserInfo/UserInfo'
 import BlackList from './BlackList/BlackList'
-import picture1 from './pic1.png';
-import picture2 from './pic2.jpg';
+import { editUserInfo, editBlacklist, updateUserList } from '../../actions/admin';
 
 function AdminPage(){
+
     const state = {
-        users: [
-            {userName: 'kaawejhWO', displayName: 'user', profilePicture: picture1, email: 'user@yahoo.com', phone: '123-123-1122', coins: 100},
-            {userName: 'user2', displayName: 'user', profilePicture: picture2, email: 'user@yahoo.com', phone: '123-123-1122', coins: 1000}],
-        blacklist: [ {userName: 'user3', displayName: 'user', profilePicture: null, email: 'user@yahoo.com', phone: '123-123-1122', coins: 0}]   
-    }
+        profilePicture:
+                "https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg"
+    };
+    const [users, setUsers] = useState([]);
+    const [blacklist, setBlacklist] = useState([]);
 
-    const [userInfo, setUserInfo] = useState();
-    const [blacklistInfo, setBlacklistInfo] = useState();
-
-
+    useEffect(() => {
+        updateUserList(setUsers, setBlacklist);
+    }, [])
+    
     function handleAdd(userName) {
-        let temp = {}
-        for (let i = 0; i < state.users.length; i++){
-            if(state.users[i]["userName"] == userName){
-                temp = state.users.splice(i, 1)
-                state.blacklist.push(temp[0])
-                break
-            }
-        }
-        updateUserInfo()
-        updateBlackListInfo()
+        editBlacklist(userName, true, setUsers, setBlacklist);
     }
 
     function handleUpdate(userName, displayName, email, phone, coins){
-        for (let i = 0; i < state.users.length; i++){
-            if(state.users[i]["userName"] == userName){
-                state.users[i]["displayName"] = displayName
-                state.users[i]["email"] = email
-                state.users[i]["phone"] = phone
-                state.users[i]["coins"] = coins     
-            }
-        }
-        updateUserInfo()
-        updateBlackListInfo()
+        editUserInfo(userName, displayName, email, phone, coins, setUsers, setBlacklist);
     }
 
     function handleRemove(userName) {
-        let temp = {}
-        for (let i = 0; i < state.blacklist.length; i++){
-            if(state.blacklist[i]["userName"] == userName){
-                temp = state.blacklist.splice(i, 1)
-                state.users.push(temp[0])
-                break
-            }
+        editBlacklist(userName, false, setUsers, setBlacklist);
+    }
+
+    function renderUsers(userList, blist) {
+        try {
+            return (
+            <React.Fragment>
+                { blist ? 
+                    userList.map((u) => <BlackList key={ uid(u) } parentCallBack = {handleRemove} user={ u } profilePicture={ state.profilePicture }/>)
+                    :
+                    userList.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} parentUpdate={handleUpdate} user={ u } profilePicture={ state.profilePicture }/>) }
+            </React.Fragment>
+            )
+        } catch (error) {
+            return null;
         }
-        updateUserInfo()
-        updateBlackListInfo()
     }
-
-    function updateUserInfo(){
-        setUserInfo(state.users.map((u) => <UserInfo key={ uid(u) } parentCallBack = {handleAdd} parentUpdate = {handleUpdate} userName={u.userName} displayName={u.displayName} 
-        profilePicture={u.profilePicture} email={u.email} phone={u.phone} coins = {u.coins} />))
-    }
-
-    function updateBlackListInfo(){
-        setBlacklistInfo(state.blacklist.map((u) => <BlackList key={ uid(u) } parentCallBack = {handleRemove}
-        userName={u.userName} displayName={u.displayName} 
-        profilePicture={u.profilePicture} email={u.email} phone={u.phone} coins = {u.coins} />))
-    }
-
-    useEffect(() =>{
-        updateUserInfo()
-        updateBlackListInfo()
-    }, [])
-    
     return(
         <div>
             <div className='userHeader'>Users</div>
-            <div className='userContainer'>
-                {userInfo}
+            <div className='userContainer' key={ uid(users) }>
+                { renderUsers(users, false) }
             </div>
             <div className='blackListHeader'>Blacklist</div>
-            <div className='blacklistContainer'>
-                {blacklistInfo}
+            <div className='blacklistContainer' key={ uid(blacklist) }>
+                { renderUsers(blacklist, true) }
             </div>
         </div>
     );

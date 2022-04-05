@@ -6,7 +6,7 @@ import 'chartjs-adapter-date-fns';
 
 import ReviewPage from '../ReviewComponents/ReviewPage';
 
-import { getStockInfo } from '../../actions/stockPage';
+import { getStockInfo, addToWatchlist } from '../../actions/stockPage';
 
 import './styles.css';
 
@@ -42,6 +42,8 @@ function Stock() {
     const [params, setParams] = useSearchParams();
     const [stockInfo, setStockInfo] = useState(null);
     const [timeFilter, setTimeFilter] = useState('1D');
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         getStockInfo(params.get('symbol'), setStockInfo);
@@ -139,6 +141,9 @@ function Stock() {
                         <button value='1Y' onClick={ e => setTimeFilter(e.target.value) }>1Y</button>
                     </div>
                 </div>
+
+                <button value='addWatchlist' onClick={() => addToWatchlist(params.get('symbol'), setErrorMessage)}>Add to Watchlist</button>
+                { errorMessage.length > 0 ? <p>{ errorMessage }</p> : null}
 
                 <div className='reviews'>
                     <ReviewPage />

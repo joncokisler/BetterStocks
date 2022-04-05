@@ -2,87 +2,95 @@ import './ReviewPage.css';
 import Comments from './Comments/Comment';
 import Statistics from './Statistics/Statistics';
 import WriteComment from './WriteComment/WriteComment';
-import picture1 from './pic1.png';
-import picture2 from './pic2.jpg';
-import NavBar from '../navbar/Navbar';
-import { render } from '@testing-library/react';
 import { Navigate, useSearchParams } from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
+import { getCurrentUser, getReviews, makeReview } from '../../actions/review';
 
 function ReviewPage() {
+
   const state = {
-    comments: [
-      {userName: 'user', displayName: 'Fred(User)', profilePicture: picture1, rate: 5,
-       text: 'This is a perfect stock!'},
-      {userName: 'admin', displayName: 'John(Admin)', profilePicture: picture2, rate: 1,
-      text: 'I hate this.'}
-    ],
-    reviewHeader: [{text: 'Reviews'}],
-    statistics: [{fiveStar: 1, fourStar: 0, threeStar: 0, twoStar: 0, oneStar: 1, avg: '3.0', numComment: 2}],
-    redirect: null,
-    new: {userName: 'user', displayName:'Fred(User)', profilePicture: picture1, rate: null, text: null}
+    profilePicture:
+			"https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg"
   };
+  const [IsBlackList, setIsBlackList] = useState()
+  const [reviews, setReviews] = useState([])
+  const [stats, setStats] = useState()
 
   const newComment =  <WriteComment parentCallBack={handleInput} />
 
   const [params, setParams] = useSearchParams();
   const stock_symbol = params.get('symbol');
 
-  const [userInput, setUserInput] = useState();
-  const [stats, setStats] = useState();
- 
-  useEffect(() =>{
-    updateUserInput()
-    updateStats()
-  }, [])
+  useEffect(() => {
+    getCurrentUser(setIsBlackList);
+  }, []);
+
+  useEffect(() => {
+    const write = document.getElementById("writeComment")
+    const message = document.getElementById("blockMessage")
+    if (IsBlackList == true){
+      write.style.opacity = "0.3"
+      message.style.display = "block"
+    } else {
+      write.style.opacity = "1"
+      message.style.display = "none"
+    }
+
+  }, [IsBlackList])
+
+  useEffect(() => {
+    getReviews(stock_symbol, setReviews);
+  }, [params]);
 
   function handleScroll() {
     window.scrollBy(0,1000)
   }
 
   function handleInput(text, rate) {
-    const comment = {userName: 'user', displayName: 'Fred(User)', profilePicture: picture1, rate: rate, text: text}
-    state.comments.push(comment)
-
-    // if (rate == 5){
-    //   state.statistics[0][0] += 1;
-    // }
-
-    updateUserInput()
-    updateStats()
+    makeReview(stock_symbol, text, rate, setReviews);
   }
 
-  function updateUserInput(){
-    setUserInput(state.comments.map((comment) =>   
-    <Comments userName={comment.userName} displayName={comment.displayName} profilePicture={comment.profilePicture}
-      rate={comment.rate} text={comment.text}/>))
+  function renderReviews() {
+    return reviews.map(review => <Comments key={ uid(review) } userName={ review.author } displayName={ review.displayName } rate={ review.stars } text={ review.review } profilePicture={state.profilePicture}/>);
   }
 
-  function updateStats() {
-    setStats(state.statistics.map((stats) =>
-    <Statistics  fiveStar={stats.fiveStar} fourStar={stats.fourStar} threeStar={stats.threeStar} 
-    twoStar={stats.twoStar} oneStar={stats.oneStar} avg={stats.avg} numComment={stats.numComment} />))
+  function renderStats() {
+    const starCounts = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    };
+    reviews.map(review => {
+      starCounts[review.stars]++;
+    });
+    let avg = Object.entries(starCounts).reduce((acc, entry) => acc + (entry[0] * entry[1]), 0) * 1.0 / reviews.length;
+    if (reviews.length === 0) {
+      avg = 0;
+    }
+
+    return <Statistics key={ uid(starCounts) } fiveStar={ starCounts[5] } fourStar={ starCounts[4] } threeStar={ starCounts[3] } twoStar={ starCounts[2] } oneStar={ starCounts[1] } avg={ avg } numComment={ reviews.length } />
   }
 
 
     return (
-      <div>
-        <div className='all'>
-          <div className='allReviews'>
-            <div className='reviewHeader'>
-                  Review
-            </div>
-            <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
-            <div id='reviewScroller'>
-              {userInput}
-            </div>
+      <div className='all'>
+        <div className='allReviews'>
+          <div className='reviewHeader'>
+                Reviews
           </div>
-          <div className='allStats'>
-            {stats}
+          <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
+          <div id='reviewScroller'>
+            { renderReviews() }
           </div>
-          <div className='writeComment'>{newComment}</div>
         </div>
+        <div className='allStats'>
+          { renderStats() }
+        </div>
+        <div id='writeComment'>{newComment}</div>
+        <div id='blockMessage'>You're not allowed to write comments!</div>
       </div>
     )
 }
