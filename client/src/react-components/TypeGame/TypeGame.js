@@ -12,7 +12,57 @@ function TypeGame(){
                 "bear market": "hard",
                 "prisoner's dilemma": "hard",
                 "broker": "medium",
-                "bid": "easy"},
+                "bid": "easy", 
+                "scarcity": "medium", 
+                "equity": "medium", 
+                "externality": "medium", 
+                "business cycle": "hard", 
+                "specialization": "hard", 
+                "comparative advantage": "hard", 
+                "good": "easy", 
+                "service": "easy", 
+                "surplus": "easy", 
+                "shortage": "easy", 
+                "tax incidence": "hard", 
+                "free rider": "hard", 
+                "tax": "easy", 
+                "profit": "easy", 
+                "utility": "easy", 
+                "monopoly": "medium", 
+                "oligopoly": "medium", 
+                "pure competition": "hard", 
+                "nash equilibrium": "hard", 
+                "lorenz curve": "hard", 
+                "deadweight loss": "hard", 
+                "usd": "easy", 
+                "cad": "easy", 
+                "currency": "medium", 
+                "exchange rate": "hard", 
+                "positive statement": "hard", 
+                "normative statement": "hard", 
+                buy: "easy", 
+                "sell": "easy", 
+                "trade":"easy", 
+                "ask": "easy", 
+                "limit order": "medium", 
+                "margin":"easy", 
+                "market order": "hard", 
+                "liquidity": "medium", 
+                "etf": "easy", 
+                "m1": "easy", 
+                "m2": "easy", 
+                "m1+": "medium", 
+                "m2+": "medium", 
+                "stock charts": "hard", 
+                "portfolio": "medium", 
+                "quote": "medium", 
+                "interest": "medium", 
+                "ipo": "easy", 
+                "public float": "hard", 
+                "forex": "easy", 
+                "brokerage": "medium", 
+                "day trading": "hard", 
+                "moving average": "hard", "game theory": "hard", "commission": "medium"},
         topUsers: [{displayName: "hah", userName: "user1", score: "1000"},
                     {displayName: "lalal", userName: "user2", score: "900"},
                     {displayName: "hum", userName: "user3", score: "800"},
@@ -117,7 +167,7 @@ function TypeGame(){
         <div>
             <div id='game'>
                 <div className='scores'>
-                    <h1>Time Left: <span className='red'>{time}</span> s</h1>
+                    <h1>Time Left: <span className='red'>{time}</span>s</h1>
                     <h1>Score: {score}</h1>
                     <h1>Best: {best}</h1>
                 </div>
@@ -125,6 +175,8 @@ function TypeGame(){
                 <div className='wordBox'>
                     {words.map((word) => <p className='word'>{word}</p>)}
                 </div>
+                <p className='instructions'>Type the word above the box and press enter. 
+                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best to get on the leaderboard! </p>
             </div>
             
             <div id='gameOver'>

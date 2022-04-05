@@ -7,6 +7,7 @@
 	display: table;	
 	overflow: scroll;
 	min-height: 100px;
+  font-family: 'Nunito';
 
 }
 
@@ -24,12 +25,16 @@
 .Content {
 	margin-left: 80px;
 	font-size: 80%;
+  font-family: 'Nunito';
+
 
 }
 
 .textContent {
 	padding: 5px;
 	margin-right: 40px;
+  color: rgb(71, 71, 71);
+	font-family: 'Nunito';
 }
   
 .userSection {
@@ -62,7 +67,9 @@
     border: none;
     transition-duration: 0.4s;
     border-radius: 5px;
-    }
+    font-family: 'Nunito';
+
+}
 
 .button1:hover{
   box-shadow: 0 4px 6px 0 rgba(0,0,0,0.24);
@@ -84,6 +91,7 @@
   border: none;
   transition-duration: 0.4s;
   border-radius: 5px;
+  font-family: 'Nunito';
 }
 
 .submitButton{

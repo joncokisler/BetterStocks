@@ -20,7 +20,7 @@ const { Stock } = require('../models/stock');
  * 
  * Body: Array of operations to complete: {"op", "replace", "path", "/<attribute to replace>", "value": <new value>}
  * 
- *     The only attributes that can be modified are: "displayName", "email", "phone", "betterCoins"
+ *     The only attributes that can be modified are: "displayName", "email", "phone", "betterCoins", 'bio'
  * 
  * Response: 200 on success and the new user's representation.
  */
@@ -36,7 +36,7 @@ router.patch('/api/admin/users/:username', mongoChecker, adminAuthenticate, asyn
         const fieldsToUpdate = {};
         req.body.map(change => {
             const propToChange = change.path.substr(1);
-            if (['blacklist', 'displayName', 'email', 'phone'].includes(propToChange)) {
+            if (['blacklist', 'displayName', 'email', 'phone', 'bio'].includes(propToChange)) {
                 fieldsToUpdate[propToChange] = change.value;
             } else if ('betterCoins' === propToChange) {
                 fieldsToUpdate['paperTrade.capital'] = change.value;

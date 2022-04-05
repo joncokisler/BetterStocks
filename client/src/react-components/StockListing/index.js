@@ -17,7 +17,13 @@ import { getStocksPrefix } from '../../actions/stockListing';
 function render_trend(trend) {
     const labels = [];
     let dateFilterStart = new Date();
-    dateFilterStart.setDate(dateFilterStart.getDate() - 1);
+    if (dateFilterStart.getDay() === 6) {  // Saturday
+        dateFilterStart.setDate(dateFilterStart.getDate() - 2);
+    } else if (dateFilterStart.getDay() === 0) {  // Sunday
+        dateFilterStart.setDate(dateFilterStart.getDate() - 3);
+    } else {
+        dateFilterStart.setDate(dateFilterStart.getDate() - 1);
+    }
     for (const [index, element] of trend.entries()) {
         if (Date.parse(element.timestamp) >= dateFilterStart) {
             labels.push(index);
@@ -63,9 +69,8 @@ function render_trend(trend) {
             duration: 0
         }
     };
-
     const data = {
-        labels: labels,
+        labels: [...Array(labels.length).keys()],
         datasets: [
             {data: labels.map((i) => trend[i].price)}
         ]
@@ -118,13 +123,14 @@ function StockListing(props) {
 
     function makeTableBody(stockList) {
         function makeCell(col, stock) {
+            const numFormat = new Intl.NumberFormat('en-US', {minimumFractionDigits:2});
             switch (col.type.toLowerCase()) {
                 case 'symbol':
                     return <td key={ uid(col) }><NavLink className='stockSymbol' to={ `/stocks?symbol=${ stock.symbol }` }>{ stock.symbol }</NavLink></td>
                 case 'trace':
                     return <td key={ uid(col) }>{ render_trend(stock[col.name]) }</td>;
                 case 'price':
-                    return <td key={ uid(col) }>{ Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0 }</td>;
+                    return <td key={ uid(col) }>{ numFormat.format(Math.round(parseFloat(stock[col.name]) * 100.0) / 100.0) }</td>;
                 case 'stars':
                     return <td key={ uid(col) }>{ render_stars(stock.week_stars) }</td>;
                 default:
@@ -141,6 +147,7 @@ function StockListing(props) {
         let dateFilterStart = new Date();
         dateFilterStart.setDate(dateFilterStart.getDate() - 7);
         for (const stock of stockList) {
+            stock.history = stock.history.concat([{timestamp: stock.timestamp, price: stock.price}]);
             stock.week_stars = stock.reviews
                                     .filter(rev => Date.parse(rev.timestamp) >= dateFilterStart)
                                     .reduce((acc, rev) => {
@@ -172,6 +179,9 @@ function StockListing(props) {
 
     return <div className='stockListing'>
         <h3>Stock Search</h3>
+
+        <p>Search for a stock by symbol!&nbsp;&nbsp;Results will appear in the list below.</p>
+        { [0, 6].includes((new Date()).getDay()) ? <p>Markets are currently <strong>closed!</strong>&nbsp;&nbsp;Price data is shown for the last open trading day.</p> : null }
         <form className='stockSearch'>
             <label>
                 <BiSearch />

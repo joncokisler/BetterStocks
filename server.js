@@ -74,7 +74,7 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // All routes other than above will go to index.html
 app.get("*", (req, res) => {
 	// check for page routes that we expect in the frontend to provide correct status code.
-	const goodPageRoutes = ["/", "/login", "/dashboard"];
+	const goodPageRoutes = ["/", "/signup", "/stocklisting", "/paper-trade", "/game", "/profile", "/admin"];
 	if (!goodPageRoutes.includes(req.url)) {
 		// if url not in expected page routes, set status to 404.
 		res.status(404);
@@ -84,9 +84,23 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
+/***** Prepare stock data retrieval timer *******/
+
+const updateStocks = require('./stockUpdate/stockUpdate');
+
+
+console.log('UPDATING STOCKS!');
+updateStocks();
+
+const minutes = 30;
+setInterval(() => {
+    console.log('UPDATING STOCKS!');
+    updateStocks();
+}, minutes * 60 * 1000);
+
 /*************************************************/
 // Express server listening...
-const port = process.env.PORT || 3100;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
 	log(`Listening on port ${port}...`);
 });

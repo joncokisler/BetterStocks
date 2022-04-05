@@ -6,16 +6,17 @@ import Navbar from "./react-components/navbar/Navbar";
 import LoginPage from "./react-components/login-signup/LoginPage";
 import SignupPage from "./react-components/login-signup/SignupPage";
 import PaperTrade from "./react-components/PaperTrade";
-import TopStocks from "./react-components/TopStocks";
 import ProfilePage from "./react-components/profile/ProfilePage";
 import ProfileEditPage from "./react-components/profile/ProfileEditPage";
 import TrendingStocks from "./react-components/TrendingStocks";
 import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
-import SearchPage from "./react-components/search-page";
 import AdminPage from "./react-components/AdminComponents/AdminPage";
 import StockListing from "./react-components/StockListing";
 import GamePage from "./react-components/TypeGame/TypeGame";
+
+import ENV from './config.js';
+const API_HOST = ENV.api_host;
 
 class App extends React.Component {
 	state = {
@@ -74,6 +75,7 @@ class App extends React.Component {
 
 	handleLoginCallbackServer = async (userJSON) => {
 		console.log(userJSON);
+
 		const response = await fetch("http://localhost:3100/users/login", {
 			method: "POST",
 			headers: {
@@ -92,7 +94,7 @@ class App extends React.Component {
 	submitInfo = (signupJSON) => {
 		console.log("submitting sugnup info");
 
-		fetch("/api/users", {
+		fetch(`${API_HOST}/api/users`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
@@ -145,41 +147,11 @@ class App extends React.Component {
 						/>
 
 						<Route
-							path="top-stocks"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<TopStocks loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
-						<Route
-							path="trending-stocks"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<TrendingStocks loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
-						<Route
 							path="paper-trade"
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
 									<PaperTrade loggedInUser={this.state.loggedInUser} />
-								</React.Fragment>
-							}
-						/>
-
-						<Route
-							path="search"
-							element={
-								<React.Fragment>
-									<Navbar user={this.state.loggedInUser} />
-									<SearchPage loggedInUser={this.state.loggedInUser} />
 								</React.Fragment>
 							}
 						/>
@@ -212,6 +184,16 @@ class App extends React.Component {
 											},
 										]}
 									/>
+								</React.Fragment>
+							}
+						/>
+
+						<Route
+							path='stocks'
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<Stock />
 								</React.Fragment>
 							}
 						/>
@@ -265,6 +247,13 @@ class App extends React.Component {
 								</React.Fragment>
 							}
 						/>
+
+						<Route
+							path='*'
+							element={
+								<p>404</p>
+							}
+						 />
 					</Routes>
 				</BrowserRouter>
 			</div>

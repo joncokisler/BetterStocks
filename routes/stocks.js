@@ -19,11 +19,12 @@ const { Stock } = require('../models/stock');
  * Returns: 200 on success and the representation of the stock
  */
 router.post('/api/stocks', mongoChecker, adminAuthenticate, async (req, res) => {
+    const now = Date.now();
     const stock = new Stock({
         symbol: req.body.symbol,
-        timestamp: Date.now(),
+        timestamp: now,
         price: req.body.price,
-        history: [],
+        history: [{timestamp: now, price: req.body.price}],
         reviews: []
     });
     try {
@@ -156,9 +157,9 @@ router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, 
             res.status(400).send('Bad request');
             return;
         }
-        stock.history.push({timestamp: stock.timestamp, price: stock.price});
-        stock.price = req.body.price;
         stock.timestamp = Date.now();
+        stock.price = req.body.price;
+        stock.history.push({timestamp: stock.timestamp, price: stock.price});
         const result = await stock.save();
         res.send(stock);
     } catch (error) {
@@ -192,7 +193,7 @@ router.post('/api/stocks/:stock/reviews', mongoChecker, authenticate, async (req
             return;
         }
         const review = stock.reviews.create({
-            author: req.session.user,
+            author: req.session.username,
             timestamp: Date.now(),
             review: req.body.review,
             stars: req.body.stars
