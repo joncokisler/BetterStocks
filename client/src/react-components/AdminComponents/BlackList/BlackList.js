@@ -6,8 +6,8 @@ class BlackList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: props.userName,
-            displayName: props.displayName,
+            userName: props.user.username,
+            displayName: props.user.displayName,
             profilePicture: props.profilePicture,
             
         };

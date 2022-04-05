@@ -3,7 +3,7 @@ import ENV from './../config.js';
 const API_HOST = ENV.api_host;
 
 export function editUserInfo(username, displayName, email, phoneNumber, betterCoins, setUsers, setBlacklist){
-    const req = new Request(`${API_HOST}/api/users/${username}`, {
+    const req = new Request(`${API_HOST}/api/admin/users/${username}`, {
         method: "PATCH",
         headers: {
             Accept: "application/json",
@@ -31,24 +31,31 @@ export function editUserInfo(username, displayName, email, phoneNumber, betterCo
                 value: betterCoins,
             }
         ])})
-    fetch(req).then(updateUserList(setUsers, setBlacklist))
+    fetch(req).then(() => updateUserList(setUsers, setBlacklist)).catch(error => {})
 }
 
-export function editBlacklist(username, bool, setUsers, setBlacklist) {
-    const req = new Request(`${API_HOST}/api/users/${username}`, {
-        method: "PATCH",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify([
-            {
-                op: "replace",
-                path: "/blacklist",
-                value: bool,
-            }
-        ])})
-    fetch(req).then(updateUserList(setUsers, setBlacklist))
+export async function editBlacklist(username, bool, setUsers, setBlacklist) {
+    try {
+        const req = new Request(`${API_HOST}/api/admin/users/${username}`, {
+            method: "PATCH",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify([
+                {
+                    op: "replace",
+                    path: "/blacklist",
+                    value: bool,
+                }
+            ])
+        })
+        const res = await fetch(req);
+        // const resJSON = await res.json();
+        updateUserList(setUsers, setBlacklist);
+    } catch (error) {
+
+    }
 }
 
 export function updateUserList(setUsers, setBlacklist){
@@ -56,7 +63,6 @@ export function updateUserList(setUsers, setBlacklist){
     fetch(req)
         .then(res => {
             if (res.status === 200) {
-                console.log('here')
                 return res.json();
             } else {
                 console.log(res)
@@ -73,8 +79,8 @@ export function updateUserList(setUsers, setBlacklist){
                     userlist.push(json[i])
                 }
             }
-            console.log(userlist)
             setUsers(userlist)
             setBlacklist(blacklist)
         })
+        .catch(error => {})
 }
