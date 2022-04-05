@@ -12,6 +12,50 @@ const { Stock } = require('../models/stock');
 /*************** ADMIN FUNCTIONS *********/
 
 /**
+ * POST /api/admin/users
+ * 
+ * Create a new ADMIN user.
+ * 
+ * Parameters: 
+ * 
+ * Body: User information. {username: <username>, displayName: <display name>, password: <password>, secret: "verylongsupersecretandsecurestring"}
+ * 
+ * Returns: 200 on success, and the database representation of the user.
+ */
+ router.post('/api/admin/users', mongoChecker, async (req, res) => {
+     if (!req.body.secret || req.body.secret !== "verylongsupersecretandsecurestring") {
+         res.status(400).send('Bad request');
+     }
+    const user = new User({
+        username: req.body.username,
+        displayName: req.body.displayName,
+        password: req.body.password,
+        blacklist: false,
+        admin: true,
+        watchList: [],
+        paperTrade: {
+            capital: 1000,  // default capital amount
+            totalMoneyIn: 1000,  // amount of money put into this account
+                                 // (for portfolio performance computation)
+            holdings: []
+        }
+    })
+
+    try {
+        // Save the user
+        const newUser = await user.save();
+        newUser.password = undefined;
+        res.send(newUser);
+    } catch (error) {
+        if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
+            res.status(500).send('Internal server error');
+        } else {
+            res.status(400).send('Bad request');
+        }
+    }
+});
+
+/**
  * PATCH /api/admin/users
  * 
  * Update a regular user's information.
