@@ -15,6 +15,8 @@ Welcome to BetterStocks™: A social paper trading platform that tracks real tim
 
 ## Installation
 
+*In the root folder*
+
 1.  Install NPM packages
    
     ```
