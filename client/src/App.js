@@ -22,34 +22,7 @@ class App extends React.Component {
 		loggedInUser: "",
 		loginRedirect: false,
 		profileRedirect: false,
-
-		users: {
-			admin: {
-				userName: "admin",
-				displayName: "John(Admin)",
-				profilePicture:
-					"https://image.shutterstock.com/mosaic_250/2797510/1617540484/stock-photo-closeup-photo-of-amazing-short-hairdo-lady-looking-up-empty-space-deep-thinking-creative-person-arm-1617540484.jpg",
-				bio: "I am an admin. I have powers",
-				email: "admin@email.com",
-				phoneNumber: 6492737381,
-				isAdmin: true,
-				watchlist: [],
-			},
-			user: {
-				userName: "user",
-				displayName: "Fred(User)",
-
-				profilePicture:
-					"https://st.depositphotos.com/2309453/3449/i/600/depositphotos_34490345-stock-photo-confident-casual-unshaven-young-man.jpg",
-
-				bio: "This is a bio. This website is great.",
-				email: "user@email.com",
-				phoneNumber: 6482453443,
-				isAdmin: false,
-
-				watchlist: [],
-			},
-		},
+		stocksRedirect: false,
 	};
 
 	handleLoginCallback = (childData) => {
@@ -85,8 +58,10 @@ class App extends React.Component {
 		});
 		console.log(response);
 		if (!response.ok) this.handleLoginRedirect();
-		else this.setState({ loggedInUser: response.json() });
-		console.log(this.state.loggedInUser);
+		else {
+			this.setState({ loggedInUser: response.json(), stocksRedirect: true });
+			console.log(this.state.loggedInUser);
+		}
 		return response;
 	};
 
@@ -135,6 +110,7 @@ class App extends React.Component {
 							element={
 								<LoginPage
 									profileRedirect={this.state.profileRedirect}
+									stocksRedirect={this.state.stocksRedirect}
 									handleLoginCallback={this.handleLoginCallbackServer}
 								/>
 							}
