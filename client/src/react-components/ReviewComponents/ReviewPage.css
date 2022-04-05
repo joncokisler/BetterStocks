@@ -7,12 +7,26 @@
   position: relative;
 }
 
-.writeComment {
-  opacity: 1;
+#writeComment {
+  opacity: 0.3;
   position: relative;
   top: 90vh;
   padding: 150px;
-  left: -100px
+  left: -100px;
+  display: block;
+}
+
+#blockMessage {
+  position: absolute;
+  top: 120vh;
+  font-family: Garamond;
+  font-weight: bold;
+  font-size: 200%;
+  color: red;
+  padding: 150px;
+  left: 50px;
+  height: 200px;
+  display: block;
 }
 
 .allReviews {

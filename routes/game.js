@@ -26,10 +26,7 @@ const { Game } = require('../models/game');
  * Returns: 200 on success
  */
 router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
-    if (!req.body.score) {
-        res.status(400).send('Bad request');
-        return;
-    }
+
     try {
         // add to high scores
         let user = await Game.findOne({user: req.session.user});
@@ -53,6 +50,7 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
         const result = await user.save();
         res.send();
     } catch (error) {
+        res.send(error)
         if (isMongoError(error)) {
             res.status(500).send('Internal server error');
         } else {

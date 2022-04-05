@@ -1,103 +1,91 @@
 import React, {useEffect, useState} from 'react'
 import './TypeGame.css'
-import { getHighscore, getTopScores, addScore, getAllWords } from '../../actions/game';
+import { uid } from 'react-uid'
+import { getHighscore, getTopScores, addScore, getInitialWords, cycleWords } from '../../actions/game';
 
 
 function TypeGame(){
     const state = {
-        wordBank: {"stock": "easy", 
-                "money": "easy",
-                "better stock": "easy",
-                "cost": "medium",
-                "reward": "medium",
-                "bear market": "hard",
-                "prisoner's dilemma": "hard",
-                "broker": "medium",
-                "bid": "easy", 
-                "scarcity": "medium", 
-                "equity": "medium", 
-                "externality": "medium", 
-                "business cycle": "hard", 
-                "specialization": "hard", 
-                "comparative advantage": "hard", 
-                "good": "easy", 
-                "service": "easy", 
-                "surplus": "easy", 
-                "shortage": "easy", 
-                "tax incidence": "hard", 
-                "free rider": "hard", 
-                "tax": "easy", 
-                "profit": "easy", 
-                "utility": "easy", 
-                "monopoly": "medium", 
-                "oligopoly": "medium", 
-                "pure competition": "hard", 
-                "nash equilibrium": "hard", 
-                "lorenz curve": "hard", 
-                "deadweight loss": "hard", 
-                "usd": "easy", 
-                "cad": "easy", 
-                "currency": "medium", 
-                "exchange rate": "hard", 
-                "positive statement": "hard", 
-                "normative statement": "hard", 
-                "buy": "easy", 
-                "sell": "easy", 
-                "trade":"easy", 
-                "ask": "easy", 
-                "limit order": "medium", 
-                "margin":"easy", 
-                "market order": "hard", 
-                "liquidity": "medium", 
-                "etf": "easy", 
-                "m1": "easy", 
-                "m2": "easy", 
-                "m1+": "medium", 
-                "m2+": "medium", 
-                "stock charts": "hard", 
-                "portfolio": "medium", 
-                "quote": "medium", 
-                "interest": "medium", 
-                "ipo": "easy", 
-                "public float": "hard", 
-                "forex": "easy", 
-                "brokerage": "medium", 
-                "day trading": "hard", 
-                "moving average": "hard", "game theory": "hard", "commission": "medium"},
-        topUsers: [{displayName: "hah", userName: "user1", score: "1000"},
-                    {displayName: "lalal", userName: "user2", score: "900"},
-                    {displayName: "hum", userName: "user3", score: "800"},
-                    {displayName: "Uhh", userName: "user4", score: "7000"},
-                    {displayName: "Ahhh", userName: "user5", score: "6000"},],
-        timeLimit: 30
+        // wordBank: {"stock": "easy", 
+        //         "money": "easy",
+        //         "better stock": "easy",
+        //         "cost": "medium",
+        //         "reward": "medium",
+        //         "bear market": "hard",
+        //         "prisoner's dilemma": "hard",
+        //         "broker": "medium",
+        //         "bid": "easy", 
+        //         "scarcity": "medium", 
+        //         "equity": "medium", 
+        //         "externality": "medium", 
+        //         "business cycle": "hard", 
+        //         "specialization": "hard", 
+        //         "comparative advantage": "hard", 
+        //         "good": "easy", 
+        //         "service": "easy", 
+        //         "surplus": "easy", 
+        //         "shortage": "easy", 
+        //         "tax incidence": "hard", 
+        //         "free rider": "hard", 
+        //         "tax": "easy", 
+        //         "profit": "easy", 
+        //         "utility": "easy", 
+        //         "monopoly": "medium", 
+        //         "oligopoly": "medium", 
+        //         "pure competition": "hard", 
+        //         "nash equilibrium": "hard", 
+        //         "lorenz curve": "hard", 
+        //         "deadweight loss": "hard", 
+        //         "usd": "easy", 
+        //         "cad": "easy", 
+        //         "currency": "medium", 
+        //         "exchange rate": "hard", 
+        //         "positive statement": "hard", 
+        //         "normative statement": "hard", 
+        //         "buy": "easy", 
+        //         "sell": "easy", 
+        //         "trade":"easy", 
+        //         "ask": "easy", 
+        //         "limit order": "medium", 
+        //         "margin":"easy", 
+        //         "market order": "hard", 
+        //         "liquidity": "medium", 
+        //         "etf": "easy", 
+        //         "m1": "easy", 
+        //         "m2": "easy", 
+        //         "m1+": "medium", 
+        //         "m2+": "medium", 
+        //         "stock charts": "hard", 
+        //         "portfolio": "medium", 
+        //         "quote": "medium", 
+        //         "interest": "medium", 
+        //         "ipo": "easy", 
+        //         "public float": "hard", 
+        //         "forex": "easy", 
+        //         "brokerage": "medium", 
+        //         "day trading": "hard", 
+        //         "moving average": "hard", "game theory": "hard", "commission": "medium"},
+        timeLimit: 5
     }
 
-    const [words, setWords] = useState([newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord()]);
+    const [topUsers, setTopUsers] = useState([])
+    const [difficulty, setDifficulty] = useState(null)
+    const [words, setWords] = useState([]);
     const [started, setStarted] = useState(null)
     const [time, setTime] = useState(state.timeLimit);
     const [score, setScores] = useState(0);
-    const [best, setBest] = useState(50);
-    
-    function newWord(){
-        const index = Math.floor(Math.random() * state.wordBank.length)
-        return state.wordBank[index].word
-    }
+    const [best, setBest] = useState(0);
 
     useEffect(() =>{
         if(started != null){
-            var count = 0
             var timer = setInterval(() => {
-                count += 1
-                updateTime()
-                if(count == state.timeLimit){
-                    clearInterval(timer)
-                }
+                updateTime(timer)
             }, 1000)
         }
     }, [started])
 
     useEffect(()=>{
-        state.wordBank = getAllWords()
+        getInitialWords(setWords, setDifficulty)
     }, [])
 
     useEffect(() =>{
@@ -107,14 +95,15 @@ function TypeGame(){
     }, [score])
 
     useEffect(()=>{
-        setBest(getHighscore())
+        getHighscore(setBest)
+        setTime(state.timeLimit)
     }, [])
 
     function startTimer(){
         setStarted(Date.now())
     }
 
-    function updateTime(){
+    function updateTime(timer){
         const timeDiff = +(Date.now()) - +started
         const timeLeft = state.timeLimit - Math.floor(timeDiff / 1000) % 60
         console.log(timeLeft)
@@ -123,10 +112,10 @@ function TypeGame(){
         }else if(timeLeft > 0){
             setTime(timeLeft)
         }else{
+            clearInterval(timer)
             setTime(0)
             addScore(score)
-            state.topUsers = getTopScores(5)
-            updateLeaderboard()
+            getTopScores(5, setTopUsers)
             const game = document.getElementById("game")
             const over = document.getElementById("gameOver")
             game.style.display = "none"
@@ -136,7 +125,7 @@ function TypeGame(){
     }
 
     function handlePlayAgain(){
-        setWords([newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord(), newWord()])
+        getInitialWords(setWords, setDifficulty)
         setTime(state.timeLimit)
         setScores(0)
         setStarted(null)
@@ -157,14 +146,6 @@ function TypeGame(){
             const input = e.target.value
             const word = String(words[8])
             if(input == word){
-                var index = 0
-                for(var i = 0; i < state.wordBank.length;i++){
-                    if(state.wordBank[i].word = word){
-                        break
-                    }
-                    index += 1
-                }
-                const difficulty = state.wordBank[index].difficulty
                 if(difficulty == 'easy'){
                     setScores(score + 10)
                 }else if(difficulty == 'medium'){
@@ -172,10 +153,7 @@ function TypeGame(){
                 }else if(difficulty == 'hard'){
                     setScores(score + 30)
                 }
-                var tempWords = words
-                tempWords.pop()
-                tempWords.splice(0, 0, newWord())
-                setWords(tempWords)
+                cycleWords(words, setWords, setDifficulty)
             }
             e.target.value = ''
         }
@@ -184,19 +162,23 @@ function TypeGame(){
     const [leaderboard, setLeaderboard] = useState([])
 
     useEffect(()=>{
-        state.topUsers = getTopScores(5)
-        updateLeaderboard()
+        getTopScores(5, setTopUsers)
     }, [])
+
+    useEffect(() => {
+        updateLeaderboard()
+    }, [topUsers])
 
     function updateLeaderboard(){
         let count = 0
-        setLeaderboard(state.topUsers.map((user) => {
+        setLeaderboard(topUsers.map((user) => {
             count += 1
+            console.log(user)
             return(<>
                 <div className='grid-item-bold'>{count}</div>
-                <div className='grid-item-bold'>{user.userName}</div>
-                <div className='grid-item-bold'>{user.displayName}</div>
-                <div className='grid-item-bold'>{user.score}</div>
+                <div className='grid-item-bold'>{user.user.userame}</div>
+                <div className='grid-item-bold'>{user.user.displayName}</div>
+                <div className='grid-item-bold'>{user.highScore}</div>
             </>
             )
         }))
@@ -210,12 +192,16 @@ function TypeGame(){
                     <h1>Score: {score}</h1>
                     <h1>Best: {best}</h1>
                 </div>
-                <input id="gameInput" onKeyPress={handleKeyPress}/>
+                <input id="gameInput" autoComplete="off" onKeyPress={handleKeyPress}/>
                 <div className='wordBox'>
-                    {words.map((word) => <p className='word'>{word}</p>)}
+                    {Array.from(words.entries()).map(entry => <p key={ uid(entry[0] + entry[1]) } className='word'>{entry[1]}</p>)}
                 </div>
-                <p className='instructions'>Type the word above the box and press enter. 
-                If you type it correctly, then you'll get points! Points you accumulate will be added to your wallet. Longer words give more points. Try your best to get on the leaderboard! </p>
+                <p className='instructions'>Type any letter in the input box to start the game.<br/>
+                Press Enter to submit a word.<br/>
+                If you type it correctly, then you'll get points! <br/>
+                Points you accumulate will be added to your wallet. <br/>
+                Longer words give more points.<br/>
+                 Try your best to get on the leaderboard! </p>
             </div>
             
             <div id='gameOver'>

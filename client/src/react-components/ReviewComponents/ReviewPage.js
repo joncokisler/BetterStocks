@@ -5,17 +5,35 @@ import WriteComment from './WriteComment/WriteComment';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
-import { getReviews, makeReview } from '../../actions/review';
+import { getCurrentUser, getReviews, makeReview } from '../../actions/review';
 
-function ReviewPage() {
+function ReviewPage(props) {
 
+  const [IsBlackList, setIsBlackList] = useState()
   const [reviews, setReviews] = useState([])
-  const [stats, setStats] = useState();
+  const [stats, setStats] = useState()
 
   const newComment =  <WriteComment parentCallBack={handleInput} />
 
   const [params, setParams] = useSearchParams();
   const stock_symbol = params.get('symbol');
+
+  useEffect(() => {
+    getCurrentUser(setIsBlackList);
+  }, []);
+
+  useEffect(() => {
+    const write = document.getElementById("writeComment")
+    const message = document.getElementById("blockMessage")
+    if (IsBlackList == true){
+      write.style.opacity = "0.3"
+      message.style.display = "block"
+    } else {
+      write.style.opacity = "1"
+      message.style.display = "none"
+    }
+
+  }, [IsBlackList])
 
   useEffect(() => {
     getReviews(stock_symbol, setReviews);
@@ -52,6 +70,7 @@ function ReviewPage() {
     return <Statistics key={ uid(starCounts) } fiveStar={ starCounts[5] } fourStar={ starCounts[4] } threeStar={ starCounts[3] } twoStar={ starCounts[2] } oneStar={ starCounts[1] } avg={ avg } numComment={ reviews.length } />
   }
 
+
     return (
       <div>
         <div className='all'>
@@ -67,7 +86,8 @@ function ReviewPage() {
           <div className='allStats'>
             { renderStats() }
           </div>
-          <div className='writeComment'>{newComment}</div>
+          <div id='writeComment'>{newComment}</div>
+          <div id='blockMessage'>You're not allowed to write comments!</div>
         </div>
       </div>
     )

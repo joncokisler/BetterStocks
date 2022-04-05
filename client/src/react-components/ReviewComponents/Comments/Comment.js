@@ -18,16 +18,6 @@ class Comment extends React.Component {
     render() {
 
         return (
-            //     <div className='betterStocksContainer'>
-            //         <img className='betterStocksIcon' src={bird} />
-            //         <a className='betterStocks'>BetterStocks</a>
-
-
-            //         <a className='sectionTitle'>Top Stocks</a>
-            //         <a className='sectionTitle'>Trending</a>
-            //         <a className='sectionTitle'>Search</a>
-                    
-            //     </div>
                 <div className='reviewSection'>
                     <div className='review'>
  		
@@ -52,8 +42,6 @@ class Comment extends React.Component {
                             </div>
                         </div>
                     </div>
-{/* 
-                    <div class='timelineHeader'></div> */}
                 </div>
         )
     }

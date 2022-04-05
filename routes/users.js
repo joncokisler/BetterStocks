@@ -177,6 +177,28 @@ router.get('/api/users/:username', mongoChecker, authenticate, async (req, res) 
 });
 
 /**
+ * GET /api/users/
+ * 
+ * Retrieve all users.
+ * 
+ * Parameters: None
+ * 
+ * Body: None
+ * 
+ * Returns: 200 on success and the database representations of all users.
+ */
+ router.get('/api/users/', mongoChecker, authenticate, async (req, res) => {
+
+    try {
+        const users = await User.find();
+        res.send(users);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+    }
+
+});
+
+/**
  * PATCH /api/users/
  * 
  * Change information for the current session's user.

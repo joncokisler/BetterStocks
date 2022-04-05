@@ -8,7 +8,7 @@ class UserInfo extends React.Component {
         this.state = {
             userName: props.userName,
             displayName: props.displayName,
-            profilePicture: props.profilePicture,
+            // profilePicture: props.profilePicture,
             email: props.email,
             phone: props.phone,
             coins: props.coins,
@@ -71,9 +71,9 @@ class UserInfo extends React.Component {
         return (
             <div className='userSection'>
                     <div className='user'>
-                        <div className='IconContainer'>
+                        {/* <div className='IconContainer'>
                             <img className="Icon" src={this.state.profilePicture} />
-                        </div>
+                        </div> */}
 
                         <div className='Content'>
                             <h2>{this.state.displayName} </h2>
@@ -100,13 +100,13 @@ class UserInfo extends React.Component {
                             <div className="close-icon" onClick={this.closePopup} >x</div>
                             <h2>{this.state.userName} </h2>
                             <p className='editInfoTitle'>Display Name </p>
-                            <input id='box1' className="editTextbox"  />
+                            <input id='box1' className="editTextbox"  placeholder='Enter a new display name'/>
                             <p className='editInfoTitle'>Email </p>
-                            <input id='box2' className="editTextbox" />
+                            <input id='box2' className="editTextbox" placeholder='Enter a new email'/>
                             <p className='editInfoTitle'>Phone Number </p>
-                            <input id='box3' className="editTextbox"  />
+                            <input id='box3' className="editTextbox"  placeholder='Enter a new phone number'/>
                             <p className='editInfoTitle'>Better Coins </p>
-                            <input id='box4' className="editTextbox" />
+                            <input id='box4' className="editTextbox" placeholder='Enter a new better coins value'/>
                             <button className='submitButton button1' onClick={this.handleSubmitChange}>Submit</button>
                         </div>
                     </div>
