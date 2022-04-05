@@ -50,7 +50,24 @@ function Stock() {
     function renderLineChart() {
         const dateFilterStart = getDateFilterStart(timeFilter);
         const filteredHistory = stockInfo.history.filter(h => Date.parse(h.timestamp) >= dateFilterStart);
+
+        let trend_color = 'rgba(80, 80, 80, 0.7)';
+        if (filteredHistory.length >= 2) {
+            const begin_end_diff = filteredHistory[filteredHistory.length - 1].price - filteredHistory[0].price;
+            if (begin_end_diff > 0) {
+                trend_color = 'rgba(30, 150, 0, 0.7)';
+            } else if (begin_end_diff < 0) {
+                trend_color = 'rgba(250, 33, 58, 0.7)';
+            }
+        }
+
         const options = {
+            elements: {
+                line: {
+                    tension: 0.4,
+                    borderColor: trend_color
+                }
+            },
             scales: {
                 x: {
                     title: {
