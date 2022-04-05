@@ -160,14 +160,17 @@ class ProfilePage extends React.Component {
 							alt="Profile"
 						/>
 						<h2 className="grid-element" id="user-name">
-							@{this.state.loggedInUser.username}
+							@ {this.state.loggedInUser.username}
 						</h2>
-						<p className="grid-element" id="bio">
+						<h2 className="grid-element" id="bio">
 							{this.state.loggedInUser.bio}
-						</p>
-						<p className="grid-element" id="phone-number">
-							{this.state.loggedInUser.phoneNumber}
-						</p>
+						</h2>
+						<h2 className="grid-element" id="phone-number">
+							{this.state.loggedInUser.phone}
+						</h2>
+						<h2 className="grid-element" id="email">
+							{this.state.loggedInUser.email}
+						</h2>
 						<div>
 							<img className="logOut" src={logOutPic} />
 							<button onClick={this.logOutAccount} className="logOutButton">
@@ -184,10 +187,6 @@ class ProfilePage extends React.Component {
 							</button>
 						</div>
 
-						{/* <input className="grid-element" id="phone-number" */}
-						<NavLink className="grid-element" id="change-password" to="/login">
-							Change Password
-						</NavLink>
 						<div id="watchlist-section">
 							<h2>My Watchlist</h2>
 							<ul id="profileWatchlist">{this.stockList}</ul>
