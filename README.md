@@ -12,6 +12,7 @@ cokisler - Can Cokisler
 
 Welcome to BetterStocks™: A social paper trading platform that tracks real time stocks, crypto, and other assets (built with React Native, Node.js & Mongo DB)! The website utilizes the Yahoo Finance API to get its information about stocks. On the website, users can buy and sell assets with our own Better Coins™. Users can rate stocks out of 5 stars and write reviews too. If users find themselves with low capital, they can play our stock typeracer game to add more Better Coins™ to their wallet. In this game module, top user high scores will be featured on a leaderboard. With our app, we hope to provide a unique platform that empowers users to make the right trades. 
 
+Link: 
 
 ## Installation
 
@@ -50,8 +51,7 @@ Welcome to BetterStocks™: A social paper trading platform that tracks real tim
 
 Log in with the default username and password of `user` and `user`. Otherwise, you can create your own account!
 
-+ **Profile:** Click on the profile button in the navbar to view the user's profile page, which includes their profile picture, username (which is an unique identifier), display name, email and phone number. All users are assigned with a 
-default profile picture.
++ **Profile:** Click on the profile button in the navbar to view the user's profile page, which includes their profile picture, username (which is an unique identifier), display name, email, phone number and biography. Users can edit their display name, email, and biography. Users can logout from the profile page by clickling the logout button.
 + **Stocks:**  Click on the Stocks button to view a list of stocks. Users can see the symbol 24Hr price history graph, last know price and the 7 day average review rating. Users can sort by stock symbol in this table. Users from this page can also search for a stock via the search bar by typing the symbol of a stock. When clicking on a stock, that will navigate the user to the page of the stock, where they can view additional information about it.
 + **Stocks (single stock)** In the Stock page, it shows the stock's critical summary data. Users can choose to view the trend for time periods such as 1 day, 1 week, 1 month, 3 months, 6 months, 1 year. There are also user comments and ratings below the stock summary. Users can also write a comment. However, if a user is in the blacklist, the comment feature will be blocked from him.
 + **Paper Trading**: In the Paper Trading page, a simulation of the stock market can be run. Each user initially has 1000 better coins/capital. Users can earn more capitals by buy and sell stocks/assets. To the left of the screen, it has information about the user's portfolio. Users can type in a stock symbol to search for a stock. The list of holdings appears beneath the portfolio summary and the buy/sell buttons. A limitation is that the API has a limit of calls for the free tier - so we had to limit the pool of stocks available to trade on our platform.
@@ -252,3 +252,9 @@ Add a stock to the logged in user's watch list.
 Parameters: None  
 Body: {stock: <stock symbol>}  
 Returns: 200 on success and the updated user.  
+
+
+## Sources
++ Log-in background video: https://static.videezy.com/system/resources/previews/000/041/687/original/02.mp4
++ Default profile picture: https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg
++ Log-out Icon: https://pngtree.com/element/down?id=NDIzOTYyNg==&type=1&time=1649188840&token=OTI0NzQzYmJlZDBhNDgxYzNmMjRmOTg4MDdhZWZjZmI=
