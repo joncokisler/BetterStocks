@@ -33,8 +33,7 @@ class ProfilePage extends React.Component {
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
-			},
-			credentials: "include",
+			}
 		});
 		const sessionResponseJSON = await sessionResponse.json();
 		console.log(sessionResponseJSON);

@@ -8,7 +8,6 @@ import SignupPage from "./react-components/login-signup/SignupPage";
 import PaperTrade from "./react-components/PaperTrade";
 import ProfilePage from "./react-components/profile/ProfilePage";
 import ProfileEditPage from "./react-components/profile/ProfileEditPage";
-import TrendingStocks from "./react-components/TrendingStocks";
 import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
 import AdminPage from "./react-components/AdminComponents/AdminPage";
