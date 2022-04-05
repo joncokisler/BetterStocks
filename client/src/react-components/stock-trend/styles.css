@@ -11,10 +11,11 @@
 }
 
 .stockPage .stock {
-    /* display: flex;
-    align-content: center;
-    justify-content: center; */
     margin: auto;
     height: 25em;
     width: 80%;
+}
+
+.stockPage .reviews {
+    margin-top: 5em;
 }

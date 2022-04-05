@@ -188,10 +188,13 @@ router.get('/api/users/:username', mongoChecker, authenticate, async (req, res) 
  * Returns: 200 on success and the database representations of all users.
  */
  router.get('/api/users/', mongoChecker, authenticate, async (req, res) => {
-
     try {
         const users = await User.find();
-        res.send(users);
+        const passwordRemoval = users.map(u => {
+            u.password = undefined;
+            return u
+        });
+        res.send(passwordRemoval);
     } catch (error) {
         res.status(500).send('Internal server error');
     }
