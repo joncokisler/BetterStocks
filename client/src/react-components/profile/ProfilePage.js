@@ -1,12 +1,13 @@
 import React from "react";
 import { uid } from "react-uid";
 import "./ProfilePage.css";
-import { NavLink, withRouter } from "react-router-dom";
+import { Navigate, NavLink, withRouter } from "react-router-dom";
 import ENV from "../../config.js";
-import logOutPic from "./logout.png"
+import logOutPic from "./logout.png";
 const API_HOST = ENV.api_host;
 class ProfilePage extends React.Component {
 	state = {
+		logOutRedirect: false,
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
 			displayName: "",
@@ -26,16 +27,14 @@ class ProfilePage extends React.Component {
 	};
 
 	constructProfileElements = async () => {
-		let currentUsername;
-		let currentUserID;
-
 		const sessionResponse = await fetch(`${API_HOST}/users/check-session`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
-			}
+			},
 		});
+		console.log(sessionResponse);
 		const sessionResponseJSON = await sessionResponse.json();
 		console.log(sessionResponseJSON);
 
@@ -43,11 +42,13 @@ class ProfilePage extends React.Component {
 			console.log("check session response is not okay");
 			console.log("---STOP users/check-sesion ---");
 			return;
+		} else {
+			console.log(sessionResponseJSON);
 		}
-		currentUsername = sessionResponseJSON.username;
-		currentUserID = sessionResponseJSON.userID;
+		const currentUsername = sessionResponseJSON.username;
+		const currentUserID = sessionResponseJSON.userID;
 
-		let response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
+		const response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -56,9 +57,11 @@ class ProfilePage extends React.Component {
 		});
 
 		if (!response.ok) console.log("user data gathering response is not okay");
-		response = await response.json();
-		console.log(response);
-		this.setState({ loggedInUser: response });
+		else {
+			const userJSONDATA = await response.json();
+			console.log(userJSONDATA);
+			this.setState({ loggedInUser: userJSONDATA });
+		}
 
 		// fetch("/users/check-session", {
 		// 	method: "GET",
@@ -91,6 +94,23 @@ class ProfilePage extends React.Component {
 		// });
 	};
 
+	logOutAccount = () => {
+		fetch(`${API_HOST}/users/logout`, {
+			method: "GET",
+			headers: {
+				Accept: "application/json text/plain, */*",
+				"Content-Type": "application/json",
+			},
+		}).then((response) => {
+			if (!response.ok) {
+				console.log("COULD NOT LOGOUT");
+			} else {
+				console.log("LOGGING OUT");
+				this.setState({ logOutRedirect: true });
+			}
+		});
+	};
+
 	constructor(props) {
 		super(props);
 		this.constructProfileElements();
@@ -114,6 +134,9 @@ class ProfilePage extends React.Component {
 	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
 	// IN THE DATA
 	render() {
+		if (this.state.logOutRedirect) {
+			return <Navigate to="/login"></Navigate>;
+		}
 		return (
 			<div>
 				<div id="profile-page">
@@ -138,8 +161,11 @@ class ProfilePage extends React.Component {
 						</p>
 						<div>
 							<img className="logOut" src={logOutPic} />
-							<button className="logOutButton">Log</button> {/* add onClick here to logOut*/} 
+							<button onClick={this.logOutAccount} className="logOutButton">
+								Log Out
+							</button>
 						</div>
+
 						{/* <input className="grid-element" id="phone-number" */}
 						<NavLink className="grid-element" id="change-password" to="/login">
 							Change Password
@@ -149,7 +175,6 @@ class ProfilePage extends React.Component {
 							<ul id="profileWatchlist">{this.stockList}</ul>
 						</div>
 					</div>
-					{console.log("open")}
 				</div>
 			</div>
 		);

@@ -15,8 +15,12 @@ const express = require("express");
 const app = express();
 // enable CORS if in development, for React local development server to connect to the web server.
 const cors = require("cors");
+var corsOptions = {
+	origin: "*",
+	credentials: true,
+};
 if (env !== "production") {
-	app.use(cors());
+	app.use(cors(corsOptions));
 }
 
 // mongoose and mongo connection
@@ -113,7 +117,7 @@ setInterval(() => {
 
 /*************************************************/
 // Express server listening...
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3100;
 app.listen(port, () => {
 	log(`Listening on port ${port}...`);
 });
