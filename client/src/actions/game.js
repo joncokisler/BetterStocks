@@ -26,6 +26,7 @@ export async function getTopScores(n, setTopUsers) {
         }
         const resJSON = await res.json();
 
+        console.log(resJSON)
 
         for (const user of resJSON) {
             const userUrl = `${API_HOST}/api/users/${user.username}`;

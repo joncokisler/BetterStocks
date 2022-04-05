@@ -99,10 +99,10 @@ router.get("/users/check-session", (req, res) => {
 	//     return;
 	// }
 	console.log(req);
-	if (req.session.userObject.username) {
+	if (req.session.username) {
 		res.send({
 			userID: req.session.user,
-			username: req.session.userObject.username,
+			username: req.session.username,
 		});
 	} else {
 		res.status(401).send();
