@@ -3,7 +3,7 @@ import { uid } from "react-uid";
 import "./ProfilePage.css";
 import { NavLink, withRouter } from "react-router-dom";
 
-class ProfilePage extends React.Component {
+class ProfileEditPage extends React.Component {
 	state = {
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
@@ -17,10 +17,17 @@ class ProfilePage extends React.Component {
 			email: "",
 			isAdmin: false,
 		},
-		profilePictureStock:
-			"https://st.depositphotos.com/2218212/2938/i/950/depositphotos_29387653-stock-photo-facebook-profile.jpg",
 
 		stockList: [],
+	};
+	handleInputChange = (event) => {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value,
+		});
 	};
 
 	constructProfileElements = async () => {
@@ -90,66 +97,102 @@ class ProfilePage extends React.Component {
 		// });
 	};
 
+	handleEditData = () => {
+		// api calls
+		console.log("This is the edited state", this.state);
+	};
+
+	submitEditInfo = async () => {
+		const patchResponse = await fetch("./api/users/", {
+			method: "PATCH",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify([
+				{
+					op: "replace",
+					path: "/email",
+					value: this.state.email,
+				},
+				{
+					op: "replace",
+					path: "/displayName",
+					value: this.state.displayName,
+				},
+				{
+					op: "replace",
+					path: "/phone",
+					value: this.state.phoneNumber,
+				},
+				// JSON.stringify({
+				// 	op: "replace",
+				// 	path: "/bio",
+				// 	value: this.state.bio,
+				// }),
+			]),
+		});
+		console.log("THIS EXECUTED");
+		const patchResponseJson = patchResponse;
+		console.log(patchResponseJson);
+		if (!patchResponse.ok) console.log("Problem in patch request profile");
+		else this.setState({ loggedInUser: patchResponse });
+		console.log(this.state.loggedInUser);
+	};
+
 	constructor(props) {
 		super(props);
-		this.constructProfileElements();
 
-		try {
-		} catch (e) {
-			if (this.props.loggedInUser.watchlist.length > 0) {
-				this.props.loggedInUser.watchlist.forEach((stock, index) => {
-					// stockList.push(<NavLink className="watchlist-stock" to={`/stock?symbol=${stock}`}></NavLink>)
-					this.state.stockList.push(
-						<NavLink
-							id={uid(stock)}
-							className="watchlist-stock"
-							to={`/stocks?symbol=${stock}`}
-						></NavLink>
-					);
-				});
-			}
-		}
+		this.constructProfileElements();
 	}
 	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
 	// IN THE DATA
 	render() {
 		return (
 			<div>
-				<div id="profile-page">
-					<div id="contact-info">
-						<h2 className="grid-element" id="display-name">
-							{this.state.loggedInUser.displayName}
-						</h2>
-						<img
-							id="profile-picture"
-							className="grid-element"
-							src={this.state.profilePictureStock}
-							alt="Profile"
-						/>
-						<h2 className="grid-element" id="user-name">
-							@{this.state.loggedInUser.username}
-						</h2>
-						<p className="grid-element" id="bio">
-							{this.state.loggedInUser.bio}
-						</p>
-						<p className="grid-element" id="phone-number">
-							{this.state.loggedInUser.phoneNumber}
-						</p>
-
-						{/* <input className="grid-element" id="phone-number" */}
-						<NavLink className="grid-element" id="change-password" to="/login">
-							Change Password
-						</NavLink>
-						<div id="watchlist-section">
-							<h2>My Watchlist</h2>
-							<ul id="profileWatchlist">{this.stockList}</ul>
-						</div>
-					</div>
-					{console.log("open")}
+				<div id="profile-edit">
+					<input
+						className="textbox"
+						type="text"
+						name="bio"
+						onChange={this.handleInputChange}
+						value={this.state.bio}
+						placeholder="Bio"
+					/>
+					<input
+						className="textbox"
+						type="text"
+						name="displayName"
+						onChange={this.handleInputChange}
+						value={this.state.displayName}
+						placeholder="Display Name"
+					/>
+					<input
+						className="textbox"
+						type="text"
+						name="phoneNumber"
+						onChange={this.handleInputChange}
+						value={this.state.phoneNumber}
+						placeholder="Phone number"
+					/>
+					<input
+						className="textbox"
+						type="text"
+						name="email"
+						onChange={this.handleInputChange}
+						value={this.state.email}
+						placeholder="Email"
+					/>
+					<input
+						id="submit-button-login"
+						type="submit"
+						value="Submit"
+						onClick={this.submitEditInfo}
+					/>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default ProfilePage;
+export default ProfileEditPage;
