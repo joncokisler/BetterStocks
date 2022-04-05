@@ -2,7 +2,8 @@ import React from "react";
 import { uid } from "react-uid";
 import "./ProfilePage.css";
 import { NavLink, withRouter } from "react-router-dom";
-
+import ENV from "../../config.js";
+const API_HOST = ENV.api_host;
 class ProfileEditPage extends React.Component {
 	state = {
 		//no need for these states, will be props when backend implemented
@@ -34,7 +35,7 @@ class ProfileEditPage extends React.Component {
 		let currentUsername;
 		let currentUserID;
 
-		const sessionResponse = await fetch("/users/check-session", {
+		const sessionResponse = await fetch(`${API_HOST}/users/check-session`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -53,7 +54,7 @@ class ProfileEditPage extends React.Component {
 		currentUsername = sessionResponseJSON.username;
 		currentUserID = sessionResponseJSON.userID;
 
-		let response = await fetch(`/api/users/${currentUsername}`, {
+		let response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -103,7 +104,7 @@ class ProfileEditPage extends React.Component {
 	};
 
 	submitEditInfo = async () => {
-		const patchResponse = await fetch("./api/users/", {
+		const patchResponse = await fetch(`${API_HOST}/api/users/`, {
 			method: "PATCH",
 			headers: {
 				Accept: "application/json",
