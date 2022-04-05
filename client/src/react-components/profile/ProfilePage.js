@@ -1,11 +1,13 @@
 import React from "react";
 import { uid } from "react-uid";
 import "./ProfilePage.css";
-import { NavLink, withRouter } from "react-router-dom";
+import { Navigate, NavLink, withRouter } from "react-router-dom";
 import ENV from "../../config.js";
+import logOutPic from "./logout.png";
 const API_HOST = ENV.api_host;
 class ProfilePage extends React.Component {
 	state = {
+		logOutRedirect: false,
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
 			displayName: "",
@@ -92,6 +94,23 @@ class ProfilePage extends React.Component {
 		// });
 	};
 
+	logOutAccount = () => {
+		fetch(`${API_HOST}/users/logout`, {
+			method: "GET",
+			headers: {
+				Accept: "application/json text/plain, */*",
+				"Content-Type": "application/json",
+			},
+		}).then((response) => {
+			if (!response.ok) {
+				console.log("COULD NOT LOGOUT");
+			} else {
+				console.log("LOGGING OUT");
+				this.setState({ logOutRedirect: true });
+			}
+		});
+	};
+
 	constructor(props) {
 		super(props);
 		this.constructProfileElements();
@@ -115,6 +134,9 @@ class ProfilePage extends React.Component {
 	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
 	// IN THE DATA
 	render() {
+		if (this.state.logOutRedirect) {
+			return <Navigate to="/login"></Navigate>;
+		}
 		return (
 			<div>
 				<div id="profile-page">
@@ -139,7 +161,9 @@ class ProfilePage extends React.Component {
 						</p>
 						<div>
 							<img className="logOut" src={logOutPic} />
-							<button className="logOutButton">Log</button> {/* add onClick here to logOut*/} 
+							<button onClick={this.logOutAccount} className="logOutButton">
+								Log Out
+							</button>
 						</div>
 
 						{/* <input className="grid-element" id="phone-number" */}

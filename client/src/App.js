@@ -61,8 +61,9 @@ class App extends React.Component {
 		if (!response.ok) this.handleLoginRedirect();
 		else {
 			this.setState({ loggedInUser: responseJSON, stocksRedirect: true });
+			return true;
 		}
-		return response;
+		return false;
 	};
 
 	submitInfo = (signupJSON) => {
@@ -107,6 +108,16 @@ class App extends React.Component {
 					<Routes>
 						<Route
 							path="/"
+							element={
+								<LoginPage
+									profileRedirect={this.state.profileRedirect}
+									stocksRedirect={this.state.stocksRedirect}
+									handleLoginCallback={this.handleLoginCallbackServer}
+								/>
+							}
+						/>
+						<Route
+							path="/login"
 							element={
 								<LoginPage
 									profileRedirect={this.state.profileRedirect}

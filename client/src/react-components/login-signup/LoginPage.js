@@ -37,7 +37,10 @@ class LoginPage extends React.Component {
 		};
 		const userJSON = JSON.stringify(userData);
 
-		const currentUser = await this.props.handleLoginCallback(userJSON);
+		const loginDone = await this.props.handleLoginCallback(userJSON);
+		if (loginDone) {
+			this.setState({ stocksRedirect: true });
+		}
 	};
 
 	handleForgotPassword = () => {
@@ -69,7 +72,8 @@ class LoginPage extends React.Component {
 		if (this.props.profileRedirect) {
 			return <Navigate to="/profile" />;
 		}
-		if (this.props.stocksRedirect) {
+		if (this.state.stocksRedirect) {
+			this.setState({ stocksRedirect: false });
 			return <Navigate to="/stocklisting" />;
 		}
 		return (
