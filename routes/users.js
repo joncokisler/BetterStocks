@@ -43,8 +43,7 @@ router.post("/users/login", mongoChecker, (req, res) => {
 			req.session.username = user.username;
 			req.session.userObject = user;
 			user.password = undefined;
-			console.log(`SESSION USER IN LOGIN CALL: ${req.session.username}`);
-			console.log(req);
+			// console.log(req);
 			req.session.save(() => {
 				res.send(user);
 			});
@@ -93,12 +92,11 @@ router.get("/users/logout", (req, res) => {
  *     * 401 if no valid session is found
  */
 router.get("/users/check-session", (req, res) => {
-	// if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-	//     req.session.user = TEST_USER_ID;
-	//     res.send({ userID: TEST_USER_ID, username: TEST_USER_USERNAME });
-	//     return;
-	// }
-	console.log(req);
+	if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
+	    req.session.user = TEST_USER_ID;
+	    res.send({ userID: TEST_USER_ID, username: TEST_USER_USERNAME });
+	    return;
+	}
 	if (req.session.username) {
 		res.send({
 			userID: req.session.user,
@@ -285,8 +283,15 @@ router.post(
 				res.status(400).send("Bad request");
 				return;
 			}
-			user.watchList.push(stock._id);
-			const result = await user.save();
+
+
+			const watched = user.watchList.filter(elem => elem._id.equals(stock._id))
+			console.log(watched);
+
+			if (watched.length === 0) {
+				user.watchList.push(stock._id);
+				const result = await user.save();
+			}
 			user.password = undefined;
 			res.send(user);
 		} catch (error) {
