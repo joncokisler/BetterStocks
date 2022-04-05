@@ -114,6 +114,7 @@ function TypeGame(){
         }else{
             clearInterval(timer)
             setTime(0)
+            console.log(score);
             addScore(score)
             getTopScores(5, setTopUsers)
             const game = document.getElementById("game")
@@ -173,13 +174,12 @@ function TypeGame(){
         let count = 0
         setLeaderboard(topUsers.map((user) => {
             count += 1
-            console.log(user)
-            return(<>
+            return(<div key={ uid(user) }>
                 <div className='grid-item-bold'>{count}</div>
-                <div className='grid-item-bold'>{user.user.userame}</div>
-                <div className='grid-item-bold'>{user.user.displayName}</div>
+                <div className='grid-item-bold'>{user.username}</div>
+                <div className='grid-item-bold'>{user.displayName}</div>
                 <div className='grid-item-bold'>{user.highScore}</div>
-            </>
+            </div>
             )
         }))
     }

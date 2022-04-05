@@ -4,7 +4,7 @@ const API_HOST = ENV.api_host;
 
 export async function getTopScores(n, setTopUsers) {
     try {
-        const scores = `${API_HOST}/api/game/highscores/${n}`;
+        const scores = `${API_HOST}/api/game/highscores?n=${n}`;
         // fetch(scores)
         //     .then(res => {
         //         if (res.status === 200) {
@@ -24,10 +24,11 @@ export async function getTopScores(n, setTopUsers) {
         if (res.status !== 200) {
             return;
         }
-        const resJSON = await res.json()
+        const resJSON = await res.json();
+
 
         for (const user of resJSON) {
-            const userUrl = ``; // I'm not sure what top put this line
+            const userUrl = `${API_HOST}/api/users/${user.username}`;
             const res2 = await fetch(userUrl);
             if (res.status !== 200) {
                 return;
@@ -44,7 +45,8 @@ export async function getTopScores(n, setTopUsers) {
 }
 
 
-export function getHighscore(setBest) {
+export async function getHighscore(setBest) {
+
     const score = `${API_HOST}/api/game/highscore/user`;
     fetch(score)
         .then(res => {
@@ -55,7 +57,7 @@ export function getHighscore(setBest) {
             }
         })
         .then(json => {
-            if (json == null){
+            if (json === null){
                 setBest(0)
             } else {
                 setBest(json.highScore)
@@ -64,21 +66,29 @@ export function getHighscore(setBest) {
         .catch(error => {});
 }
 
-export function addScore(score) {
-    
-    const req = new Request(
-        `${API_HOST}/api/game/score`,
-        {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                score: score
-            })
-        }
-    );
-    fetch(req).catch(error => {});
+export async function addScore(score) {
+    console.log('trying')
+    try {
+        const req = new Request(
+            `${API_HOST}/api/game/score`,
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    score: score
+                })
+            }
+        );
+        console.log(score);
+        const res = await fetch(req);
+        const resJSON = await res.json();
+        console.log(resJSON);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export function getInitialWords(setWords, setDifficulty) {
