@@ -23,10 +23,16 @@ Welcome to BetterStocks™: A social paper trading platform that tracks real tim
     npm install
     ```
 
-1.  Start the React development server 
+2.  Create Build
 
     ```
-    npm start
+    npm run build-run
+    ```
+
+3.  Start the local web server and dataase
+
+    ```
+    mongod --dbpath mongo-data
     ```
 
 ### External Dependencies
@@ -128,7 +134,6 @@ Parameters: None
 Body: {stock: <stock symbol>}  
 Returns: 200 on success and the new paper trade information  
          {capital: <user's capital>, holdings: <list of stock holdings and the number of holdings>}  
-
          400 on a bad request, such as not having enough capital, or a bad stock symbol. Response body will contain  
          information about the failed request: {reason: <reason>}, where reason could be one of  
          "Not enough capital"  
@@ -140,8 +145,7 @@ Sell a stock for the currently logged in user.
 Parameters: None  
 Body: {stock: <stock symbol>}  
 Returns: 200 on success and the new paper trade information  
-         {capital: <user's capital>, holdings: <list of stock holdings and the number of holdings>}  
-  
+         {capital: <user's capital>, holdings: <list of stock holdings and the number of holdings>}   
          400 on a bad request, such as not holding the stock, or a bad stock symbol. Response body will contain  
          information about the failed request: {reason: <reason>}, where reason could be one of  
          "No stock units"  
