@@ -15,7 +15,7 @@ import AdminPage from "./react-components/AdminComponents/AdminPage";
 import StockListing from "./react-components/StockListing";
 import GamePage from "./react-components/TypeGame/TypeGame";
 
-import ENV from './config.js';
+import ENV from "./config.js";
 const API_HOST = ENV.api_host;
 
 class App extends React.Component {
@@ -76,7 +76,7 @@ class App extends React.Component {
 	handleLoginCallbackServer = async (userJSON) => {
 		console.log(userJSON);
 
-		const response = await fetch("http://localhost:3100/users/login", {
+		const response = await fetch(`${API_HOST}/users/login`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -189,7 +189,7 @@ class App extends React.Component {
 						/>
 
 						<Route
-							path='stocks'
+							path="stocks"
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
@@ -248,12 +248,7 @@ class App extends React.Component {
 							}
 						/>
 
-						<Route
-							path='*'
-							element={
-								<p>404</p>
-							}
-						 />
+						<Route path="*" element={<p>404</p>} />
 					</Routes>
 				</BrowserRouter>
 			</div>
