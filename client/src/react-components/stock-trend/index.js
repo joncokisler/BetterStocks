@@ -19,7 +19,7 @@ function getDateFilterStart(dateFilter) {
             } else if (dateFilterStart.getDay() === 0) {  // Sunday
                 dateFilterStart.setDate(dateFilterStart.getDate() - 3);
             } else {
-                dateFilterStart.setDate(dateFilterStart.getDate() - 4);
+                dateFilterStart.setDate(dateFilterStart.getDate() - 1);
             }
             break;
         case 'W':
