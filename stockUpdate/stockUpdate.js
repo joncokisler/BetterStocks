@@ -19,11 +19,11 @@ async function updateStocks() {
         return;
     }
 
-    const currDate = new Date();
-    if (currDate.getHours() < 9 || currDate.getHours() > 18) {
-        console.log('Outside of stock trading hours. No updates completed!');  // save API calls
-        return;
-    }
+    // const currDate = new Date();
+    // if (currDate.getHours() < 9 || currDate.getHours() > 18) {
+    //     console.log('Outside of stock trading hours. No updates completed!');  // save API calls
+    //     return;
+    // }
 
     for (const stocks of STOCKS_TO_WATCH) {
         const url = `https://yfapi.net/v8/finance/spark?interval=15m&range=1d&symbols=${stocks.reduce((acc, s) => acc + s + ',', '').slice(0, -1)}`;
