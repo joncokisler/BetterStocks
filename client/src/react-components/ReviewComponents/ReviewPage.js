@@ -72,23 +72,21 @@ function ReviewPage(props) {
 
 
     return (
-      <div>
-        <div className='all'>
-          <div className='allReviews'>
-            <div className='reviewHeader'>
-                  Review
-            </div>
-            <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
-            <div id='reviewScroller'>
-              { renderReviews() }
-            </div>
+      <div className='all'>
+        <div className='allReviews'>
+          <div className='reviewHeader'>
+                Reviews
           </div>
-          <div className='allStats'>
-            { renderStats() }
+          <button className='writeCommentButton button2' onClick={handleScroll} >Write Comment</button>
+          <div id='reviewScroller'>
+            { renderReviews() }
           </div>
-          <div id='writeComment'>{newComment}</div>
-          <div id='blockMessage'>You're not allowed to write comments!</div>
         </div>
+        <div className='allStats'>
+          { renderStats() }
+        </div>
+        <div id='writeComment'>{newComment}</div>
+        <div id='blockMessage'>You're not allowed to write comments!</div>
       </div>
     )
 }
