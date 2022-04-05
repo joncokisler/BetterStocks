@@ -1,3 +1,4 @@
+
 ## BetterStocks™
 
 *Team 26*
@@ -65,8 +66,8 @@ Log in with the default username and password of `admin` and `admin`. Admins are
 
  ### admin.js
 
- + POST /api/admin/users
-Create a new ADMIN user.
-Parameters: 
-Body: User information. {username: <username>, displayName: <display name>, password: <password>, secret: "verylongsupersecretandsecurestring"}
+ + POST /api/admin/users  
+Create a new ADMIN user.  
+Parameters:  
+Body: User information. {username: <username>, displayName: <display name>, password: <password>, secret: "verylongsupersecretandsecurestring"}  
  Returns: 200 on success, and the database representation of the user.
