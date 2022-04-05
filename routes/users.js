@@ -41,6 +41,7 @@ router.post("/users/login", mongoChecker, (req, res) => {
             }
             req.session.user = user._id;
             req.session.username = user.username;
+            user.password = undefined;
             res.send(user);
         })
         .catch(error => {
@@ -134,6 +135,7 @@ router.post('/api/users', mongoChecker, async (req, res) => {
     try {
         // Save the user
         const newUser = await user.save();
+        newUser.password = undefined;
         res.send(newUser);
     } catch (error) {
         if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
@@ -160,6 +162,7 @@ router.get('/api/users/:username', mongoChecker, authenticate, async (req, res) 
     try {
         const user = await User.findOne({username: req.params.username});
         if (user) {
+            user.password = undefined;
             res.send(user);
         } else {
             res.status(404).send('Resource not found');
@@ -204,6 +207,7 @@ router.patch('/api/users/', mongoChecker, authenticate, async (req, res) => {
         if (!user) {
             res.status(404).send('Resource not found');
         } else {
+            user.password = undefined;
             res.send(user);
         }
     } catch (error) {
@@ -239,6 +243,7 @@ router.post('/api/users/watchlist', mongoChecker, authenticate, async (req, res)
         }
         user.watchList.push(stock._id);
         const result = await user.save();
+        user.password = undefined;
         res.send(user);
 
     } catch (error) {

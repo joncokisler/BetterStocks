@@ -6,6 +6,7 @@ const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
 const { authenticate, adminAuthenticate } = require("./helpers/authentication");
 
 const { Stock } = require('../models/stock');
+const { User } = require('../models/user');
 
 /***************** STOCK CRUD **************************/
 
@@ -183,7 +184,7 @@ router.put('/api/stocks/:symbol/price', mongoChecker, authenticate, async (req, 
  * 
  * Body: {review: <review string>, stars: <number of stars>}
  * 
- * Returns: 200 on success and the updated array of reviews.
+ * Returns: 200 on success and the updated array of reviews, or a 403 if the user is blacklisted.
  */
 router.post('/api/stocks/:stock/reviews', mongoChecker, authenticate, async (req, res) => {
     try {
@@ -192,6 +193,16 @@ router.post('/api/stocks/:stock/reviews', mongoChecker, authenticate, async (req
             res.status(404).send('Resource not found');
             return;
         }
+
+        const user = await User.findById(req.session.user);
+        if (!user) {
+            res.status(401).send('Unauthorized');
+            return;
+        } else if (user.blacklist) {
+            res.status(403).send('Forbidden');
+            return;
+        }
+
         const review = stock.reviews.create({
             author: req.session.username,
             timestamp: Date.now(),

@@ -7,13 +7,14 @@ import LoginPage from "./react-components/login-signup/LoginPage";
 import SignupPage from "./react-components/login-signup/SignupPage";
 import PaperTrade from "./react-components/PaperTrade";
 import ProfilePage from "./react-components/profile/ProfilePage";
+import ProfileEditPage from "./react-components/profile/ProfileEditPage";
 import Stock from "./react-components/stock-trend/index";
 import ReviewPage from "./react-components/ReviewComponents/ReviewPage";
 import AdminPage from "./react-components/AdminComponents/AdminPage";
 import StockListing from "./react-components/StockListing";
 import GamePage from "./react-components/TypeGame/TypeGame";
 
-import ENV from './config.js';
+import ENV from "./config.js";
 const API_HOST = ENV.api_host;
 
 class App extends React.Component {
@@ -71,21 +72,22 @@ class App extends React.Component {
 		// console.log(this.state.loggedInUser.userName)
 	};
 
-	handleLoginCallbackServer = (userJSON) => {
+	handleLoginCallbackServer = async (userJSON) => {
 		console.log(userJSON);
-		fetch(`${API_HOST}/users/login`, {
+
+		const response = await fetch(`${API_HOST}/users/login`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
 			},
 			body: userJSON,
-		}).then((response) => {
-			console.log(response);
-			if (!response.ok) this.handleLoginRedirect();
-			else this.setState({ loggedInUser: response.json() });
-			console.log(this.state.loggedInUser);
 		});
+		console.log(response);
+		if (!response.ok) this.handleLoginRedirect();
+		else this.setState({ loggedInUser: response.json() });
+		console.log(this.state.loggedInUser);
+		return response;
 	};
 
 	submitInfo = (signupJSON) => {
@@ -186,7 +188,7 @@ class App extends React.Component {
 						/>
 
 						<Route
-							path='stocks'
+							path="stocks"
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
@@ -226,6 +228,16 @@ class App extends React.Component {
 						/>
 
 						<Route
+							path="profile-edit"
+							element={
+								<React.Fragment>
+									<Navbar user={this.state.loggedInUser} />
+									<ProfileEditPage loggedInUser={this.state.loggedInUser} />
+								</React.Fragment>
+							}
+						/>
+
+						<Route
 							path="game"
 							element={
 								<React.Fragment>
@@ -235,12 +247,7 @@ class App extends React.Component {
 							}
 						/>
 
-						<Route
-							path='*'
-							element={
-								<p>404</p>
-							}
-						 />
+						<Route path="*" element={<p>404</p>} />
 					</Routes>
 				</BrowserRouter>
 			</div>

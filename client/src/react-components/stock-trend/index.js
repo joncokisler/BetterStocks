@@ -4,6 +4,8 @@ import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
+import ReviewPage from '../ReviewComponents/ReviewPage';
+
 import { getStockInfo } from '../../actions/stockPage';
 
 import './styles.css';
@@ -17,7 +19,7 @@ function getDateFilterStart(dateFilter) {
             } else if (dateFilterStart.getDay() === 0) {  // Sunday
                 dateFilterStart.setDate(dateFilterStart.getDate() - 3);
             } else {
-                dateFilterStart.setDate(dateFilterStart.getDate() - 4);
+                dateFilterStart.setDate(dateFilterStart.getDate() - 1);
             }
             break;
         case 'W':
@@ -48,15 +50,54 @@ function Stock() {
     function renderLineChart() {
         const dateFilterStart = getDateFilterStart(timeFilter);
         const filteredHistory = stockInfo.history.filter(h => Date.parse(h.timestamp) >= dateFilterStart);
+
+        let trend_color = 'rgba(80, 80, 80, 0.7)';
+        if (filteredHistory.length >= 2) {
+            const begin_end_diff = filteredHistory[filteredHistory.length - 1].price - filteredHistory[0].price;
+            if (begin_end_diff > 0) {
+                trend_color = 'rgba(30, 150, 0, 0.7)';
+            } else if (begin_end_diff < 0) {
+                trend_color = 'rgba(250, 33, 58, 0.7)';
+            }
+        }
+
         const options = {
+            elements: {
+                line: {
+                    tension: 0.4,
+                    borderColor: trend_color
+                }
+            },
             scales: {
                 x: {
+                    title: {
+                        display: true,
+                        text: 'Date and Time'
+                    },
                     type: 'timeseries',
                     time: {
                         minUnit: 'hour'
                     }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Price ($)'
+                    },
+                    ticks: {
+                        format: {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    }
                 }
-            }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            maintainAspectRatio: false
         };
         const data = {
             labels: filteredHistory.map(s => {
@@ -80,7 +121,8 @@ function Stock() {
 
     function renderStockInfo() {
         return <React.Fragment>
-                <h3>{ params.get('symbol') }</h3>
+                <h2>{ params.get('symbol') }</h2>
+                <br />
 
                 { [0, 6].includes((new Date()).getDay()) ? <p>Markets are currently <strong>closed!</strong>&nbsp;&nbsp;Price data is shown for the last open trading day.</p> : null }
 
@@ -96,33 +138,12 @@ function Stock() {
                         <button value='6M' onClick={ e => setTimeFilter(e.target.value) }>6M</button>
                         <button value='1Y' onClick={ e => setTimeFilter(e.target.value) }>1Y</button>
                     </div>
-                    {/* <table className='dataTable'>
-                            <thead>
-                                <tr>
-                                    <th>52WK High</th>
-                                    <th>52WK Low</th>
-                                    <th>MKTCAP</th>
-                                    <th>VOLUME</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1.24k</td>
-                                    <td>539.48</td>
-                                    <td>940.17b</td>
-                                    <td>26.29m</td>
-                                </tr>
-                            </tbody>
-                        </table> */}
                 </div>
-                    
-                <div className='statistics'>
-                    <div className='scoreSummary'>
-                        <h1>3.0</h1>
-                        <h2>out of 5.0</h2>
-                        <NavLink to={ `reviews?symbol=${params.get('symbol')}` }>Review History</NavLink>
-                    </div>
+
+                <div className='reviews'>
+                    <ReviewPage />
                 </div>
+
                 </React.Fragment>
     }
 
