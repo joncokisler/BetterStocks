@@ -1,11 +1,16 @@
 import React from "react";
 import { uid } from "react-uid";
 import "./ProfilePage.css";
-import { NavLink, withRouter } from "react-router-dom";
+import { Navigate, NavLink, withRouter } from "react-router-dom";
 import ENV from "../../config.js";
+import backButtonImg from "./backButtonImg.png";
 const API_HOST = ENV.api_host;
 class ProfileEditPage extends React.Component {
 	state = {
+		backToProfileRedirect: false,
+		email: null,
+		displayName: null,
+		phoneNumber: null,
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
 			displayName: "",
@@ -32,16 +37,14 @@ class ProfileEditPage extends React.Component {
 	};
 
 	constructProfileElements = async () => {
-		let currentUsername;
-		let currentUserID;
-
 		const sessionResponse = await fetch(`${API_HOST}/users/check-session`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
-			}
+			},
 		});
+		console.log(sessionResponse);
 		const sessionResponseJSON = await sessionResponse.json();
 		console.log(sessionResponseJSON);
 
@@ -49,11 +52,13 @@ class ProfileEditPage extends React.Component {
 			console.log("check session response is not okay");
 			console.log("---STOP users/check-sesion ---");
 			return;
+		} else {
+			console.log(sessionResponseJSON);
 		}
-		currentUsername = sessionResponseJSON.username;
-		currentUserID = sessionResponseJSON.userID;
+		const currentUsername = sessionResponseJSON.username;
+		const currentUserID = sessionResponseJSON.userID;
 
-		let response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
+		const response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -62,9 +67,11 @@ class ProfileEditPage extends React.Component {
 		});
 
 		if (!response.ok) console.log("user data gathering response is not okay");
-		response = await response.json();
-		console.log(response);
-		this.setState({ loggedInUser: response });
+		else {
+			const userJSONDATA = await response.json();
+			console.log(userJSONDATA);
+			this.setState({ loggedInUser: userJSONDATA });
+		}
 
 		// fetch("/users/check-session", {
 		// 	method: "GET",
@@ -102,7 +109,20 @@ class ProfileEditPage extends React.Component {
 		console.log("This is the edited state", this.state);
 	};
 
+	goBackToProfile = () => {
+		this.setState({ backToProfileRedirect: true });
+	};
+
 	submitEditInfo = async () => {
+		if (this.state.email === null || this.state.email === "") {
+			this.setState({ email: this.state.loggedInUser.email });
+		}
+		if (this.state.displayName === null || this.state.displayName === "") {
+			this.setState({ displayName: this.state.loggedInUser.displayName });
+		}
+		if (this.state.phoneNumber === null || this.state.phoneNumber === "") {
+			this.setState({ phoneNumber: this.state.loggedInUser.phone });
+		}
 		const patchResponse = await fetch(`${API_HOST}/api/users/`, {
 			method: "PATCH",
 			headers: {
@@ -148,6 +168,9 @@ class ProfileEditPage extends React.Component {
 	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
 	// IN THE DATA
 	render() {
+		if (this.state.backToProfileRedirect) {
+			return <Navigate to="/profile"></Navigate>;
+		}
 		return (
 			<div>
 				<div id="profile-edit">
@@ -189,6 +212,12 @@ class ProfileEditPage extends React.Component {
 						value="Submit"
 						onClick={this.submitEditInfo}
 					/>
+				</div>
+				<div>
+					<img className="back-button-img" src={backButtonImg} />
+					<button onClick={this.goBackToProfile} className="back-button-button">
+						Back to Profile
+					</button>
 				</div>
 			</div>
 		);
