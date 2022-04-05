@@ -66,8 +66,21 @@ Log in with the default username and password of `admin` and `admin`. Admins are
 
  ### admin.js
 
+
  + POST /api/admin/users  
 Create a new ADMIN user.  
 Parameters:  
 Body: User information. {username: <username>, displayName: <display name>, password: <password>, secret: "verylongsupersecretandsecurestring"}  
  Returns: 200 on success, and the database representation of the user.
+
+ + PATCH /api/admin/users
+ * 
+ * Update a regular user's information.
+ * 
+ * Parameters: username (username of the user to change)
+ * 
+ * Body: Array of operations to complete: {"op", "replace", "path", "/<attribute to replace>", "value": <new value>}
+ * 
+ *     The only attributes that can be modified are: "displayName", "email", "phone", "betterCoins", 'bio'
+ * 
+ * Response: 200 on success and the new user's representation.
