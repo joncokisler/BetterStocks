@@ -5,6 +5,7 @@ import "./LoginPage.css";
 import { withRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import SignupPage from "./SignupPage.js";
+import BackgroundVideo from "../backgroundVideo/index.js";
 
 class LoginPage extends React.Component {
 	state = {
@@ -68,11 +69,16 @@ class LoginPage extends React.Component {
 		if (this.props.profileRedirect) {
 			return <Navigate to="/profile" />;
 		}
+		if (this.props.stocksRedirect) {
+			return <Navigate to="/stocklisting" />;
+		}
 		return (
 			<div>
+				<BackgroundVideo />
 				<Header />
-
 				<div id="inputDivLogin">
+					<div id="phrase"> Better trades today for an easier tomorrow</div>
+
 					<input
 						className="textbox"
 						type="text"
