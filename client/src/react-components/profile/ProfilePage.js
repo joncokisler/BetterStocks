@@ -4,10 +4,12 @@ import "./ProfilePage.css";
 import { Navigate, NavLink, withRouter } from "react-router-dom";
 import ENV from "../../config.js";
 import logOutPic from "./logout.png";
+import editButtonImage from "./edit-button-img.png";
 const API_HOST = ENV.api_host;
 class ProfilePage extends React.Component {
 	state = {
 		logOutRedirect: false,
+		editProfileRedirect: false,
 		//no need for these states, will be props when backend implemented
 		loggedInUser: {
 			displayName: "",
@@ -111,6 +113,10 @@ class ProfilePage extends React.Component {
 		});
 	};
 
+	editAccount = () => {
+		this.setState({ editProfileRedirect: true });
+	};
+
 	constructor(props) {
 		super(props);
 		this.constructProfileElements();
@@ -137,6 +143,9 @@ class ProfilePage extends React.Component {
 		if (this.state.logOutRedirect) {
 			return <Navigate to="/login"></Navigate>;
 		}
+		if (this.state.editProfileRedirect) {
+			return <Navigate to="/profile-edit"></Navigate>;
+		}
 		return (
 			<div>
 				<div id="profile-page">
@@ -151,25 +160,33 @@ class ProfilePage extends React.Component {
 							alt="Profile"
 						/>
 						<h2 className="grid-element" id="user-name">
-							@{this.state.loggedInUser.username}
+							@ {this.state.loggedInUser.username}
 						</h2>
-						<p className="grid-element" id="bio">
+						<h2 className="grid-element" id="bio">
 							{this.state.loggedInUser.bio}
-						</p>
-						<p className="grid-element" id="phone-number">
-							{this.state.loggedInUser.phoneNumber}
-						</p>
+						</h2>
+						<h2 className="grid-element" id="phone-number">
+							{this.state.loggedInUser.phone}
+						</h2>
+						<h2 className="grid-element" id="email">
+							{this.state.loggedInUser.email}
+						</h2>
 						<div>
 							<img className="logOut" src={logOutPic} />
 							<button onClick={this.logOutAccount} className="logOutButton">
 								Log Out
 							</button>
 						</div>
+						<div>
+							<img className="edit-profile-img" src={editButtonImage} />
+							<button
+								onClick={this.editAccount}
+								className="edit-profile-button"
+							>
+								Edit Profile
+							</button>
+						</div>
 
-						{/* <input className="grid-element" id="phone-number" */}
-						<NavLink className="grid-element" id="change-password" to="/login">
-							Change Password
-						</NavLink>
 						<div id="watchlist-section">
 							<h2>My Watchlist</h2>
 							<ul id="profileWatchlist">{this.stockList}</ul>
