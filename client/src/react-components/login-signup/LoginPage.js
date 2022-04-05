@@ -69,12 +69,15 @@ class LoginPage extends React.Component {
 		if (this.props.profileRedirect) {
 			return <Navigate to="/profile" />;
 		}
+		if (this.props.stocksRedirect) {
+			return <Navigate to="/stocklisting" />;
+		}
 		return (
 			<div>
-				<BackgroundVideo/>
-				<Header/>
+				<BackgroundVideo />
+				<Header />
 				<div id="inputDivLogin">
-				<div id="phrase"> Better trades today for an easier tomorrow</div>
+					<div id="phrase"> Better trades today for an easier tomorrow</div>
 
 					<input
 						className="textbox"
