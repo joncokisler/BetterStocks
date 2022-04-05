@@ -25,16 +25,14 @@ class ProfilePage extends React.Component {
 	};
 
 	constructProfileElements = async () => {
-		let currentUsername;
-		let currentUserID;
-
 		const sessionResponse = await fetch(`${API_HOST}/users/check-session`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
 				"Content-Type": "application/json",
-			}
+			},
 		});
+		console.log(sessionResponse);
 		const sessionResponseJSON = await sessionResponse.json();
 		console.log(sessionResponseJSON);
 
@@ -42,11 +40,13 @@ class ProfilePage extends React.Component {
 			console.log("check session response is not okay");
 			console.log("---STOP users/check-sesion ---");
 			return;
+		} else {
+			console.log(sessionResponseJSON);
 		}
-		currentUsername = sessionResponseJSON.username;
-		currentUserID = sessionResponseJSON.userID;
+		const currentUsername = sessionResponseJSON.username;
+		const currentUserID = sessionResponseJSON.userID;
 
-		let response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
+		const response = await fetch(`${API_HOST}/api/users/${currentUsername}`, {
 			method: "GET",
 			headers: {
 				Accept: "application/json text/plain, */*",
@@ -55,9 +55,11 @@ class ProfilePage extends React.Component {
 		});
 
 		if (!response.ok) console.log("user data gathering response is not okay");
-		response = await response.json();
-		console.log(response);
-		this.setState({ loggedInUser: response });
+		else {
+			const userJSONDATA = await response.json();
+			console.log(userJSONDATA);
+			this.setState({ loggedInUser: userJSONDATA });
+		}
 
 		// fetch("/users/check-session", {
 		// 	method: "GET",
@@ -145,7 +147,6 @@ class ProfilePage extends React.Component {
 							<ul id="profileWatchlist">{this.stockList}</ul>
 						</div>
 					</div>
-					{console.log("open")}
 				</div>
 			</div>
 		);

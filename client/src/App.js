@@ -56,11 +56,11 @@ class App extends React.Component {
 			},
 			body: userJSON,
 		});
-		console.log(response);
+		const responseJSON = await response.json();
+		console.log(responseJSON);
 		if (!response.ok) this.handleLoginRedirect();
 		else {
-			this.setState({ loggedInUser: response.json(), stocksRedirect: true });
-			console.log(this.state.loggedInUser);
+			this.setState({ loggedInUser: responseJSON, stocksRedirect: true });
 		}
 		return response;
 	};
@@ -198,7 +198,7 @@ class App extends React.Component {
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
-									<ProfilePage loggedInUser={this.state.loggedInUser} />
+									<ProfilePage />
 								</React.Fragment>
 							}
 						/>
@@ -208,7 +208,7 @@ class App extends React.Component {
 							element={
 								<React.Fragment>
 									<Navbar user={this.state.loggedInUser} />
-									<ProfileEditPage loggedInUser={this.state.loggedInUser} />
+									<ProfileEditPage />
 								</React.Fragment>
 							}
 						/>

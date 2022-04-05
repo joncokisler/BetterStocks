@@ -15,8 +15,12 @@ const express = require("express");
 const app = express();
 // enable CORS if in development, for React local development server to connect to the web server.
 const cors = require("cors");
+var corsOptions = {
+	origin: "*",
+	credentials: true,
+};
 if (env !== "production") {
-	app.use(cors());
+	app.use(cors(corsOptions));
 }
 
 // mongoose and mongo connection
@@ -52,6 +56,10 @@ app.use(
 			expires: 60000,
 			httpOnly: true,
 		},
+		genid: function (req) {
+			return genuuid(); // use UUIDs for session IDs
+		},
+		secret: "keyboard cat",
 		// store the sessions on the database in production
 		store:
 			env === "production"

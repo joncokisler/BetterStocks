@@ -30,14 +30,14 @@ class LoginPage extends React.Component {
 		this.setState({ signupRedirect: "/signup" });
 	};
 
-	loginPressed = () => {
+	loginPressed = async () => {
 		const userData = {
 			username: this.state.username,
 			password: this.state.password,
 		};
 		const userJSON = JSON.stringify(userData);
 
-		const currentUser = this.props.handleLoginCallback(userJSON);
+		const currentUser = await this.props.handleLoginCallback(userJSON);
 	};
 
 	handleForgotPassword = () => {
