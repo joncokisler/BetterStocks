@@ -9,15 +9,9 @@ const { User } = require("../models/user");
 const { Stock } = require("../models/stock");
 
 const env = process.env.NODE_ENV;
-<<<<<<< HEAD
-const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON; // option to turn on the test user.
-const TEST_USER_ID = '624bb3452c379f9828a27347'; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
-const TEST_USER_USERNAME = 'user';
-=======
 const USE_TEST_USER = env !== "production" && process.env.TEST_USER_ON; // option to turn on the test user.
-const TEST_USER_ID = "624641cdfcff616c8941f445"; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+const TEST_USER_ID = "624b5cdf42d2bd54c4f9f692"; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
 const TEST_USER_USERNAME = "user";
->>>>>>> 3f9cd0205322b4e97e3cb1ec08e89e9b4c8da319
 
 /***************** AUTHENTICATION **************************/
 

@@ -5,7 +5,7 @@ const { User } = require('../../models/user');
 
 const env = process.env.NODE_ENV;
 const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON // option to turn on the test user.
-const TEST_USER_ID = '624bb3452c379f9828a27347'; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+const TEST_USER_ID = '624b5cdf42d2bd54c4f9f692'; // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
 const TEST_USER_USERNAME = 'user';
 
 module.exports = {
