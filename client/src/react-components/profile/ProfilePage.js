@@ -137,6 +137,10 @@ class ProfilePage extends React.Component {
 						<p className="grid-element" id="phone-number">
 							{this.state.loggedInUser.phoneNumber}
 						</p>
+						<div>
+							<img className="logOut" src={logOutPic} />
+							<button className="logOutButton">Log</button> {/* add onClick here to logOut*/} 
+						</div>
 
 						{/* <input className="grid-element" id="phone-number" */}
 						<NavLink className="grid-element" id="change-password" to="/login">
