@@ -209,7 +209,7 @@ class ProfileEditPage extends React.Component {
 						name="phoneNumber"
 						onChange={this.handleInputChange}
 						value={this.state.phoneNumber}
-						placeholder="Phone number"
+						placeholder="Phone Number"
 					/>
 					<input
 						className="textbox"
