@@ -18,9 +18,6 @@ function TypeGame(){
     const [score, setScores] = useState(0);
     const [best, setBest] = useState();
 
-
-    console.log(time);
-    console.log(state.timeLimit);
     useEffect(() =>{
         if(started != null){
             var timer = setInterval(() => {
