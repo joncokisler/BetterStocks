@@ -61,6 +61,7 @@ export async function getCurrentUser(setIsBlackList){
 
 }
 
+
 export async function makeReview(stock, review, stars, setReviews) {
     try {
         const reviewUrl = `${API_HOST}/api/stocks/${stock}/reviews`;
