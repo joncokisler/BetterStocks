@@ -12,7 +12,7 @@ cokisler - Can Cokisler
 
 Welcome to BetterStocks™: A social paper trading platform that tracks real time stocks, crypto, and other assets (built with React Native, Node.js & Mongo DB)! The website utilizes the Yahoo Finance API to get its information about stocks. On the website, users can buy and sell assets with our own Better Coins™. Users can rate stocks out of 5 stars and write reviews too. If users find themselves with low capital, they can play our stock typeracer game to add more Better Coins™ to their wallet. In this game module, top user high scores will be featured on a leaderboard. With our app, we hope to provide a unique platform that empowers users to make the right trades. 
 
-Link: 
+Link: https://mighty-citadel-04530.herokuapp.com/
 
 ## Installation
 
