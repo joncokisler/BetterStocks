@@ -141,6 +141,7 @@ class ProfilePage extends React.Component {
 	// IN THE DATA
 	render() {
 		if (this.state.logOutRedirect) {
+			this.setState({ logOutRedirect: false });
 			return <Navigate to="/login"></Navigate>;
 		}
 		if (this.state.editProfileRedirect) {

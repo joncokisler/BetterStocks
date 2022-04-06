@@ -171,7 +171,45 @@ class ProfileEditPage extends React.Component {
 			else this.setState({ loggedInUser: patchResponse });
 			console.log(this.state.loggedInUser);
 		}
-	};					/>
+	};
+	constructor(props) {
+		super(props);
+
+		this.constructProfileElements();
+	}
+	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
+	// IN THE DATA
+	render() {
+		if (this.state.backToProfileRedirect) {
+			return <Navigate to="/profile"></Navigate>;
+		}
+		return (
+			<div>
+				<div id="profile-edit">
+					<input
+						className="textbox"
+						type="text"
+						name="bio"
+						onChange={this.handleInputChange}
+						value={this.state.bio}
+						placeholder="Bio"
+					/>
+					<input
+						className="textbox"
+						type="text"
+						name="displayName"
+						onChange={this.handleInputChange}
+						value={this.state.displayName}
+						placeholder="Display Name"
+					/>
+					<input
+						className="textbox"
+						type="text"
+						name="phoneNumber"
+						onChange={this.handleInputChange}
+						value={this.state.phoneNumber}
+						placeholder="Phone number"
+					/>
 					<input
 						className="textbox"
 						type="text"
