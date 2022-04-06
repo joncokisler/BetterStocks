@@ -188,7 +188,7 @@ function StockListing(props) {
                 <BiSearch />
             
                 </div>
-                <input type='text' value={ searchString } onChange={(e) => setSearchString(e.target.value.toUpperCase())} placeholder='Symbol' />
+                <input type='text' className='stockbox' value={ searchString } onChange={(e) => setSearchString(e.target.value.toUpperCase())} placeholder='Symbol' />
 
             </label>
         </form>
