@@ -72,9 +72,10 @@ function TypeGame(){
     const [difficulty, setDifficulty] = useState(null)
     const [words, setWords] = useState([]);
     const [started, setStarted] = useState(null)
+    const [ended, setEnded] = useState(false)
     const [time, setTime] = useState(state.timeLimit);
     const [score, setScores] = useState(0);
-    const [best, setBest] = useState(0);
+    const [best, setBest] = useState();
 
     useEffect(() =>{
         if(started != null){
@@ -99,6 +100,13 @@ function TypeGame(){
         setTime(state.timeLimit)
     }, [])
 
+    useEffect(() => {
+        if(ended == true){
+            console.log(score)
+            addScore(score)
+        }
+    }, [ended])
+
     function startTimer(){
         setStarted(Date.now())
     }
@@ -112,15 +120,13 @@ function TypeGame(){
         }else if(timeLeft > 0){
             setTime(timeLeft)
         }else{
-            clearInterval(timer)
-            setTime(0)
-            console.log(score);
-            addScore(score)
+            setEnded(true)
             getTopScores(5, setTopUsers)
             const game = document.getElementById("game")
             const over = document.getElementById("gameOver")
             game.style.display = "none"
             over.style.display = "block"
+            clearInterval(timer)
         }
 
     }
@@ -130,6 +136,7 @@ function TypeGame(){
         setTime(state.timeLimit)
         setScores(0)
         setStarted(null)
+        setEnded(false)
         const game = document.getElementById("game")
         const over = document.getElementById("gameOver")
         const input = document.getElementById("gameInput")

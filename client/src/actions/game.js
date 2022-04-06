@@ -69,6 +69,7 @@ export async function getHighscore(setBest) {
 
 export async function addScore(score) {
     console.log('trying')
+    console.log(score);
     try {
         const req = new Request(
             `${API_HOST}/api/game/score`,
@@ -83,10 +84,10 @@ export async function addScore(score) {
                 })
             }
         );
-        console.log(score);
+
         const res = await fetch(req);
         const resJSON = await res.json();
-        console.log(resJSON);
+   
     } catch (error) {
         console.log(error);
     }
