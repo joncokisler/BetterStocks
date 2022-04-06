@@ -114,90 +114,64 @@ class ProfileEditPage extends React.Component {
 	};
 
 	submitEditInfo = async () => {
+		let NONemptyFields = ["email", "displayName", "phone"];
 		if (this.state.email === null || this.state.email === "") {
-			this.setState({ email: this.state.loggedInUser.email });
+			NONemptyFields = NONemptyFields.filter((e) => e !== "email");
 		}
 		if (this.state.displayName === null || this.state.displayName === "") {
-			this.setState({ displayName: this.state.loggedInUser.displayName });
+			NONemptyFields = NONemptyFields.filter((e) => e !== "displayName");
 		}
 		if (this.state.phoneNumber === null || this.state.phoneNumber === "") {
-			this.setState({ phoneNumber: this.state.loggedInUser.phone });
+			NONemptyFields = NONemptyFields.filter((e) => e !== "phone");
 		}
-		const patchResponse = await fetch(`${API_HOST}/api/users/`, {
-			method: "PATCH",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify([
-				{
+		console.log(NONemptyFields);
+
+		const bodyArray = [];
+		for (var i = 0; i < NONemptyFields.length; i++) {
+			if (NONemptyFields[i] === "email") {
+				bodyArray.push({
 					op: "replace",
 					path: "/email",
 					value: this.state.email,
-				},
-				{
+				});
+			} else if (NONemptyFields[i] === "displayName") {
+				bodyArray.push({
 					op: "replace",
 					path: "/displayName",
 					value: this.state.displayName,
-				},
-				{
+				});
+			} else if (NONemptyFields[i] === "phone") {
+				bodyArray.push({
 					op: "replace",
 					path: "/phone",
 					value: this.state.phoneNumber,
+				});
+			}
+		}
+		console.log(bodyArray);
+		const body1 = bodyArray;
+		if (body1.length !== 0) {
+			const patchResponse = await fetch(`${API_HOST}/api/users/`, {
+				method: "PATCH",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
 				},
+				body: JSON.stringify(body1),
 				// JSON.stringify({
 				// 	op: "replace",
 				// 	path: "/bio",
 				// 	value: this.state.bio,
 				// }),
-			]),
-		});
-		console.log("THIS EXECUTED");
-		const patchResponseJson = patchResponse;
-		console.log(patchResponseJson);
-		if (!patchResponse.ok) console.log("Problem in patch request profile");
-		else this.setState({ loggedInUser: patchResponse });
-		console.log(this.state.loggedInUser);
-	};
-
-	constructor(props) {
-		super(props);
-
-		this.constructProfileElements();
-	}
-	//THE COMPONENTS WILL RELY ON API CALLS TO THE SERVER TO FILL
-	// IN THE DATA
-	render() {
-		if (this.state.backToProfileRedirect) {
-			return <Navigate to="/profile"></Navigate>;
+			});
+			console.log("THIS EXECUTED");
+			const patchResponseJson = patchResponse;
+			console.log(patchResponseJson);
+			if (!patchResponse.ok) console.log("Problem in patch request profile");
+			else this.setState({ loggedInUser: patchResponse });
+			console.log(this.state.loggedInUser);
 		}
-		return (
-			<div>
-				<div id="profile-edit">
-					<input
-						className="textbox"
-						type="text"
-						name="bio"
-						onChange={this.handleInputChange}
-						value={this.state.bio}
-						placeholder="Bio"
-					/>
-					<input
-						className="textbox"
-						type="text"
-						name="displayName"
-						onChange={this.handleInputChange}
-						value={this.state.displayName}
-						placeholder="Display Name"
-					/>
-					<input
-						className="textbox"
-						type="text"
-						name="phoneNumber"
-						onChange={this.handleInputChange}
-						value={this.state.phoneNumber}
-						placeholder="Phone number"
-					/>
+	};					/>
 					<input
 						className="textbox"
 						type="text"
