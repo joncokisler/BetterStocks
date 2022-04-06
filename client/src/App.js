@@ -46,7 +46,7 @@ class App extends React.Component {
 	};
 
 	handleLoginCallbackServer = async (userJSON) => {
-		console.log(userJSON);
+		// console.log(userJSON);
 
 		const response = await fetch(`${API_HOST}/users/login`, {
 			method: "POST",

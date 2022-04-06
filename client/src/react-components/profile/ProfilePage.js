@@ -61,7 +61,7 @@ class ProfilePage extends React.Component {
 		if (!response.ok) console.log("user data gathering response is not okay");
 		else {
 			const userJSONDATA = await response.json();
-			console.log(userJSONDATA);
+			// console.log(userJSONDATA);
 			this.setState({ loggedInUser: userJSONDATA });
 		}
 
