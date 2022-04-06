@@ -60,6 +60,8 @@ function PaperTrade() {
         }
     }, [stockHoldings]);
 
+    console.log(stockHoldings);
+
     /* Handle a buy/sell event */
     function stockBuySell(e) {
         e.preventDefault();

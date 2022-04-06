@@ -21,9 +21,9 @@ export async function addToWatchlist(stock, setErrorMessage) {
         const res = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    stock: stock
-                })
+            body: JSON.stringify({
+                stock: stock
+            })
         });
         if (res.status !== 200) {
             setErrorMessage('Invalid stock!');
