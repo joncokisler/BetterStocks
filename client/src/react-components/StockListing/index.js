@@ -184,8 +184,12 @@ function StockListing(props) {
         { [0, 6].includes((new Date()).getDay()) ? <p>Markets are currently <strong>closed!</strong>&nbsp;&nbsp;Price data is shown for the last open trading day.</p> : null }
         <form className='stockSearch'>
             <label>
+                <div className='search'>  
                 <BiSearch />
-                <input type='text' value={ searchString } onChange={(e) => setSearchString(e.target.value.toUpperCase())} placeholder='Symbol' />
+            
+                </div>
+                <input type='text' className='stockbox' value={ searchString } onChange={(e) => setSearchString(e.target.value.toUpperCase())} placeholder='Symbol' />
+
             </label>
         </form>
         <table className='stockList'>

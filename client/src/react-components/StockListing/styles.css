@@ -24,3 +24,28 @@
     width: 10em;
     height: 5em;
 }
+
+.stockbox {
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    border:none;
+    border-bottom: 1px solid grey;
+    text-align: center;
+}
+
+
+
+.stockbox:focus {
+    border: 2px solid #555;
+  }
+
+.stockbox:hover {
+    border-bottom: 2px solid #555;
+  }
+
+.search {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}

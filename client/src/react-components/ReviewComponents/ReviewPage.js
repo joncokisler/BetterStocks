@@ -5,7 +5,7 @@ import WriteComment from './WriteComment/WriteComment';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import React, {useState, useEffect} from 'react';
-import { getCurrentUser, getReviews, makeReview } from '../../actions/review';
+import { getCurrentUser, getReviews, makeReview } from '../../actions/Review';
 
 function ReviewPage() {
 
