@@ -9,6 +9,7 @@
     width: 30vw;
     height: 50px;
     position: relative;
+    border: solid black 2px;
     font-size: large;
     padding-left: 10px;
     padding-right: 10px;

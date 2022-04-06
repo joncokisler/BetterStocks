@@ -181,12 +181,12 @@ function TypeGame(){
         let count = 0
         setLeaderboard(topUsers.map((user) => {
             count += 1
-            return(<div key={ uid(user) }>
-                <div className='grid-item-bold'>{count}</div>
-                <div className='grid-item-bold'>{user.username}</div>
-                <div className='grid-item-bold'>{user.displayName}</div>
-                <div className='grid-item-bold'>{user.highScore}</div>
-            </div>
+            return(<>
+                <div className='grid-item'>{count}</div>
+                <div className='grid-item'>{user.username}</div>
+                <div className='grid-item'>{user.displayName}</div>
+                <div className='grid-item'>{user.highScore}</div>
+            </>
             )
         }))
     }
