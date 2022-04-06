@@ -50,7 +50,7 @@ const MongoStore = require("connect-mongo"); // to store session information on 
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET || "our hardcoded secret", // make a SESSION_SECRET environment variable when deploying (for example, on heroku)
-		resave: false,
+		resave: true,
 		saveUninitialized: false,
 		cookie: {
 			expires: 3600000,

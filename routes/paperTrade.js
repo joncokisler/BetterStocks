@@ -60,6 +60,7 @@ router.post('/api/papertrade', mongoChecker, authenticate, async (req, res) => {
         res.send({capital: ptrade.capital, holdings: holdings});
 
     } catch (error) {
+        console.log(error);
         if (isMongoError(error)) {
             res.status(500).send('Internal server error');
         } else {

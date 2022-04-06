@@ -22,7 +22,7 @@ function PaperTrade() {
             numHoldings: HOLDINGS
         }}
     */
-    const [stockHoldings, setStockHoldings] = useState({});
+    const [stockHoldings, setStockHoldings] = useState([]);
     
     // user related
     const [username, setUsername] = useState('');
@@ -59,8 +59,6 @@ function PaperTrade() {
         } catch (error) {
         }
     }, [stockHoldings]);
-
-    console.log(stockHoldings);
 
     /* Handle a buy/sell event */
     function stockBuySell(e) {
