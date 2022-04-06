@@ -19,3 +19,11 @@
 .stockPage .reviews {
     margin-top: 5em;
 }
+
+#link {
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    border: 0.5px solid grey;
+    text-align: center;
+}
