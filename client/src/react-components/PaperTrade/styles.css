@@ -61,15 +61,15 @@
     margin-top: 4em;
 }
 
-input {
+.buysellb {
     background-color: white;
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    border:none;
+    border: 0.5px solid grey;
     text-align: center;
 }
 
-input[type=text] {
+.stockb {
     background-color: white;
     background-position: 10px 10px;
     background-repeat: no-repeat;
@@ -79,20 +79,19 @@ input[type=text] {
 }
 
 
-
-input[type=text]:focus {
-    border: 2px solid #555;
+.stockb:focus {
+    border: 1.8px solid #555;
   }
 
-input[type=text]:hover {
-    border-bottom: 2px solid #555;
+.stockb:hover {
+    border-bottom: 1.5px solid #555;
   }
 
-input[type=submit]:hover {
-    border: 2px solid #555;
+.buysellb:hover {
+    border: 1.5px solid #555;
   }
 
-input[type=submit]:active {
+.buysellb:active {
 
     background-color: grey;
     color: white;

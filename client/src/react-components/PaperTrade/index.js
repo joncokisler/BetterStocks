@@ -138,10 +138,10 @@ function PaperTrade() {
                         <p>Enter a stock by symbol and then buy or sell to your heart's content!</p>
                         <label>
                             Stock:
-                            <input type='text' value={ stockSymbol } onChange={(e) => setStockSymbol(e.target.value.toUpperCase())} placeholder='Symbol' />
+                            <input type='text' className='stockb' value={ stockSymbol } onChange={(e) => setStockSymbol(e.target.value.toUpperCase())} placeholder='Symbol' />
                         </label>
-                        <input type='submit' name='buy' value='Buy' />
-                        <input type='submit' name='sell' value='Sell' />
+                        <input type='submit' className='buysellb' name='buy' value='Buy' />
+                        <input type='submit' className='buysellb' name='sell' value='Sell' />
                         <p id='stockBuySellErrorMsg'>{ errorMessage.length > 0 ? errorMessage + '!' : null }</p>
                     </form>
                 </div>
