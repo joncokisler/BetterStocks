@@ -44,7 +44,7 @@ router.post('/api/game/score', mongoChecker, authenticate, async (req, res) => {
         }
 
         // add to user capital
-        const user2 = await User.findById(req.session.user);
+        const user2 = await User.findOne({username: req.session.username});
         user2.paperTrade.capital += Number(req.body.score);
         user2.paperTrade.totalMoneyIn += Number(req.body.score);
         const result = await user2.save();
@@ -101,7 +101,7 @@ router.get('/api/game/highscores', mongoChecker, authenticate, async (req, res) 
  */
 router.get('/api/game/highscore/user', mongoChecker, authenticate, async (req, res) => {
     try {
-        const highScore = await Game.findOne({username: req.session.user});
+        const highScore = await Game.findOne({username: req.session.username});
         if (!highScore) {
             res.status(404).send('Resource not found');
         } else {
