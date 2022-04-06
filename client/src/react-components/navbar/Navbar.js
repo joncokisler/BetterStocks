@@ -83,7 +83,7 @@ class Navbar extends React.Component {
                         <li><NavLink className="nav-items" to="/paper-trade">Paper Trading</NavLink></li>
                         <li><NavLink className="nav-items" to="/game">TypeGame</NavLink></li>
                         <li><NavLink className="nav-items" to="/profile">Profile</NavLink></li>
-                        <li><NavLink id = "admin" className="nav-items" to="/admin">Admin</NavLink></li>;
+                        <li><NavLink id = "admin" className="nav-items" to="/admin">Admin</NavLink></li>
                         { this.renderAdmin() }
                     </ul>
 
