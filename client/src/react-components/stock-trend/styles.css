@@ -27,3 +27,12 @@ button {
     border: 0.5px solid grey;
     text-align: center;
 }
+
+button:hover {
+    border: 1.5px solid #555;
+}
+
+button:active {
+    background-color: grey;
+    color: white;
+}
