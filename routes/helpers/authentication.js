@@ -22,19 +22,24 @@ module.exports = {
                     return Promise.reject();
                 } else {
                     req.user = user;
+                    req.session.user = user._id;
+                    req.session.username = user.username;
                     next();
                 }
             }).catch((error) => {
                 res.status(401).send("Unauthorized");
             })
         } else {
+            console.log('here');
             res.status(401).send("Unauthorized");
         }
     },
 
     adminAuthenticate: async (req, res, next) => {
-        if (env !== 'production' && USE_TEST_USER)
+        if (env !== 'production' && USE_TEST_USER) {
             req.session.user = TEST_USER_ID;
+            req.session.user = TEST_USER_USERNAME;
+        }
 
         if (req.session.user) {
             const u = await User.findById(req.session.user);

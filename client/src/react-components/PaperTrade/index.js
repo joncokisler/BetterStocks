@@ -22,7 +22,7 @@ function PaperTrade() {
             numHoldings: HOLDINGS
         }}
     */
-    const [stockHoldings, setStockHoldings] = useState({});
+    const [stockHoldings, setStockHoldings] = useState([]);
     
     // user related
     const [username, setUsername] = useState('');
